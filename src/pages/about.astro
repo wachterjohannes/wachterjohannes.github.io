@@ -73,6 +73,15 @@ const description =
   </section>
 
   <section class="content sec">
+    <div class="section-head"><span class="kicker">// HOW THIS IS WRITTEN</span><span class="rule"></span></div>
+    <p class="colophon">
+      I draft these articles with an AI assistant, the same kind of tooling I write about, then
+      edit and cut until it says what I actually mean. The experiences and the opinions are mine.
+      I do not ship a sentence I would not defend in a code review.
+    </p>
+  </section>
+
+  <section class="content sec">
     <div class="section-head"><span class="kicker">// SKILLS</span><span class="rule"></span></div>
     <div class="skills">{skills.map((s) => <Tag>{s}</Tag>)}</div>
     <p class="skills-note">Also works with C, C++, Java and C#.</p>
@@ -163,6 +172,7 @@ const description =
   }
 
   .sec { padding-top: var(--space-8); }
+  .colophon { font-size: var(--size-body); line-height: var(--leading-body); color: var(--fg-1); max-width: 65ch; margin: 0; text-wrap: pretty; }
   .skills { display: flex; gap: 8px; flex-wrap: wrap; }
   .skills-note { font-family: var(--font-mono); font-size: 13px; color: var(--fg-3); margin: 14px 0 0; }
   .rows { display: grid; gap: var(--space-5); }
