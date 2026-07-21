@@ -1,0 +1,71 @@
+---
+// Ported from components/display/Card.jsx. Renders as an <a> when href is given
+// (interactive, border lifts on hover) or a plain <div> otherwise.
+interface Props {
+  kicker?: string;
+  title?: string;
+  meta?: string;
+  href?: string;
+  arrow?: boolean;
+  class?: string;
+}
+const { kicker, title, meta, href, arrow = true, class: className = '' } = Astro.props;
+const Tag = href ? 'a' : 'div';
+---
+<Tag
+  class:list={['card', { interactive: !!href }, className]}
+  {...href ? { href } : {}}
+>
+  {kicker && <div class="card-kicker">{kicker}</div>}
+  {title && (
+    <div class="card-title">
+      {title}{arrow && href && <span class="card-arrow"> &rarr;</span>}
+    </div>
+  )}
+  {meta && <div class="card-meta">{meta}</div>}
+  <div class="card-body"><slot /></div>
+</Tag>
+
+<style>
+  .card {
+    display: block;
+    background: var(--surface-card);
+    border: 1px solid var(--border-1);
+    border-radius: var(--radius-2);
+    box-shadow: var(--shadow-1);
+    padding: var(--space-5);
+    font-family: var(--font-sans);
+    color: var(--fg-1);
+    transition: border-color var(--speed) var(--ease);
+  }
+  a.card { border-bottom: 1px solid var(--border-1); }
+  .card.interactive { cursor: pointer; }
+  .card.interactive:hover { border-color: var(--border-2); color: var(--fg-1); }
+  .card-kicker {
+    font-family: var(--font-mono);
+    font-size: var(--size-label);
+    letter-spacing: var(--tracking-label);
+    text-transform: uppercase;
+    color: var(--accent-text);
+    margin-bottom: 8px;
+  }
+  .card-title {
+    font-size: var(--size-h3);
+    font-weight: var(--weight-semibold);
+    line-height: var(--leading-heading);
+  }
+  .card-arrow { color: var(--accent-text); }
+  .card-meta {
+    font-family: var(--font-mono);
+    font-size: 13px;
+    color: var(--fg-3);
+    margin-top: 4px;
+  }
+  .card-body {
+    font-size: var(--size-small);
+    line-height: var(--leading-body);
+    color: var(--fg-2);
+    margin-top: 10px;
+  }
+  .card-body:empty { margin-top: 0; }
+</style>

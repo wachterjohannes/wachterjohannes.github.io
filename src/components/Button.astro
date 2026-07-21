@@ -1,0 +1,43 @@
+---
+// Ported from components/actions/Button.jsx. Link (href) or button.
+interface Props {
+  variant?: 'primary' | 'secondary' | 'ghost';
+  href?: string;
+  class?: string;
+  rel?: string;
+  target?: string;
+}
+const { variant = 'primary', href, class: className = '', rel, target } = Astro.props;
+const Tag = href ? 'a' : 'button';
+---
+<Tag
+  class:list={['btn', variant, className]}
+  {...href ? { href, rel, target } : { type: 'button' }}
+>
+  <slot />
+</Tag>
+
+<style>
+  .btn {
+    font-family: var(--font-sans);
+    font-weight: var(--weight-medium);
+    font-size: 14px;
+    line-height: 1.4;
+    padding: 8px 16px;
+    border-radius: var(--radius-1);
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    cursor: pointer;
+    border: 1px solid transparent;
+    transition: background var(--speed) var(--ease), color var(--speed) var(--ease);
+  }
+  a.btn { border-bottom: 1px solid transparent; }
+  .btn:active { transform: translateY(1px); }
+  .btn.primary { background: var(--accent); color: var(--fg-on-accent); }
+  .btn.primary:hover { background: var(--accent-hover); color: var(--fg-on-accent); }
+  .btn.secondary { background: var(--surface-card); color: var(--fg-1); border-color: var(--border-2); }
+  .btn.secondary:hover { background: var(--bg-2); color: var(--fg-1); }
+  .btn.ghost { background: transparent; color: var(--fg-1); }
+  .btn.ghost:hover { background: var(--bg-2); color: var(--fg-1); }
+</style>

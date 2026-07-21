@@ -1,0 +1,154 @@
+---
+// Site chrome ported from ui_kits/website/index.html. On the home page the header
+// sits transparent over the dark hero (light text); elsewhere it is a sticky bar
+// with a bottom border. The Projects dropdown is CSS hover/focus (no JS needed).
+// Wordmark + brand are johanneswachter.dev.
+import { projectList } from '../data/projects';
+interface Props { transparent?: boolean }
+const { transparent = false } = Astro.props;
+const path = Astro.url.pathname;
+const isBlog = path === '/' || path.startsWith('/blog');
+const isProjects = path.startsWith('/projects');
+const isAbout = path.startsWith('/about');
+---
+<header class:list={['site-header', { transparent }]}>
+  <div class="bar page">
+    <a class="wordmark" href="/">johanneswachter<span class="dot">.dev</span></a>
+    <nav class="nav" aria-label="Primary">
+      <a href="/" class:list={['nav-link', { active: isBlog }]}>Blog</a>
+      <div class="projects">
+        <a href="/projects" class:list={['nav-link', { active: isProjects }]} aria-haspopup="true">
+          Projects <span aria-hidden="true">&#9662;</span>
+        </a>
+        <div class="menu" role="menu">
+          {projectList.map((p) => (
+            <a class="menu-item" role="menuitem" href={`/projects/${p.slug}`}>{p.name}</a>
+          ))}
+        </div>
+      </div>
+      <a href="/about" class:list={['nav-link', { active: isAbout }]}>About</a>
+    </nav>
+    <div class="actions">
+      <button id="theme-toggle" class="icon-btn" type="button" aria-label="Toggle color theme">
+        <svg class="i-moon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3a6 6 0 0 0 9 9 9 9 0 1 1-9-9Z"/></svg>
+        <svg class="i-sun" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M6.34 17.66l-1.41 1.41M19.07 4.93l-1.41 1.41"/></svg>
+      </button>
+    </div>
+  </div>
+</header>
+
+<script is:inline>
+  (function () {
+    var btn = document.getElementById('theme-toggle');
+    if (!btn) return;
+    btn.addEventListener('click', function () {
+      var root = document.documentElement;
+      var next = root.getAttribute('data-theme') === 'dark' ? 'light' : 'dark';
+      root.setAttribute('data-theme', next);
+      try { localStorage.setItem('theme', next); } catch (e) {}
+    });
+  })();
+</script>
+
+<style>
+  .site-header {
+    position: sticky;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 10;
+    background: var(--bg-1);
+    border-bottom: 1px solid var(--border-1);
+    color: var(--fg-1);
+  }
+  /* Transparent variant floats over the dark hero on the home page. */
+  .site-header.transparent {
+    position: absolute;
+    background: transparent;
+    border-bottom: none;
+    color: oklch(0.96 0.008 85);
+  }
+  .bar {
+    display: flex;
+    align-items: center;
+    gap: 28px;
+    padding-top: 14px;
+    padding-bottom: 14px;
+  }
+  .wordmark {
+    font-family: var(--font-mono);
+    font-size: 17px;
+    font-weight: 500;
+    color: inherit;
+    border-bottom: none;
+  }
+  .wordmark:hover { color: inherit; }
+  .dot { color: var(--accent-text); }
+  .transparent .dot { color: oklch(0.8 0.1 70); }
+
+  .nav { display: flex; gap: 20px; align-items: center; }
+  .nav-link {
+    font-family: var(--font-sans);
+    font-size: 14px;
+    color: inherit;
+    opacity: 0.72;
+    padding: 4px 2px;
+    border-bottom: 2px solid transparent;
+    transition: opacity var(--speed), border-color var(--speed);
+  }
+  .nav-link:hover { opacity: 1; color: inherit; }
+  .nav-link.active { opacity: 1; font-weight: 600; border-bottom-color: var(--accent); }
+
+  .projects { position: relative; display: inline-flex; }
+  .menu {
+    position: absolute;
+    top: 100%;
+    left: -8px;
+    margin-top: 6px;
+    min-width: 180px;
+    background: var(--surface-card);
+    border: 1px solid var(--border-1);
+    border-radius: var(--radius-2);
+    box-shadow: var(--shadow-2);
+    padding: 6px;
+    display: none;
+    flex-direction: column;
+    z-index: 30;
+  }
+  .projects:hover .menu,
+  .projects:focus-within .menu { display: flex; }
+  .menu-item {
+    font-family: var(--font-sans);
+    font-size: 14px;
+    color: var(--fg-1);
+    padding: 8px 12px;
+    border-radius: var(--radius-1);
+    border-bottom: none;
+    white-space: nowrap;
+    transition: background var(--speed);
+  }
+  .menu-item:hover { background: var(--bg-2); color: var(--fg-1); }
+
+  .actions { margin-left: auto; display: flex; align-items: center; gap: 14px; }
+  .icon-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 32px; height: 32px;
+    background: transparent;
+    border: 1px solid transparent;
+    border-radius: var(--radius-1);
+    color: inherit;
+    cursor: pointer;
+    transition: background var(--speed);
+  }
+  .icon-btn:hover { background: color-mix(in oklch, currentColor 12%, transparent); }
+  .i-sun { display: none; }
+  :global([data-theme='dark']) .i-sun { display: inline; }
+  :global([data-theme='dark']) .i-moon { display: none; }
+
+  @media (max-width: 640px) {
+    .bar { gap: 16px; flex-wrap: wrap; }
+    .nav { gap: 14px; }
+  }
+</style>

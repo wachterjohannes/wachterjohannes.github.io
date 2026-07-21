@@ -1,0 +1,69 @@
+---
+// Per-page <head>: title, meta description, canonical, Open Graph, Twitter card,
+// and optional JSON-LD. Canonical + OG URLs are absolute against the production
+// site (johanneswachter.dev) so they are correct even while staged elsewhere.
+interface Props {
+  title: string;
+  description: string;
+  image?: string;         // site-relative path, e.g. /images/posts/x.png
+  type?: 'website' | 'article';
+  jsonLd?: Record<string, unknown>;
+}
+const {
+  title,
+  description,
+  image = '/images/posts/giving-ai-assistants-eyes-header.png',
+  type = 'website',
+  jsonLd,
+} = Astro.props;
+
+const site = Astro.site ?? new URL('https://johanneswachter.dev');
+// Normalise: no trailing slash except the root, so canonicals are stable.
+const path = Astro.url.pathname.replace(/(.)\/$/, '$1');
+const canonical = new URL(path, site).href;
+const ogImage = new URL(image, site).href;
+const SITE_NAME = 'Johannes Wachter';
+---
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<meta name="generator" content={Astro.generator} />
+<link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+<link rel="sitemap" href="/sitemap-index.xml" />
+
+<title>{title}</title>
+<meta name="description" content={description} />
+<meta name="author" content="Johannes Wachter" />
+<link rel="canonical" href={canonical} />
+
+<!-- Open Graph -->
+<meta property="og:type" content={type} />
+<meta property="og:title" content={title} />
+<meta property="og:description" content={description} />
+<meta property="og:url" content={canonical} />
+<meta property="og:image" content={ogImage} />
+<meta property="og:site_name" content={SITE_NAME} />
+<meta property="og:locale" content="en_US" />
+
+<!-- Twitter -->
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:title" content={title} />
+<meta name="twitter:description" content={description} />
+<meta name="twitter:image" content={ogImage} />
+
+{jsonLd && (
+  <script type="application/ld+json" set:html={JSON.stringify(jsonLd)} />
+)}
+
+<!-- Set theme before paint to avoid a flash -->
+<script is:inline>
+  (function () {
+    try {
+      var stored = localStorage.getItem('theme');
+      var theme =
+        stored || (matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
+      document.documentElement.setAttribute('data-theme', theme);
+    } catch (e) {
+      document.documentElement.setAttribute('data-theme', 'light');
+    }
+  })();
+</script>

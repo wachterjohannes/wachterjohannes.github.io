@@ -1,0 +1,25 @@
+---
+// Ported from components/display/Tag.jsx. Static pill; link when href given.
+interface Props { href?: string; class?: string; }
+const { href, class: className = '' } = Astro.props;
+const Tag = href ? 'a' : 'span';
+---
+<Tag class:list={['tag', className]} {...href ? { href } : {}}><slot /></Tag>
+
+<style>
+  .tag {
+    font-family: var(--font-mono);
+    font-size: 12px;
+    padding: 3px 10px;
+    border-radius: var(--radius-1);
+    border: 1px solid var(--border-1);
+    background: var(--surface-card);
+    color: var(--fg-2);
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    transition: all var(--speed) var(--ease);
+  }
+  a.tag { border-bottom: 1px solid var(--border-1); }
+  a.tag:hover { border-color: var(--border-2); color: var(--fg-1); }
+</style>

@@ -1,0 +1,63 @@
+/* asapo.at color system, warm neutrals, terminal-amber accent. Light default, dark via [data-theme="dark"]. */
+:root {
+  /* base palette */
+  --warm-0: oklch(0.977 0.006 85);
+  --warm-1: oklch(0.955 0.009 85);
+  --warm-2: oklch(0.92 0.012 85);
+  --warm-3: oklch(0.86 0.014 85);
+  --ink-1: oklch(0.245 0.014 75);
+  --ink-2: oklch(0.42 0.016 75);
+  --ink-3: oklch(0.58 0.018 78);
+  --amber: oklch(0.62 0.145 62);
+  --amber-strong: oklch(0.54 0.14 58);
+  --amber-bright: oklch(0.76 0.14 68);
+  /* semantic surfaces */
+  --bg-1: var(--warm-0);
+  --bg-2: var(--warm-1);
+  --surface-card: oklch(0.99 0.004 90);
+  --surface-inset: var(--warm-1);
+  --surface-code: oklch(0.28 0.014 75);
+  /* text */
+  --fg-1: var(--ink-1);
+  --fg-2: var(--ink-2);
+  --fg-3: var(--ink-3);
+  --fg-on-accent: oklch(0.985 0.005 85);
+  --fg-on-code: oklch(0.93 0.01 85);
+  /* lines */
+  --border-1: oklch(0.89 0.012 85);
+  --border-2: oklch(0.82 0.015 85);
+  /* accent */
+  --accent: var(--amber);
+  --accent-hover: var(--amber-strong);
+  --accent-soft: oklch(0.94 0.035 70);
+  --accent-text: oklch(0.55 0.145 58);
+  /* status: shared lightness/chroma, varied hue */
+  --success: oklch(0.62 0.145 150);
+  --danger: oklch(0.62 0.145 25);
+  --warning: oklch(0.62 0.145 85);
+  --success-soft: oklch(0.94 0.035 150);
+  --danger-soft: oklch(0.94 0.035 25);
+  --warning-soft: oklch(0.94 0.035 85);
+  --focus-ring: oklch(0.62 0.145 62 / 0.45);
+}
+[data-theme="dark"] {
+  --bg-1: oklch(0.205 0.01 75);
+  --bg-2: oklch(0.235 0.011 75);
+  --surface-card: oklch(0.255 0.012 75);
+  --surface-inset: oklch(0.18 0.009 75);
+  --surface-code: oklch(0.17 0.009 75);
+  --fg-1: oklch(0.93 0.012 85);
+  --fg-2: oklch(0.76 0.014 85);
+  --fg-3: oklch(0.60 0.014 82);
+  --fg-on-accent: oklch(0.16 0.01 75);
+  --border-1: oklch(0.32 0.012 75);
+  --border-2: oklch(0.40 0.013 78);
+  --accent: var(--amber-bright);
+  --accent-hover: oklch(0.82 0.13 72);
+  --accent-soft: oklch(0.30 0.045 65);
+  --accent-text: oklch(0.78 0.13 70);
+  --success-soft: oklch(0.30 0.05 150);
+  --danger-soft: oklch(0.30 0.05 25);
+  --warning-soft: oklch(0.30 0.05 85);
+  --focus-ring: oklch(0.76 0.14 68 / 0.5);
+}

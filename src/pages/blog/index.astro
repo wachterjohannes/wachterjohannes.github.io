@@ -1,0 +1,122 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import Card from '../../components/Card.astro';
+import Tag from '../../components/Tag.astro';
+import { getSortedPosts, getAllTags } from '../../utils/posts';
+import { formatDate } from '../../utils/date';
+
+const posts = await getSortedPosts();
+const tags = await getAllTags();
+
+// Tabs are derived from the categories actually present (kicker minus the "// ").
+const cats = [...new Set(posts.map((p) => p.data.category.replace(/^\/\/\s*/, '')))];
+const tabs = ['All posts', ...cats];
+
+const meta = (p: typeof posts[number]) =>
+  `${formatDate(p.data.pubDate)} · ${p.data.readingTime}`;
+
+const description =
+  'Notes on Sulu, Symfony, search, MCP and whatever I am building. Long-form writing by Johannes Wachter.';
+---
+<BaseLayout title="Writing · Johannes Wachter" description={description}>
+  <div class="content wrap">
+    <span class="kicker">// BLOG</span>
+    <h1>Writing</h1>
+    <p class="intro">Notes on Sulu, Symfony, search and whatever I&rsquo;m building in my free time.</p>
+
+    <div class="tabs" role="tablist">
+      {tabs.map((t, i) => (
+        <button
+          class:list={['tab', { active: i === 0 }]}
+          role="tab"
+          aria-selected={i === 0 ? 'true' : 'false'}
+          data-filter={t === 'All posts' ? 'all' : t}
+        >
+          {t}{t === 'All posts' && <span class="count">{posts.length}</span>}
+        </button>
+      ))}
+    </div>
+
+    <div class="stack" id="post-list">
+      {posts.map((p) => (
+        <div class="post-item" data-category={p.data.category.replace(/^\/\/\s*/, '')}>
+          <Card kicker={p.data.category} title={p.data.title} meta={meta(p)} href={`/blog/${p.id}`}>
+            {p.data.description}
+          </Card>
+        </div>
+      ))}
+    </div>
+
+    <div class="topics">
+      <span class="topics-label">topics:</span>
+      {tags.map((t) => <Tag>{t}</Tag>)}
+    </div>
+  </div>
+</BaseLayout>
+
+<script is:inline>
+  (function () {
+    var tabs = document.querySelectorAll('.tab');
+    var items = document.querySelectorAll('.post-item');
+    tabs.forEach(function (tab) {
+      tab.addEventListener('click', function () {
+        tabs.forEach(function (t) {
+          t.classList.remove('active');
+          t.setAttribute('aria-selected', 'false');
+        });
+        tab.classList.add('active');
+        tab.setAttribute('aria-selected', 'true');
+        var f = tab.getAttribute('data-filter');
+        items.forEach(function (it) {
+          it.style.display =
+            f === 'all' || it.getAttribute('data-category') === f ? '' : 'none';
+        });
+      });
+    });
+  })();
+</script>
+
+<style>
+  .wrap { padding-top: var(--space-8); padding-bottom: var(--space-8); }
+  h1 {
+    font-family: var(--font-sans);
+    font-weight: var(--weight-semibold);
+    font-size: var(--size-h1);
+    line-height: var(--leading-heading);
+    letter-spacing: var(--tracking-display);
+    margin: 12px 0 6px;
+  }
+  .intro { font-size: var(--size-body); color: var(--fg-2); margin: 0 0 24px; }
+
+  .tabs {
+    display: flex;
+    gap: var(--space-5);
+    border-bottom: 1px solid var(--border-1);
+    flex-wrap: wrap;
+  }
+  .tab {
+    background: none;
+    border: none;
+    padding: 10px 2px;
+    margin-bottom: -1px;
+    font-family: var(--font-sans);
+    font-size: var(--size-small);
+    color: var(--fg-3);
+    border-bottom: 2px solid transparent;
+    cursor: pointer;
+    transition: color var(--speed) var(--ease);
+  }
+  .tab:hover { color: var(--fg-2); }
+  .tab.active { color: var(--fg-1); font-weight: var(--weight-semibold); border-bottom-color: var(--accent); }
+  .count { font-family: var(--font-mono); font-size: 11px; color: var(--fg-3); margin-left: 6px; }
+
+  .stack { display: grid; gap: var(--space-4); margin-top: var(--space-5); }
+  .topics {
+    display: flex;
+    gap: 8px;
+    margin-top: var(--space-6);
+    align-items: center;
+    flex-wrap: wrap;
+  }
+  .topics-label { font-family: var(--font-mono); font-size: 12px; color: var(--fg-3); margin-right: 4px; }
+</style>

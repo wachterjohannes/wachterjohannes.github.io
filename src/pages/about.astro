@@ -1,0 +1,146 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Tag from '../components/Tag.astro';
+
+// Ported from ui_kits/website/About.jsx. Date ranges keep en-dashes (allowed);
+// the one em-dash in the MASSIVE ART description is converted to a comma.
+const facts: [string, string][] = [
+  ['Age', '36'],
+  ['E-mail', 'johannes@sulu.io'],
+  ['Sulu Developer', 'since August, 2013'],
+];
+const skills = ['PHP', 'Symfony', 'Sulu', 'Javascript', 'Elasticsearch', 'LLM/RAG', 'Scrum'];
+const work: [string, string, string, string][] = [
+  ['August, 2018 – until now', 'Sulu GmbH', 'Sulu Core Developer', 'Development, support and conception of sulu and third party bundles. Additionally internal and external consulting about sulu and other topics.'],
+  ['October, 2020 – until now', 'Vorarlberg University of Applied Science', 'External Lecturer', 'Holding of various seminars, courses and project coaching. Among others "Script and Web Technologies" and "Innovation Project".'],
+  ['September, 2013 – September, 2018', 'MASSIVE ART WebServices GmbH', 'Sulu Core Developer', 'Conception and development of sulu, third-party bundles and consulting, half-time beside the study at first.'],
+  ['June, 2010 – September, 2010', 'Liebherr Elektronik GmbH', 'Test Software Developer', 'Extended the project started for my thesis at the HTL Rankweil.'],
+];
+const edu: [string, string, string][] = [
+  ['2005 – 2009', 'Höhere Lehranstalt für Elektronik und Technische Informatik', 'HTL Rankweil'],
+  ['2010 – 2013', 'Software and Information Engineering', 'University of Applied Sciences Dornbirn'],
+  ['2013 – 2015', 'Master of Science in Engineering', 'University of Applied Sciences Dornbirn'],
+  ['2017', 'Elasticsearch Core Developer', 'Elastic'],
+];
+
+const description =
+  'Johannes Wachter: Sulu core developer, open source enthusiast, and external lecturer at FH Vorarlberg. Background, work experience and education.';
+---
+<BaseLayout title="About · Johannes Wachter" description={description} image="/johannes.jpg">
+  <section class="content intro">
+    <div class="intro-text">
+      <span class="kicker">// ABOUT</span>
+      <h1>Johannes Wachter</h1>
+      <p>
+        Sulu Core Developer, open source enthusiast, always excited about the latest in
+        technology, and instantly recognizable by a laugh you&rsquo;ll hear before you see him.
+      </p>
+      <p>
+        Hello! I&rsquo;m Johannes Wachter. Core Developer of <a href="/projects/symfony-mate">sulu</a>
+        since the very beginning of the project. Specialised in the backend of the system, but we
+        are a very small team and we all do the stuff which is needed. I have experiences with
+        different languages like C, C++, Java, C#, PHP and Javascript. In my free time I am working
+        on different open-source projects.
+      </p>
+      <dl class="facts">
+        {facts.map(([k, v]) => (
+          <div class="fact"><dt>{k}</dt><dd>{v}</dd></div>
+        ))}
+      </dl>
+    </div>
+    <figure class="portrait">
+      <img src="/johannes.jpg" alt="Johannes Wachter" width="320" height="480" />
+    </figure>
+  </section>
+
+  <section class="content sec">
+    <div class="section-head"><span class="kicker">// SKILLS</span><span class="rule"></span></div>
+    <div class="skills">{skills.map((s) => <Tag>{s}</Tag>)}</div>
+  </section>
+
+  <section class="content sec">
+    <div class="section-head"><span class="kicker">// WORK EXPERIENCE</span><span class="rule"></span></div>
+    <div class="rows">
+      {work.map(([date, co, role, desc]) => (
+        <div class="row bordered">
+          <div class="date">{date}</div>
+          <div>
+            <div class="co">{co}</div>
+            <div class="role">{role}</div>
+            <p class="desc">{desc}</p>
+          </div>
+        </div>
+      ))}
+    </div>
+  </section>
+
+  <section class="content sec">
+    <div class="section-head"><span class="kicker">// EDUCATION</span><span class="rule"></span></div>
+    <div class="rows tight">
+      {edu.map(([date, title, inst]) => (
+        <div class="row">
+          <div class="date">{date}</div>
+          <div><span class="edu-title">{title}</span> <span class="edu-inst">· {inst}</span></div>
+        </div>
+      ))}
+    </div>
+  </section>
+</BaseLayout>
+
+<style>
+  .intro {
+    padding-top: var(--space-8);
+    display: grid;
+    grid-template-columns: 1fr auto;
+    gap: var(--space-7);
+    align-items: start;
+  }
+  h1 {
+    font-family: var(--font-sans);
+    font-weight: var(--weight-semibold);
+    font-size: var(--size-h1);
+    line-height: var(--leading-heading);
+    letter-spacing: var(--tracking-display);
+    margin: 12px 0 16px;
+  }
+  .intro-text p {
+    font-size: var(--size-body);
+    line-height: var(--leading-body);
+    color: var(--fg-1);
+    margin: 0 0 16px;
+    text-wrap: pretty;
+  }
+  .facts { margin: 20px 0 0; display: grid; gap: 6px; }
+  .fact { display: flex; gap: 12px; font-size: var(--size-small); }
+  .fact dt { font-family: var(--font-mono); color: var(--fg-3); width: 130px; margin: 0; }
+  .fact dd { margin: 0; font-weight: var(--weight-medium); }
+
+  .portrait { margin: 0; }
+  .portrait img {
+    width: 240px;
+    max-width: 40vw;
+    height: auto;
+    border: 1px solid var(--border-1);
+    border-radius: var(--radius-2);
+    display: block;
+  }
+
+  .sec { padding-top: var(--space-8); }
+  .skills { display: flex; gap: 8px; flex-wrap: wrap; }
+  .rows { display: grid; gap: var(--space-5); }
+  .rows.tight { gap: var(--space-4); }
+  .row { display: grid; grid-template-columns: 220px 1fr; gap: 20px; }
+  .row.bordered { padding-bottom: var(--space-5); border-bottom: 1px solid var(--border-1); }
+  .date { font-family: var(--font-mono); font-size: 13px; color: var(--fg-3); padding-top: 3px; }
+  .co { font-size: var(--size-h3); font-weight: var(--weight-semibold); }
+  .role { font-size: var(--size-small); color: var(--accent-text); margin: 2px 0 8px; }
+  .desc { font-size: var(--size-small); line-height: var(--leading-body); color: var(--fg-2); margin: 0; }
+  .edu-title { font-weight: var(--weight-medium); }
+  .edu-inst { color: var(--fg-3); }
+
+  @media (max-width: 720px) {
+    .intro { grid-template-columns: 1fr; }
+    .portrait { order: -1; }
+    .row { grid-template-columns: 1fr; gap: 6px; }
+  }
+</style>

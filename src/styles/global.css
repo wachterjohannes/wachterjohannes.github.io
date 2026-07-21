@@ -1,0 +1,173 @@
+/* Global entry: design tokens first, then base element styles ported from the
+   asapo.at website kit (index.html chrome + Article typography). Brand is now
+   johanneswachter.dev. */
+@import './tokens/fonts.css';
+@import './tokens/colors.css';
+@import './tokens/typography.css';
+@import './tokens/spacing.css';
+@import './tokens/effects.css';
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html {
+  background: var(--bg-1);
+  -webkit-text-size-adjust: 100%;
+}
+
+body {
+  margin: 0;
+  font-family: var(--font-sans);
+  font-size: var(--size-body);
+  line-height: var(--leading-body);
+  background: var(--bg-1);
+  color: var(--fg-1);
+  -webkit-font-smoothing: antialiased;
+  transition: background var(--speed);
+}
+
+a {
+  color: var(--accent-text);
+  text-decoration: none;
+  border-bottom: 1px solid var(--border-2);
+  transition: color var(--speed) var(--ease), border-color var(--speed) var(--ease);
+}
+a:hover {
+  color: var(--accent-hover);
+  border-bottom-color: var(--accent-hover);
+}
+
+img {
+  max-width: 100%;
+  height: auto;
+}
+
+h1, h2, h3 {
+  color: var(--fg-1);
+}
+
+:focus-visible {
+  outline: 2px solid var(--focus-ring);
+  outline-offset: 2px;
+}
+
+/* Shared page helpers */
+.page {
+  max-width: var(--width-page);
+  margin: 0 auto;
+  padding-left: var(--space-5);
+  padding-right: var(--space-5);
+}
+.content {
+  max-width: var(--width-content);
+  margin: 0 auto;
+  padding-left: var(--space-5);
+  padding-right: var(--space-5);
+}
+.kicker {
+  font-family: var(--font-mono);
+  font-size: var(--size-label);
+  letter-spacing: var(--tracking-label);
+  text-transform: uppercase;
+  color: var(--accent-text);
+}
+.rule {
+  flex: 1;
+  border-top: 1px solid var(--border-1);
+}
+.section-head {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  margin-bottom: var(--space-5);
+}
+.visually-hidden {
+  position: absolute;
+  width: 1px; height: 1px;
+  padding: 0; margin: -1px;
+  overflow: hidden; clip: rect(0 0 0 0);
+  white-space: nowrap; border: 0;
+}
+
+/* Long-form article prose (ported from Article.jsx typography) */
+.prose {
+  font-size: var(--size-body);
+  line-height: var(--leading-body);
+  color: var(--fg-1);
+}
+.prose > p,
+.prose > ul,
+.prose > ol,
+.prose > blockquote,
+.prose > pre,
+.prose > figure {
+  margin: 0 0 20px;
+}
+.prose p { text-wrap: pretty; }
+.prose h2 {
+  font-size: var(--size-h2);
+  font-weight: var(--weight-semibold);
+  line-height: var(--leading-heading);
+  margin: 36px 0 14px;
+}
+.prose h3 {
+  font-size: var(--size-h3);
+  font-weight: var(--weight-semibold);
+  line-height: var(--leading-heading);
+  margin: 28px 0 12px;
+}
+.prose a { text-wrap: nowrap; }
+.prose ul, .prose ol { padding-left: 22px; }
+.prose li { margin: 0 0 8px; }
+.prose img {
+  border: 1px solid var(--border-1);
+  border-radius: var(--radius-2);
+  display: block;
+  margin: 24px 0;
+}
+.prose blockquote {
+  margin: 24px 0;
+  padding: 4px 0 4px 20px;
+  border-left: 2px solid var(--accent);
+  color: var(--fg-2);
+  font-size: var(--size-h3);
+  line-height: 1.5;
+}
+.prose blockquote p { margin: 0; }
+.prose :not(pre) > code {
+  font-family: var(--font-mono);
+  font-size: 14px;
+  background: var(--surface-inset);
+  border: 1px solid var(--border-1);
+  border-radius: var(--radius-1);
+  padding: 1px 6px;
+}
+.prose pre {
+  font-family: var(--font-mono);
+  font-size: 14px;
+  line-height: 1.7;
+  background: var(--surface-code);
+  color: var(--fg-on-code);
+  padding: 16px 20px;
+  border-radius: var(--radius-2);
+  overflow: auto;
+}
+.prose pre code {
+  background: none;
+  border: 0;
+  padding: 0;
+  font-size: inherit;
+  color: inherit;
+}
+.prose hr {
+  border: 0;
+  border-top: 1px solid var(--border-1);
+  margin: 32px 0;
+}
+
+@media (max-width: 640px) {
+  :root { --size-display: 40px; --size-h1: 32px; --size-h2: 24px; }
+}

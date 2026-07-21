@@ -1,0 +1,21 @@
+/* IBM Plex Sans for display+body, IBM Plex Mono for labels/meta/code. */
+:root {
+  --font-sans: 'IBM Plex Sans', system-ui, -apple-system, sans-serif;
+  --font-mono: 'IBM Plex Mono', ui-monospace, 'SF Mono', Menlo, monospace;
+  --size-display: 56px;
+  --size-h1: 40px;
+  --size-h2: 28px;
+  --size-h3: 20px;
+  --size-body: 16px;
+  --size-small: 14px;
+  --size-label: 12px;
+  --leading-display: 1.08;
+  --leading-heading: 1.2;
+  --leading-body: 1.6;
+  --tracking-display: -0.02em;
+  --tracking-label: 0.08em;
+  --weight-regular: 400;
+  --weight-medium: 500;
+  --weight-semibold: 600;
+  --weight-bold: 700;
+}

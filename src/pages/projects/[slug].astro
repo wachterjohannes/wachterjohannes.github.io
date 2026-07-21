@@ -1,0 +1,86 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import Badge from '../../components/Badge.astro';
+import Button from '../../components/Button.astro';
+import Card from '../../components/Card.astro';
+import { projects, type Project } from '../../data/projects';
+
+export async function getStaticPaths() {
+  return projects.map((project) => ({
+    params: { slug: project.slug },
+    props: { project },
+  }));
+}
+
+const { project } = Astro.props as { project: Project };
+const related = projects.filter((p) => p.slug !== project.slug).slice(0, 2);
+const description = `${project.name}: ${project.tagline}`;
+---
+<BaseLayout title={`${project.name} · Johannes Wachter`} description={description}>
+  <div class="content wrap">
+    <span class="kicker">// LAB</span>
+    <div class="head">
+      <h1>{project.name}</h1>
+      {project.badges.map(([v, l]) => <Badge variant={v}>{l}</Badge>)}
+    </div>
+    <p class="tagline">{project.tagline}</p>
+
+    <div class="actions">
+      <Button href={project.github} rel="noopener" target="_blank">View on GitHub &rarr;</Button>
+      {project.docs && <Button variant="secondary" href={project.docs} rel="noopener" target="_blank">Documentation</Button>}
+    </div>
+
+    <pre class="code">{project.code}</pre>
+
+    <p class="body">{project.body}</p>
+
+    <p class="note">
+      Projects here are a lab, not a portfolio: each one exists because building it taught me
+      something I write about.
+    </p>
+
+    <div class="related">
+      {related.map((p) => (
+        <Card kicker="// RELATED" title={p.name} href={`/projects/${p.slug}`} arrow={false}>
+          {p.tagline}
+        </Card>
+      ))}
+    </div>
+  </div>
+</BaseLayout>
+
+<style>
+  .wrap { padding-top: var(--space-8); padding-bottom: var(--space-8); }
+  .head {
+    display: flex;
+    align-items: baseline;
+    gap: 14px;
+    margin: 12px 0 6px;
+    flex-wrap: wrap;
+  }
+  h1 {
+    font-family: var(--font-sans);
+    font-weight: var(--weight-semibold);
+    font-size: var(--size-h1);
+    line-height: var(--leading-heading);
+    letter-spacing: var(--tracking-display);
+    margin: 0;
+  }
+  .tagline { font-size: var(--size-h3); color: var(--fg-2); margin: 0 0 20px; }
+  .actions { display: flex; gap: 10px; margin-bottom: var(--space-6); flex-wrap: wrap; }
+  .code {
+    font-family: var(--font-mono);
+    font-size: 14px;
+    line-height: 1.7;
+    background: var(--surface-code);
+    color: var(--fg-on-code);
+    padding: 16px 20px;
+    border-radius: var(--radius-2);
+    overflow: auto;
+    margin: 0 0 var(--space-6);
+  }
+  .body { font-size: var(--size-body); line-height: var(--leading-body); color: var(--fg-1); margin: 0 0 var(--space-6); text-wrap: pretty; }
+  .note { font-family: var(--font-mono); font-size: 13px; line-height: 1.7; color: var(--fg-3); margin: 0 0 var(--space-6); }
+  .related { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+  @media (max-width: 640px) { .related { grid-template-columns: 1fr; } }
+</style>

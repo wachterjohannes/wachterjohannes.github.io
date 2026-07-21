@@ -1,0 +1,129 @@
+---
+import { render } from 'astro:content';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import Card from '../../components/Card.astro';
+import Tag from '../../components/Tag.astro';
+import { getSortedPosts } from '../../utils/posts';
+import { formatDate, isoDate } from '../../utils/date';
+
+export async function getStaticPaths() {
+  const posts = await getSortedPosts();
+  return posts.map((post) => ({
+    params: { slug: post.id },
+    props: { post, all: posts },
+  }));
+}
+
+const { post, all } = Astro.props;
+const { Content } = await render(post);
+const { data } = post;
+
+// "Next up" = the two most recent other posts.
+const nextUp = all.filter((p) => p.id !== post.id).slice(0, 2);
+
+const site = Astro.site ?? new URL('https://johanneswachter.dev');
+const url = new URL(`/blog/${post.id}`, site).href;
+const imageAbs = new URL(data.heroImage, site).href;
+
+const jsonLd = {
+  '@context': 'https://schema.org',
+  '@type': 'Article',
+  headline: data.title,
+  description: data.description,
+  image: [imageAbs],
+  datePublished: isoDate(data.pubDate),
+  dateModified: isoDate(data.pubDate),
+  author: {
+    '@type': 'Person',
+    name: 'Johannes Wachter',
+    url: 'https://johanneswachter.dev/about',
+  },
+  publisher: { '@type': 'Person', name: 'Johannes Wachter' },
+  mainEntityOfPage: { '@type': 'WebPage', '@id': url },
+  keywords: data.tags.join(', '),
+};
+---
+<BaseLayout
+  title={`${data.title} · Johannes Wachter`}
+  description={data.description}
+  image={data.heroImage}
+  type="article"
+  jsonLd={jsonLd}
+>
+  <article class="content wrap">
+    <a class="back" href="/blog">&larr; Blog</a>
+    <span class="kicker">{data.category}</span>
+    <h1>{data.title}</h1>
+    <div class="byline">{formatDate(data.pubDate)} · {data.readingTime} read · Johannes Wachter</div>
+
+    <figure class="hero">
+      <img src={data.heroImage} alt={data.heroAlt || data.title} width="1200" height="630" />
+    </figure>
+
+    <div class="prose">
+      <Content />
+    </div>
+
+    {data.tags.length > 0 && (
+      <div class="tags">
+        <span class="tags-label">tags:</span>
+        {data.tags.map((t) => <Tag>{t}</Tag>)}
+      </div>
+    )}
+
+    {nextUp.length > 0 && (
+      <div class="next">
+        {nextUp.map((p) => (
+          <Card kicker="// NEXT UP" title={p.data.title} href={`/blog/${p.id}`}>
+            {p.data.description}
+          </Card>
+        ))}
+      </div>
+    )}
+  </article>
+</BaseLayout>
+
+<style>
+  .wrap { padding-top: var(--space-8); padding-bottom: var(--space-8); }
+  .back {
+    display: inline-block;
+    font-family: var(--font-mono);
+    font-size: 13px;
+    color: var(--fg-3);
+    border-bottom: none;
+    margin-bottom: 24px;
+  }
+  .back:hover { color: var(--accent-text); }
+  h1 {
+    font-family: var(--font-sans);
+    font-weight: var(--weight-semibold);
+    font-size: var(--size-h1);
+    line-height: var(--leading-heading);
+    letter-spacing: var(--tracking-display);
+    margin: 12px 0 10px;
+  }
+  .byline { font-family: var(--font-mono); font-size: 13px; color: var(--fg-3); margin-bottom: 28px; }
+  .hero {
+    margin: 0 0 32px;
+  }
+  .hero img {
+    width: 100%;
+    height: auto;
+    border: 1px solid var(--border-1);
+    border-radius: var(--radius-2);
+    display: block;
+  }
+  .tags { display: flex; gap: 8px; margin: 36px 0 0; align-items: center; flex-wrap: wrap; }
+  .tags-label { font-family: var(--font-mono); font-size: 12px; color: var(--fg-3); margin-right: 4px; }
+  .next {
+    border-top: 1px solid var(--border-1);
+    margin-top: 40px;
+    padding-top: 28px;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 16px;
+  }
+  @media (max-width: 640px) {
+    .next { grid-template-columns: 1fr; }
+  }
+</style>
