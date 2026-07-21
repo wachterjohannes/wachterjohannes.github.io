@@ -68,7 +68,7 @@ Lately I have started acting on this inside Mate itself, questioning how much of
 
 ## Links & resources
 
-- **The arc so far**: [Giving AI assistants eyes](https://www.linkedin.com/pulse/giving-ai-assistants-eyes-highlights-from-symfony-mate-wachter-yfuwe) · [Skills over MCP](https://www.linkedin.com/pulse/skills-over-mcp-shipping-symfony-know-how-mate-johannes-wachter-zkdbf) · [The last mile: distributing Agent Skills to real agents](https://www.linkedin.com/pulse/last-mile-distributing-agent-skills-real-agents-johannes-wachter-trdif/)
+- **The arc so far**: [Giving AI assistants eyes](/blog/giving-ai-assistants-eyes) · [Skills over MCP](/blog/skills-over-mcp) · [The last mile: distributing Agent Skills to real agents](/blog/the-last-mile)
 - **Symfony Mate**: [github.com/symfony/ai-mate](https://github.com/symfony/ai-mate)
 - **The profiler-command PR**: [symfony/symfony#64824](https://github.com/symfony/symfony/pull/64824)
 - **The skills polyfill (skills:install)**: [symfony/ai#2213](https://github.com/symfony/ai/pull/2213)

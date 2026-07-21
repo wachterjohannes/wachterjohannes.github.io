@@ -67,3 +67,14 @@ const SITE_NAME = 'Johannes Wachter';
     }
   })();
 </script>
+
+<!-- GoatCounter analytics (privacy-friendly, cookieless). Production only, so
+     local dev and previews are not counted. -->
+{import.meta.env.PROD && (
+  <script
+    is:inline
+    data-goatcounter="https://wachterjohannes.goatcounter.com/count"
+    async
+    src="//gc.zgo.at/count.js"
+  ></script>
+)}
