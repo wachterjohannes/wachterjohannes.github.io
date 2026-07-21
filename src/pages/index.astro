@@ -1,9 +1,11 @@
 ---
+import { Image } from 'astro:assets';
 import BaseLayout from '../layouts/BaseLayout.astro';
 import Card from '../components/Card.astro';
 import Button from '../components/Button.astro';
 import { getSortedPosts } from '../utils/posts';
 import { formatDate } from '../utils/date';
+import heroImg from '../assets/hero.jpg';
 
 const posts = await getSortedPosts();
 const featured = posts[0];
@@ -19,6 +21,20 @@ const description =
   <!-- Hero: his point of view, not a job title. Flat warm-dark surface (the kit's
        full-bleed hero image was unavailable); the portrait sits in a bordered ring. -->
   <section class="hero">
+    <Image
+      class="hero-bg"
+      src={heroImg}
+      alt=""
+      aria-hidden="true"
+      width={2400}
+      height={1136}
+      widths={[1280, 1920, 2400]}
+      sizes="100vw"
+      format="webp"
+      quality={68}
+      loading="eager"
+    />
+    <div class="hero-scrim" aria-hidden="true"></div>
     <div class="hero-inner">
       <div class="avatar">
         <img src="/johannes.jpg" alt="Johannes Wachter" width="104" height="104" />
@@ -87,18 +103,35 @@ const description =
     align-items: center;
     justify-content: center;
     overflow: hidden;
+    /* Flat fallback behind the photo (also the color while the image loads). */
     background: oklch(0.24 0.014 75);
   }
-  .hero::after {
-    content: '';
+  /* Optimized forest + peak photo, cropped to show the trees and the snowy
+     summit (biased slightly right / upper). Always dark, so it reads the same
+     in light and dark mode. */
+  .hero-bg {
     position: absolute;
     inset: 0;
-    background: radial-gradient(120% 80% at 50% 0%, oklch(0.3 0.02 75 / 0.6), oklch(0.19 0.012 75 / 0.85));
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: 55% 38%;
+    z-index: 0;
+  }
+  /* Dark scrim for legibility: top-weighted (the sky is bright) plus a central
+     pool under the headline. Keeps the moody look of the original design. */
+  .hero-scrim {
+    position: absolute;
+    inset: 0;
+    z-index: 1;
     pointer-events: none;
+    background:
+      linear-gradient(180deg, oklch(0.12 0.01 75 / 0.74), oklch(0.15 0.011 75 / 0.5) 45%, oklch(0.16 0.012 75 / 0.66)),
+      radial-gradient(100% 78% at 50% 42%, oklch(0.10 0.008 75 / 0.52), transparent 72%);
   }
   .hero-inner {
     position: relative;
-    z-index: 1;
+    z-index: 2;
     text-align: center;
     padding: 120px 24px 72px;
     color: oklch(0.97 0.008 85);
