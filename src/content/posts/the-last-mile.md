@@ -11,7 +11,7 @@ draft: false
 linkedin: "https://www.linkedin.com/posts/wachterjohannes_theres-a-lot-of-discussion-around-mcp-right-activity-7480497144185978881-9sKs"
 ---
 
-*By Johannes Wachter, core developer at Sulu. The follow-up I promised in [Skills over MCP](https://www.linkedin.com/pulse/skills-over-mcp-shipping-symfony-know-how-mate-johannes-wachter-zkdbf): the polyfill that bridges the gap between where the standard is heading and what agents can actually read today.*
+*By Johannes Wachter, core developer at Sulu. The follow-up I promised in [Skills over MCP](/blog/skills-over-mcp): the polyfill that bridges the gap between where the standard is heading and what agents can actually read today.*
 
 ## Where the last post left off
 
@@ -99,7 +99,7 @@ If you're building developer tooling in this space, I'd genuinely like to compar
 ## Links & resources
 
 - **The polyfill (skills:install)**: [symfony/ai#2213](https://github.com/symfony/ai/pull/2213)
-- **Predecessor post**: [Skills over MCP: shipping Symfony know-how with Mate](https://www.linkedin.com/pulse/skills-over-mcp-shipping-symfony-know-how-mate-johannes-wachter-zkdbf)
+- **Predecessor post**: [Skills over MCP: shipping Symfony know-how with Mate](/blog/skills-over-mcp)
 - **Community Symfony skills repo (fatonh)**: [github.com/fatonh/symfony-skills](https://github.com/fatonh/symfony-skills)
 - **Symfony bridge skills content**: [symfony/ai#2132](https://github.com/symfony/ai/pull/2132)
 - **Serving half in the PHP MCP SDK**: [php-sdk#372](https://github.com/modelcontextprotocol/php-sdk/pull/372)
