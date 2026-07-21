@@ -1,6 +1,7 @@
 ---
 import { render } from 'astro:content';
 import BaseLayout from '../../layouts/BaseLayout.astro';
+import Button from '../../components/Button.astro';
 import Card from '../../components/Card.astro';
 import Tag from '../../components/Tag.astro';
 import { getSortedPosts } from '../../utils/posts';
@@ -55,6 +56,9 @@ const jsonLd = {
     <span class="kicker">{data.category}</span>
     <h1>{data.title}</h1>
     <div class="byline">{formatDate(data.pubDate)} · {data.readingTime} read · Johannes Wachter</div>
+    {data.linkedin && (
+      <a class="li-top" href={data.linkedin} rel="noopener" target="_blank">Discuss on LinkedIn &rarr;</a>
+    )}
 
     <figure class="hero">
       <img src={data.heroImage} alt={data.heroAlt || data.title} width="1200" height="630" />
@@ -63,6 +67,13 @@ const jsonLd = {
     <div class="prose">
       <Content />
     </div>
+
+    {data.linkedin && (
+      <div class="li-cta">
+        <Button href={data.linkedin} rel="noopener" target="_blank">Discuss on LinkedIn &rarr;</Button>
+        <span class="li-note">This post was also published on LinkedIn. Join the discussion there.</span>
+      </div>
+    )}
 
     {data.tags.length > 0 && (
       <div class="tags">
@@ -94,6 +105,24 @@ const jsonLd = {
     margin-bottom: 24px;
   }
   .back:hover { color: var(--accent-text); }
+  /* Subtle link under the title (only when a LinkedIn version exists). */
+  .li-top {
+    display: inline-block;
+    font-family: var(--font-mono);
+    font-size: 13px;
+    margin-bottom: 24px;
+  }
+  /* Prominent call to action at the end of the article. */
+  .li-cta {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    flex-wrap: wrap;
+    margin-top: 36px;
+    padding-top: 28px;
+    border-top: 1px solid var(--border-1);
+  }
+  .li-note { font-size: var(--size-small); color: var(--fg-3); }
   h1 {
     font-family: var(--font-sans);
     font-weight: var(--weight-semibold);

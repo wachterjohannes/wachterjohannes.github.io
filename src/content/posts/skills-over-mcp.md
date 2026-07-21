@@ -8,6 +8,7 @@ heroImage: "/images/posts/skills-over-mcp-header.png"
 heroAlt: "Skills over MCP: shipping Symfony know-how with Mate."
 tags: [ai, mcp, skills, symfony, mate]
 draft: false
+linkedin: "https://www.linkedin.com/pulse/skills-over-mcp-shipping-symfony-know-how-mate-johannes-wachter-zkdbf"
 ---
 
 *By Johannes Wachter, core developer at Sulu. A deeper follow-up to my [Symfony Mate talk](https://www.linkedin.com/posts/wachterjohannes_symfony-php-ai-ugcPost-7474517649868283904-Inz_/), digging into one thread that kept coming up in the Q&A: should this be skills instead of tools, and what would "skills over MCP" actually look like?*

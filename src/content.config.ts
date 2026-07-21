@@ -16,6 +16,9 @@ const posts = defineCollection({
     heroAlt: z.string().default(''),
     tags: z.array(z.string()).default([]),
     draft: z.boolean().default(false),
+    // Optional: the published LinkedIn version of this post. When set, the post
+    // renders a "Discuss on LinkedIn" link. Absent means no link is shown.
+    linkedin: z.string().url().optional(),
   }),
 });
 

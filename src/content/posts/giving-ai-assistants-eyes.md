@@ -8,6 +8,7 @@ heroImage: "/images/posts/giving-ai-assistants-eyes-header.png"
 heroAlt: "Symfony Mate: giving AI assistants eyes. A terminal shows composer require, mate init and mate discover."
 tags: [ai, symfony, mcp, mate]
 draft: false
+linkedin: "https://www.linkedin.com/pulse/giving-ai-assistants-eyes-highlights-from-symfony-mate-wachter-yfuwe"
 ---
 
 *By Johannes Wachter, core developer at Sulu, on [Symfony Mate](https://github.com/symfony/ai-mate): the development-only MCP server that lets AI assistants see inside your application.*
