@@ -2,19 +2,28 @@
 import BaseLayout from '../layouts/BaseLayout.astro';
 import Tag from '../components/Tag.astro';
 
-// Ported from ui_kits/website/About.jsx. Date ranges keep en-dashes (allowed);
-// the one em-dash in the MASSIVE ART description is converted to a comma.
+// About/CV page. Work Experience and Education are kept as-is (accurate). The bio
+// reflects his current Sulu + AI positioning; project names link to their detail
+// pages. No em-dashes; date ranges keep en-dashes (allowed).
 const facts: [string, string][] = [
-  ['Age', '36'],
+  ['Location', 'Vorarlberg, Austria'],
   ['E-mail', 'johannes@sulu.io'],
   ['Sulu Developer', 'since August, 2013'],
 ];
-const skills = ['PHP', 'Symfony', 'Sulu', 'Javascript', 'Elasticsearch', 'LLM/RAG', 'Scrum'];
+const skills = ['PHP', 'Symfony', 'Sulu', 'JavaScript', 'Elasticsearch', 'LLM / RAG', 'MCP', 'Scrum'];
 const work: [string, string, string, string][] = [
   ['August, 2018 – until now', 'Sulu GmbH', 'Sulu Core Developer', 'Development, support and conception of sulu and third party bundles. Additionally internal and external consulting about sulu and other topics.'],
   ['October, 2020 – until now', 'Vorarlberg University of Applied Science', 'External Lecturer', 'Holding of various seminars, courses and project coaching. Among others "Script and Web Technologies" and "Innovation Project".'],
   ['September, 2013 – September, 2018', 'MASSIVE ART WebServices GmbH', 'Sulu Core Developer', 'Conception and development of sulu, third-party bundles and consulting, half-time beside the study at first.'],
   ['June, 2010 – September, 2010', 'Liebherr Elektronik GmbH', 'Test Software Developer', 'Extended the project started for my thesis at the HTL Rankweil.'],
+];
+// Real talks only. [event, title, note?]
+const talks: [string, string, string?][] = [
+  ['SymfonyLive Berlin 2026 · SymfonyOnline 2026', 'Symfony Mate: Real Runtime Context for AI Coding Assistants'],
+  ['SymfonyCon Vienna 2024', 'Flexibility in the Face of Uncertainty', 'Provider-agnostic, GDPR-aware AI in Symfony'],
+  ['Never Code Alone livestream, 2025', 'Sulu CMS & AI: Live-Integration', 'With Roland Golla'],
+  ['SymfonyCon Cluj 2017', 'Tired of fixing your CMS instead of creating awesome websites?', 'Sulu'],
+  ['VLBG Webdev 2026', 'RAG beyond hello world'],
 ];
 const edu: [string, string, string][] = [
   ['2005 – 2009', 'Höhere Lehranstalt für Elektronik und Technische Informatik', 'HTL Rankweil'],
@@ -24,7 +33,7 @@ const edu: [string, string, string][] = [
 ];
 
 const description =
-  'Johannes Wachter: Sulu core developer, open source enthusiast, and external lecturer at FH Vorarlberg. Background, work experience and education.';
+  'Johannes Wachter: core developer of Sulu, the open-source Symfony CMS, working where software engineering meets AI. Background, work, talks and education.';
 ---
 <BaseLayout title="About · Johannes Wachter" description={description} image="/johannes.jpg">
   <section class="content intro">
@@ -32,15 +41,18 @@ const description =
       <span class="kicker">// ABOUT</span>
       <h1>Johannes Wachter</h1>
       <p>
-        Sulu Core Developer, open source enthusiast, always excited about the latest in
-        technology, and instantly recognizable by a laugh you&rsquo;ll hear before you see him.
+        Hello, I am Johannes Wachter. I am a core developer of <a href="/projects/sulu">Sulu</a>,
+        the open-source Symfony CMS, and I have worked on it since the project&rsquo;s early days,
+        mostly on the backend. I am based in Vorarlberg, Austria, and have been building with
+        Symfony since around 2012.
       </p>
       <p>
-        Hello! I&rsquo;m Johannes Wachter. Core Developer of <a href="/projects/symfony-mate">sulu</a>
-        since the very beginning of the project. Specialised in the backend of the system, but we
-        are a very small team and we all do the stuff which is needed. I have experiences with
-        different languages like C, C++, Java, C#, PHP and Javascript. In my free time I am working
-        on different open-source projects.
+        These days most of my energy goes into where software engineering meets AI. I started
+        <a href="/projects/symfony-mate">Symfony Mate</a>, which gives AI coding assistants real
+        runtime context from a running app, and <a href="/projects/modelflow-ai">Modelflow-AI</a>,
+        a provider-agnostic PHP interface for AI models. I contribute to
+        <a href="/projects/symfony-ai">symfony/ai</a>, teach as an external lecturer at FH
+        Vorarlberg, and write about what building open source actually teaches you.
       </p>
       <dl class="facts">
         {facts.map(([k, v]) => (
@@ -56,6 +68,7 @@ const description =
   <section class="content sec">
     <div class="section-head"><span class="kicker">// SKILLS</span><span class="rule"></span></div>
     <div class="skills">{skills.map((s) => <Tag>{s}</Tag>)}</div>
+    <p class="skills-note">Also works with C, C++, Java and C#.</p>
   </section>
 
   <section class="content sec">
@@ -68,6 +81,21 @@ const description =
             <div class="co">{co}</div>
             <div class="role">{role}</div>
             <p class="desc">{desc}</p>
+          </div>
+        </div>
+      ))}
+    </div>
+  </section>
+
+  <section class="content sec">
+    <div class="section-head"><span class="kicker">// SPEAKING</span><span class="rule"></span></div>
+    <div class="rows tight">
+      {talks.map(([event, title, note]) => (
+        <div class="row">
+          <div class="date">{event}</div>
+          <div>
+            <span class="edu-title">{title}</span>
+            {note && <span class="edu-inst"> · {note}</span>}
           </div>
         </div>
       ))}
@@ -127,6 +155,7 @@ const description =
 
   .sec { padding-top: var(--space-8); }
   .skills { display: flex; gap: 8px; flex-wrap: wrap; }
+  .skills-note { font-family: var(--font-mono); font-size: 13px; color: var(--fg-3); margin: 14px 0 0; }
   .rows { display: grid; gap: var(--space-5); }
   .rows.tight { gap: var(--space-4); }
   .row { display: grid; grid-template-columns: 220px 1fr; gap: 20px; }
