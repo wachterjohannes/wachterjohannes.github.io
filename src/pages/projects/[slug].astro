@@ -30,7 +30,7 @@ const description = `${project.name}: ${project.tagline}`;
       {project.docs && <Button variant="secondary" href={project.docs} rel="noopener" target="_blank">Documentation</Button>}
     </div>
 
-    <pre class="code">{project.code}</pre>
+    {project.code && <pre class="code">{project.code}</pre>}
 
     <p class="body">{project.body}</p>
 

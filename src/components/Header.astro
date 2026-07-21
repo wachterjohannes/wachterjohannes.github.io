@@ -1,9 +1,8 @@
 ---
 // Site chrome ported from ui_kits/website/index.html. On the home page the header
 // sits transparent over the dark hero (light text); elsewhere it is a sticky bar
-// with a bottom border. The Projects dropdown is CSS hover/focus (no JS needed).
-// Wordmark + brand are johanneswachter.dev.
-import { projectList } from '../data/projects';
+// with a bottom border. Nav items are plain links; Projects goes to the /projects
+// index (which lists every project). Wordmark + brand are johanneswachter.dev.
 interface Props { transparent?: boolean }
 const { transparent = false } = Astro.props;
 const path = Astro.url.pathname;
@@ -16,16 +15,7 @@ const isAbout = path.startsWith('/about');
     <a class="wordmark" href="/">johanneswachter<span class="dot">.dev</span></a>
     <nav class="nav" aria-label="Primary">
       <a href="/" class:list={['nav-link', { active: isBlog }]}>Blog</a>
-      <div class="projects">
-        <a href="/projects" class:list={['nav-link', { active: isProjects }]} aria-haspopup="true">
-          Projects <span aria-hidden="true">&#9662;</span>
-        </a>
-        <div class="menu" role="menu">
-          {projectList.map((p) => (
-            <a class="menu-item" role="menuitem" href={`/projects/${p.slug}`}>{p.name}</a>
-          ))}
-        </div>
-      </div>
+      <a href="/projects" class:list={['nav-link', { active: isProjects }]}>Projects</a>
       <a href="/about" class:list={['nav-link', { active: isAbout }]}>About</a>
     </nav>
     <div class="actions">
@@ -98,36 +88,6 @@ const isAbout = path.startsWith('/about');
   }
   .nav-link:hover { opacity: 1; color: inherit; }
   .nav-link.active { opacity: 1; font-weight: 600; border-bottom-color: var(--accent); }
-
-  .projects { position: relative; display: inline-flex; }
-  .menu {
-    position: absolute;
-    top: 100%;
-    left: -8px;
-    margin-top: 6px;
-    min-width: 180px;
-    background: var(--surface-card);
-    border: 1px solid var(--border-1);
-    border-radius: var(--radius-2);
-    box-shadow: var(--shadow-2);
-    padding: 6px;
-    display: none;
-    flex-direction: column;
-    z-index: 30;
-  }
-  .projects:hover .menu,
-  .projects:focus-within .menu { display: flex; }
-  .menu-item {
-    font-family: var(--font-sans);
-    font-size: 14px;
-    color: var(--fg-1);
-    padding: 8px 12px;
-    border-radius: var(--radius-1);
-    border-bottom: none;
-    white-space: nowrap;
-    transition: background var(--speed);
-  }
-  .menu-item:hover { background: var(--bg-2); color: var(--fg-1); }
 
   .actions { margin-left: auto; display: flex; align-items: center; gap: 14px; }
   .icon-btn {
