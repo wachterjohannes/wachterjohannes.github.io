@@ -12,13 +12,17 @@ const posts = defineCollection({
     pubDate: z.coerce.date(),
     category: z.string(), // mono kicker, e.g. "// AI"
     readingTime: z.string(),
-    heroImage: z.string(),
+    heroImage: z.string().optional(),
     heroAlt: z.string().default(''),
     tags: z.array(z.string()).default([]),
     draft: z.boolean().default(false),
     // Optional: the published LinkedIn version of this post. When set, the post
     // renders a "Discuss on LinkedIn" link. Absent means no link is shown.
     linkedin: z.string().url().optional(),
+    // Archived posts (migrated from the old asapo.at site) are shown only on
+    // /archive, never in the home Featured/Latest or the main blog index.
+    archived: z.boolean().default(false),
+    source: z.string().url().optional(), // original asapo.at URL
   }),
 });
 

@@ -15,6 +15,7 @@ export interface Project {
   body: string;
   github: string;
   docs?: string;
+  story?: string; // slug of an archived origin-story post, linked on the detail page
 }
 
 export const projects: Project[] = [
@@ -42,6 +43,7 @@ $ bin/adminconsole sulu:build dev`,
   },
   {
     slug: 'modelflow-ai',
+    story: 'introducing-modelflow-ai',
     name: 'Modelflow-AI',
     tagline: 'A provider-agnostic PHP interface over multiple AI providers.',
     badges: [['warning', 'experimental'], ['neutral', 'PHP']],
@@ -59,6 +61,7 @@ $ bin/adminconsole sulu:build dev`,
   },
   {
     slug: 'pucene',
+    story: 'pucene-vision',
     name: 'Pucene',
     tagline: 'Lucene concepts reimplemented in pure PHP.',
     badges: [['warning', 'experiment'], ['neutral', 'PHP']],
@@ -68,6 +71,7 @@ $ bin/adminconsole sulu:build dev`,
   },
   {
     slug: 'php-task',
+    story: 'php-task-basic-ideas',
     name: 'PHP-Task',
     tagline: 'Schedule tasks inside your PHP application, not the crontab.',
     badges: [['accent', 'lab'], ['success', 'in use'], ['neutral', 'PHP']],
@@ -77,6 +81,7 @@ $ bin/adminconsole sulu:build dev`,
   },
   {
     slug: 'nanbando',
+    story: 'nanbando-basic-ideas',
     name: 'Nanbando',
     tagline: 'A backup tool for PHP applications.',
     badges: [['accent', 'lab'], ['success', 'in use'], ['neutral', 'PHP']],

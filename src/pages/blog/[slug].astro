@@ -4,11 +4,12 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
 import Button from '../../components/Button.astro';
 import Card from '../../components/Card.astro';
 import Tag from '../../components/Tag.astro';
-import { getSortedPosts } from '../../utils/posts';
+import { getAllPosts } from '../../utils/posts';
 import { formatDate, isoDate } from '../../utils/date';
 
 export async function getStaticPaths() {
-  const posts = await getSortedPosts();
+  // Generate a page for every post, regular and archived.
+  const posts = await getAllPosts();
   return posts.map((post) => ({
     params: { slug: post.id },
     props: { post, all: posts },
@@ -19,19 +20,22 @@ const { post, all } = Astro.props;
 const { Content } = await render(post);
 const { data } = post;
 
-// "Next up" = the two most recent other posts.
-const nextUp = all.filter((p) => p.id !== post.id).slice(0, 2);
+// "Next up" stays within the same kind: archived posts point to other archived
+// posts, regular posts to other regular posts.
+const nextUp = all
+  .filter((p) => p.id !== post.id && p.data.archived === data.archived)
+  .slice(0, 2);
 
 const site = Astro.site ?? new URL('https://johanneswachter.dev');
 const url = new URL(`/blog/${post.id}`, site).href;
-const imageAbs = new URL(data.heroImage, site).href;
+const imageAbs = data.heroImage ? new URL(data.heroImage, site).href : undefined;
 
 const jsonLd = {
   '@context': 'https://schema.org',
   '@type': 'Article',
   headline: data.title,
   description: data.description,
-  image: [imageAbs],
+  ...(imageAbs ? { image: [imageAbs] } : {}),
   datePublished: isoDate(data.pubDate),
   dateModified: isoDate(data.pubDate),
   author: {
@@ -52,17 +56,26 @@ const jsonLd = {
   jsonLd={jsonLd}
 >
   <article class="content wrap">
-    <a class="back" href="/blog">&larr; Blog</a>
+    <a class="back" href={data.archived ? '/archive' : '/blog'}>&larr; {data.archived ? 'Archive' : 'Blog'}</a>
     <span class="kicker">{data.category}</span>
     <h1>{data.title}</h1>
     <div class="byline">{formatDate(data.pubDate)} · {data.readingTime} read · Johannes Wachter</div>
+    {data.archived && (
+      <p class="archive-note">
+        Archived, originally posted on
+        {' '}<a href={data.source} rel="noopener" target="_blank">asapo.at</a>
+        {' '}({formatDate(data.pubDate)}).
+      </p>
+    )}
     {data.linkedin && (
       <a class="li-top" href={data.linkedin} rel="noopener" target="_blank">Discuss on LinkedIn &rarr;</a>
     )}
 
-    <figure class="hero">
-      <img src={data.heroImage} alt={data.heroAlt || data.title} width="1200" height="630" />
-    </figure>
+    {data.heroImage && (
+      <figure class:list={['hero', { archive: data.archived }]}>
+        <img src={data.heroImage} alt={data.heroAlt || data.title} />
+      </figure>
+    )}
 
     <div class="prose">
       <Content />
@@ -138,9 +151,27 @@ const jsonLd = {
   .hero img {
     width: 100%;
     height: auto;
+    aspect-ratio: 1200 / 630;
+    object-fit: cover;
     border: 1px solid var(--border-1);
     border-radius: var(--radius-2);
     display: block;
+  }
+  /* Archived covers vary in size (some are small logos); show them at natural
+     size, centered and width-capped, rather than stretched to full width. */
+  .hero.archive { text-align: center; }
+  .hero.archive img {
+    width: auto;
+    max-width: min(100%, 520px);
+    aspect-ratio: auto;
+    object-fit: contain;
+    display: inline-block;
+  }
+  .archive-note {
+    font-family: var(--font-mono);
+    font-size: 13px;
+    color: var(--fg-3);
+    margin: 0 0 24px;
   }
   .tags { display: flex; gap: 8px; margin: 36px 0 0; align-items: center; flex-wrap: wrap; }
   .tags-label { font-family: var(--font-mono); font-size: 12px; color: var(--fg-3); margin-right: 4px; }

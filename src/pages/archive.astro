@@ -1,0 +1,49 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Card from '../components/Card.astro';
+import { getArchivedPosts } from '../utils/posts';
+import { formatDate } from '../utils/date';
+
+const posts = await getArchivedPosts();
+
+const meta = (p: typeof posts[number]) =>
+  `${formatDate(p.data.pubDate)} · ${p.data.readingTime}`;
+
+const description =
+  'Older posts migrated from my previous site, asapo.at. Early project write-ups and a couple of personal notes, kept for the record.';
+---
+<BaseLayout title="Archive · Johannes Wachter" description={description}>
+  <div class="content wrap">
+    <span class="kicker">// ARCHIVE</span>
+    <h1>Archive</h1>
+    <p class="intro">
+      Older posts migrated from my previous site, <a href="https://asapo.at" rel="noopener" target="_blank">asapo.at</a>.
+      Early write-ups on the projects and a couple of personal notes, kept here for the record.
+    </p>
+
+    <div class="stack">
+      {posts.map((p) => (
+        <Card kicker={p.data.category} title={p.data.title} meta={meta(p)} href={`/blog/${p.id}`}>
+          {p.data.description}
+        </Card>
+      ))}
+    </div>
+
+    <p class="more"><a href="/blog">&larr; Back to current writing</a></p>
+  </div>
+</BaseLayout>
+
+<style>
+  .wrap { padding-top: var(--space-8); padding-bottom: var(--space-8); }
+  h1 {
+    font-family: var(--font-sans);
+    font-weight: var(--weight-semibold);
+    font-size: var(--size-h1);
+    line-height: var(--leading-heading);
+    letter-spacing: var(--tracking-display);
+    margin: 12px 0 6px;
+  }
+  .intro { font-size: var(--size-body); color: var(--fg-2); margin: 0 0 var(--space-6); max-width: var(--width-content); }
+  .stack { display: grid; gap: var(--space-4); }
+  .more { margin: var(--space-6) 0 0; font-size: var(--size-small); }
+</style>

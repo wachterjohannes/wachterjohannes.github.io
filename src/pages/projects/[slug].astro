@@ -4,6 +4,7 @@ import Badge from '../../components/Badge.astro';
 import Button from '../../components/Button.astro';
 import Card from '../../components/Card.astro';
 import { projects, type Project } from '../../data/projects';
+import { getArchivedPosts } from '../../utils/posts';
 
 export async function getStaticPaths() {
   return projects.map((project) => ({
@@ -15,6 +16,10 @@ export async function getStaticPaths() {
 const { project } = Astro.props as { project: Project };
 const related = projects.filter((p) => p.slug !== project.slug).slice(0, 2);
 const description = `${project.name}: ${project.tagline}`;
+
+// Origin-story link: an archived asapo.at post about how the project started.
+const archived = await getArchivedPosts();
+const story = project.story ? archived.find((p) => p.id === project.story) : undefined;
 ---
 <BaseLayout title={`${project.name} · Johannes Wachter`} description={description}>
   <div class="content wrap">
@@ -33,6 +38,13 @@ const description = `${project.name}: ${project.tagline}`;
     {project.code && <pre class="code">{project.code}</pre>}
 
     <p class="body">{project.body}</p>
+
+    {story && (
+      <p class="story">
+        Origin story: <a href={`/blog/${story.id}`}>{story.data.title}</a> &rarr;
+        <span class="story-note">from the archive</span>
+      </p>
+    )}
 
     <p class="note">
       Projects here are a lab, not a portfolio: each one exists because building it taught me
@@ -79,7 +91,9 @@ const description = `${project.name}: ${project.tagline}`;
     overflow: auto;
     margin: 0 0 var(--space-6);
   }
-  .body { font-size: var(--size-body); line-height: var(--leading-body); color: var(--fg-1); margin: 0 0 var(--space-6); text-wrap: pretty; }
+  .body { font-size: var(--size-body); line-height: var(--leading-body); color: var(--fg-1); margin: 0 0 var(--space-5); text-wrap: pretty; }
+  .story { font-size: var(--size-small); color: var(--fg-2); margin: 0 0 var(--space-6); }
+  .story-note { font-family: var(--font-mono); font-size: 12px; color: var(--fg-3); margin-left: 8px; }
   .note { font-family: var(--font-mono); font-size: 13px; line-height: 1.7; color: var(--fg-3); margin: 0 0 var(--space-6); }
   .related { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
   @media (max-width: 640px) { .related { grid-template-columns: 1fr; } }

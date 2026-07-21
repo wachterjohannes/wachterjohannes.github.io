@@ -51,6 +51,10 @@ const description =
       <span class="topics-label">topics:</span>
       {tags.map((t) => <Tag>{t}</Tag>)}
     </div>
+
+    <p class="archive-link">
+      Looking for older posts? Browse the <a href="/archive">archive</a> from asapo.at &rarr;
+    </p>
   </div>
 </BaseLayout>
 
@@ -119,4 +123,5 @@ const description =
     flex-wrap: wrap;
   }
   .topics-label { font-family: var(--font-mono); font-size: 12px; color: var(--fg-3); margin-right: 4px; }
+  .archive-link { margin-top: var(--space-6); font-size: var(--size-small); color: var(--fg-2); }
 </style>
