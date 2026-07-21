@@ -34,7 +34,7 @@ On this day I heard the first time about "[Sulu](http://sulu.io)".
 
 ## My first sulu commit
 
-The first few days at work were very exciting. [Daniel](https://twitter.com/danrot90) and [Thomas](https://twitter.com/chirimoya) already started bootstrap the application and [my first commit](https://github.com/sulu/sulu/commit/cdd3c58da0f6bb49975feb71b03ef0646cbecac8) (done on Tue Aug 20 2013 17:04:54) was just a little small thing initiating a testcase for the TranslateBundle.
+The first few days at work were very exciting. Daniel and [Thomas](https://twitter.com/chirimoya) already started bootstrap the application and [my first commit](https://github.com/sulu/sulu/commit/cdd3c58da0f6bb49975feb71b03ef0646cbecac8) (done on Tue Aug 20 2013 17:04:54) was just a little small thing initiating a testcase for the TranslateBundle.
 
 But I got a motivation boost.
 

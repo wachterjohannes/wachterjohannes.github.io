@@ -26,4 +26,4 @@ In a real world example the runner will be called in a fixed interval (something
 
 ## Success
 
-A few weeks ago the project was released in the version [1.0.0](https://github.com/php-task/php-task/releases/tag/1.0.0). With this release PHP-task was integrated into Sulu. Read more about how the project is used there in the bog-post: "[New in Sulu: Automation](http://blog.sulu.io/new-in-sulu-1-5-automation)".
+A few weeks ago the project was released in the version [1.0.0](https://github.com/php-task/php-task/releases/tag/1.0.0). With this release PHP-task was integrated into Sulu. Read more about how the project is used there in the blog-post: "[New in Sulu: Automation](http://blog.sulu.io/new-in-sulu-1-5-automation)".
