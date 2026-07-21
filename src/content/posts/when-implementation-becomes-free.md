@@ -8,7 +8,7 @@ heroImage: "/images/posts/when-implementation-becomes-free-header.png"
 heroAlt: "When implementation becomes almost free. A terminal card reads: ship the idea, done in minutes, the bottleneck moved, where to?"
 tags: [ai, innovation, teaching, opinion]
 draft: false
-linkedin: "https://www.linkedin.com/pulse/what-happens-innovation-when-implementation-becomes-almost-wachter-vlzke"
+linkedin: "https://www.linkedin.com/posts/wachterjohannes_ai-innovation-opensource-activity-7475885760634576896-SE4y"
 ---
 
 *An open observation by me, Johannes Wachter. Lecturer at FH Vorarlberg, open-source developer, core developer of the Sulu CMS, and someone who works with AI every day.*

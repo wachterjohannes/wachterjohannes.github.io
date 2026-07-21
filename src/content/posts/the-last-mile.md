@@ -8,7 +8,7 @@ heroImage: "/images/posts/the-last-mile-header.png"
 heroAlt: "The last mile: distributing Agent Skills to real agents. A terminal shows composer require and mate discover installing skills."
 tags: [ai, skills, symfony, mate, mcp]
 draft: false
-linkedin: "https://www.linkedin.com/pulse/last-mile-distributing-agent-skills-real-agents-johannes-wachter-trdif/"
+linkedin: "https://www.linkedin.com/posts/wachterjohannes_theres-a-lot-of-discussion-around-mcp-right-activity-7480497144185978881-9sKs"
 ---
 
 *By Johannes Wachter, core developer at Sulu. The follow-up I promised in [Skills over MCP](https://www.linkedin.com/pulse/skills-over-mcp-shipping-symfony-know-how-mate-johannes-wachter-zkdbf): the polyfill that bridges the gap between where the standard is heading and what agents can actually read today.*
