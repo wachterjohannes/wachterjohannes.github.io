@@ -4,7 +4,7 @@ import Badge from '../../components/Badge.astro';
 import Button from '../../components/Button.astro';
 import Card from '../../components/Card.astro';
 import { projects, type Project } from '../../data/projects';
-import { getArchivedPosts } from '../../utils/posts';
+import { getArchivedPosts, getSortedPosts } from '../../utils/posts';
 
 export async function getStaticPaths() {
   return projects.map((project) => ({
@@ -20,6 +20,10 @@ const description = `${project.name}: ${project.tagline}`;
 // Origin-story link: an archived asapo.at post about how the project started.
 const archived = await getArchivedPosts();
 const story = project.story ? archived.find((p) => p.id === project.story) : undefined;
+
+// Related current write-up: a non-archived blog post about the project.
+const current = await getSortedPosts();
+const read = project.read ? current.find((p) => p.id === project.read) : undefined;
 ---
 <BaseLayout title={`${project.name} · Johannes Wachter`} description={description}>
   <div class="content wrap">
@@ -38,6 +42,13 @@ const story = project.story ? archived.find((p) => p.id === project.story) : und
     {project.code && <pre class="code">{project.code}</pre>}
 
     <p class="body">{project.body}</p>
+
+    {read && (
+      <p class="story">
+        Read more: <a href={`/blog/${read.id}`}>{read.data.title}</a> &rarr;
+        <span class="story-note">from the blog</span>
+      </p>
+    )}
 
     {story && (
       <p class="story">
