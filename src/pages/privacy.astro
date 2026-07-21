@@ -1,0 +1,77 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+
+// Lightweight privacy statement. This site is personal and collects as little as
+// possible: cookieless analytics (GoatCounter) and no personal data. Kept short
+// and honest. No em-dashes.
+const description =
+  'How this site handles data: cookieless analytics with GoatCounter, no cookies, and no personal data collected.';
+---
+<BaseLayout title="Privacy · Johannes Wachter" description={description}>
+  <div class="content wrap">
+    <span class="kicker">// PRIVACY</span>
+    <h1>Privacy</h1>
+    <p class="intro">
+      This is a personal site and it collects as little as possible. No accounts, no
+      advertising, no tracking across other sites.
+    </p>
+
+    <div class="prose">
+      <h2>Analytics</h2>
+      <p>
+        I use <a href="https://www.goatcounter.com" rel="noopener" target="_blank">GoatCounter</a>,
+        a privacy-friendly, open-source analytics tool, to see roughly how many people visit and
+        which pages they read. It is cookieless and does not collect personal data. To count a
+        visit it briefly processes your IP address and browser type to build an anonymised hash,
+        which is not stored, so visitors cannot be identified or followed across sites.
+      </p>
+
+      <h2>Cookies</h2>
+      <p>
+        This site sets no cookies. The only thing stored in your browser is your light or dark
+        theme choice, kept locally when you use the theme toggle. It is a convenience setting,
+        never sent anywhere and never used to track you.
+      </p>
+
+      <h2>Hosting</h2>
+      <p>
+        The site is hosted on GitHub Pages. Like any web host, GitHub may process technical
+        request data such as IP addresses in its server logs to deliver the pages and keep the
+        service secure.
+      </p>
+
+      <h2>Contact</h2>
+      <p>
+        Questions about any of this? Write to
+        <a href="mailto:johannes@sulu.io">johannes@sulu.io</a>.
+      </p>
+    </div>
+  </div>
+</BaseLayout>
+
+<style>
+  .wrap { padding-top: var(--space-8); padding-bottom: var(--space-8); }
+  h1 {
+    font-family: var(--font-sans);
+    font-weight: var(--weight-semibold);
+    font-size: var(--size-h1);
+    line-height: var(--leading-heading);
+    letter-spacing: var(--tracking-display);
+    margin: 12px 0 6px;
+  }
+  .intro { font-size: var(--size-body); color: var(--fg-2); margin: 0 0 var(--space-6); max-width: var(--width-content); }
+  .prose { max-width: var(--width-content); }
+  .prose h2 {
+    font-family: var(--font-sans);
+    font-weight: var(--weight-semibold);
+    font-size: var(--size-h3);
+    margin: var(--space-6) 0 8px;
+  }
+  .prose p {
+    font-size: var(--size-body);
+    line-height: var(--leading-body);
+    color: var(--fg-1);
+    margin: 0 0 var(--space-4);
+    text-wrap: pretty;
+  }
+</style>

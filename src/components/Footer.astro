@@ -22,7 +22,7 @@ const links = [
 ---
 <footer class="site-footer">
   <div class="bar page">
-    <span class="copy">&copy; {year} Johannes Wachter &middot; johanneswachter.dev</span>
+    <span class="copy">&copy; {year} Johannes Wachter &middot; johanneswachter.dev &middot; <a href="/privacy">Privacy</a></span>
     <div class="socials">
       {links.map((l) => (
         <a class="icon-btn" href={l.href} aria-label={l.label} rel="me noopener" target="_blank">
@@ -50,6 +50,8 @@ const links = [
     font-size: 12px;
     color: var(--fg-3);
   }
+  .copy a { color: inherit; border-bottom: none; }
+  .copy a:hover { color: var(--accent-text); }
   .socials { margin-left: auto; display: flex; gap: 6px; }
   .icon-btn {
     display: inline-flex;
