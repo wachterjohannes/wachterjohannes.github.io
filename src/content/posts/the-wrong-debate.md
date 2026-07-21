@@ -24,7 +24,7 @@ After a handful of these threads, in GitHub issues, in Slack, in personal conver
 
 Back when I started in PHP, the argument in the community was Composer or PEAR: stability versus per-project dependencies.
 
-Composer won that argument, and it barely mattered. What made PHP better was a whole ecosystem learning at once. Composer for dependencies. PHP-FIG and the PSR standards for shared conventions. Symfony and Laravel. PHPUnit, PHPStan, Rector. They raised the floor together, each building on what the others had figured out.
+Composer won that argument, but Composer winning was not the whole story. What made PHP better was a whole ecosystem learning at once. Composer for dependencies. PHP-FIG and the PSR standards for shared conventions. Symfony and Laravel. PHPUnit, PHPStan, Rector. They raised the floor together, each building on what the others had figured out.
 
 We are repeating that argument one layer up. "Composer or PEAR" became "MCP or CLI." Same shape, same distraction.
 
@@ -32,7 +32,7 @@ We are repeating that argument one layer up. "Composer or PEAR" became "MCP or C
 
 Here is the part that changed my mind, and it came from someone else in that thread. [Illia Vasylevskyi](https://www.linkedin.com/in/illia-vasylevskyi-b7353558/) pointed out that the loudest objection to MCP, that an installed server permanently eats context and re-evaluates every tool with full schemas on every request, is mostly outdated.
 
-Modern harnesses, Codex, Cursor and Claude Code, defer tool loading now. The model sees a registry of server and tool names, and has to search before any schema or description loads into context. That is the same progressive discovery skills already use. Once that is true, the token-cost gap between an MCP tool and a CLI plus a skill mostly disappears. Similar discoverability, similar cost, close to a taste preference.
+Modern harnesses are moving towards deferred tool loading. Claude Code and Codex support it today: instead of loading every tool's full definition upfront, the model sees a registry of server and tool names and searches before any schema or description loads into context. That is the same progressive discovery skills already use. Once that is true, the token-cost gap between an MCP tool and a CLI plus a skill narrows significantly. The architectural difference becomes much smaller than the debate often suggests.
 
 I want to be honest about the edges, because [Joppe De Cuyper](https://www.linkedin.com/in/joppedc/) was right to push on them. This holds in Claude Code and Codex today, and it is rolling out elsewhere, but it is not universal. On Copilot and Cursor the context cost is still real right now, and Claude Code is not the default corporate tool. So if you tell me the CLI wins today, I will take it. The mechanism is already in the API and the rest will follow, but that is a direction, not a finished fact.
 
@@ -52,7 +52,7 @@ Once I stopped asking who is right and started asking which part of the problem 
 
 Building Mate has given me something like a front-row seat to these discussions. It has also left me unsure the tools Mate exposes today are even the right ones, and willing to rework all of them. That is the real open problem Illia named, working out how much tooling you need without drowning the model in it.
 
-A concrete example of why this is hard. Leaning Mate on a `bin/console` command is not trivial. It only lands on the newest Symfony, and in a debug session the container is usually half-broken, which is exactly when you are debugging, so shelling out dies right when you need it most. That is why Mate reads the profiler through its own isolated container instead. Or maybe the cleaner primitive is for the profiler to write a Markdown file on each request that both an agent and Mate can read, less machinery and no broken-container problem. I do not know yet. That is rather the point. Mate is the foundation I want to bring these pieces together on, not the thing that wins.
+A concrete example of why this is hard. Making Mate depend on a `bin/console` command is not trivial. It only lands on the newest Symfony, and in a debugging session the application kernel or service container is often exactly what is broken, so invoking `bin/console` can fail right when you need the profiler most. That is why Mate reads the profiler through its own isolated container instead. Or maybe the cleaner primitive is for the profiler to write a Markdown file on each request that both an agent and Mate can read, less machinery and no broken-container problem. I do not know yet. That is rather the point. Mate is the foundation I want to bring these pieces together on, not the thing that wins.
 
 ## The real risk
 
