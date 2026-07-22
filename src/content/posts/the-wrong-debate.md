@@ -7,6 +7,7 @@ readingTime: "8 min"
 heroImage: "/images/posts/the-wrong-debate-header.png"
 heroAlt: "Title card: the wrong debate. MCP vs CLI is the wrong fight. PHP already showed us why."
 tags: [ai, mcp, php, symfony, opinion]
+linkedin: "https://www.linkedin.com/feed/update/urn:li:activity:7485627287883845632/"
 draft: false
 ---
 
