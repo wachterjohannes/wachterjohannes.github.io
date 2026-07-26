@@ -5,6 +5,7 @@ import Button from '../../components/Button.astro';
 import Card from '../../components/Card.astro';
 import Tag from '../../components/Tag.astro';
 import { getAllPosts } from '../../utils/posts';
+import { series as allSeries } from '../../data/series';
 import { formatDate, isoDate } from '../../utils/date';
 
 export async function getStaticPaths() {
@@ -19,6 +20,10 @@ export async function getStaticPaths() {
 const { post, all } = Astro.props;
 const { Content } = await render(post);
 const { data } = post;
+
+// The topic hub this post belongs to, if any. Only link to a visible hub, so a
+// post never points at a hub that is being held back (which would 404).
+const series = allSeries.find((s) => !s.hidden && s.pieces.some((p) => p.slug === post.id)) ?? null;
 
 // "Next up" stays within the same kind: archived posts point to other archived
 // posts, regular posts to other regular posts.
@@ -67,8 +72,15 @@ const jsonLd = {
         {' '}({formatDate(data.pubDate)}).
       </p>
     )}
-    {data.linkedin && (
-      <a class="li-top" href={data.linkedin} rel="noopener" target="_blank">Discuss on LinkedIn &rarr;</a>
+    {(data.linkedin || series) && (
+      <div class="meta-links">
+        {data.linkedin && (
+          <a href={data.linkedin} rel="noopener" target="_blank">Discuss on LinkedIn &rarr;</a>
+        )}
+        {series && (
+          <a href={`/${series.slug}`}>Part of the {series.title} series &rarr;</a>
+        )}
+      </div>
     )}
 
     {data.heroImage && (
@@ -118,12 +130,16 @@ const jsonLd = {
     margin-bottom: 24px;
   }
   .back:hover { color: var(--accent-text); }
-  /* Subtle link under the title (only when a LinkedIn version exists). */
-  .li-top {
-    display: inline-block;
+  /* Subtle links under the title: LinkedIn discussion and the topic hub. */
+  .meta-links {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    margin-bottom: 24px;
+  }
+  .meta-links a {
     font-family: var(--font-mono);
     font-size: 13px;
-    margin-bottom: 24px;
   }
   /* Prominent call to action at the end of the article. */
   .li-cta {
