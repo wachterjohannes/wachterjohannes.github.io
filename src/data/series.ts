@@ -86,15 +86,15 @@ export const series: Series[] = [
         kind: 'article',
       },
       {
-        title: 'How embeddings and vector stores actually work',
-        blurb: 'What a vector really is, how embeddings are produced, and what separates a vector store from a plain database. The foundation the rest of the series leans on.',
-        slug: 'embeddings-and-vector-stores',
-        kind: 'article',
-      },
-      {
         title: 'Retrieval quality is decided before the first query',
         blurb: 'The indexing side: loading, chunking and enriching the source before anyone searches it.',
         slug: 'indexing-for-rag',
+        kind: 'article',
+      },
+      {
+        title: 'How embeddings and vector stores actually work',
+        blurb: 'What a vector really is, how embeddings are produced, and what separates a vector store from a plain database. The foundation the earlier pieces leaned on.',
+        slug: 'embeddings-and-vector-stores',
         kind: 'article',
       },
       {
