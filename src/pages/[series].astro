@@ -1,0 +1,69 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Card from '../components/Card.astro';
+import { series as allSeries } from '../data/series';
+import { getAllPosts } from '../utils/posts';
+import { formatDate } from '../utils/date';
+
+// One topic hub per entry in series.ts. getStaticPaths whitelists exactly these
+// slugs, so /rag is built and unrelated top-level paths still 404.
+export async function getStaticPaths() {
+  return allSeries.map((s) => ({ params: { series: s.slug }, props: { s } }));
+}
+
+const { s } = Astro.props;
+
+// A piece is "live" when a published post with its slug exists.
+const posts = await getAllPosts();
+const bySlug = new Map(posts.map((p) => [p.id, p]));
+
+const items = s.pieces.map((piece, index) => ({
+  piece,
+  n: String(index + 1).padStart(2, '0'),
+  post: bySlug.get(piece.slug) ?? null,
+}));
+
+const publishedCount = items.filter((it) => it.post).length;
+const description = `${s.title}. ${s.tagline}`;
+---
+<BaseLayout title={`${s.title} · Johannes Wachter`} description={description}>
+  <div class="content wrap">
+    <span class="kicker">{s.kicker}</span>
+    <h1>{s.title}</h1>
+    <p class="tagline">{s.tagline}</p>
+    <p class="intro">{s.intro}</p>
+    <p class="status">
+      {publishedCount} of {s.pieces.length} published. This page grows as the series ships.
+    </p>
+
+    <div class="stack">
+      {items.map(({ piece, n, post }) => (
+        <Card
+          kicker={`${n} · ${piece.kind ?? 'article'}`}
+          title={piece.title}
+          meta={post ? `${formatDate(post.data.pubDate)} · ${post.data.readingTime}` : 'Coming soon'}
+          href={post ? `/blog/${post.id}` : undefined}
+        >{piece.blurb}</Card>
+      ))}
+    </div>
+
+    <p class="back"><a href="/blog">All writing &rarr;</a></p>
+  </div>
+</BaseLayout>
+
+<style>
+  .wrap { padding-top: var(--space-8); padding-bottom: var(--space-8); }
+  h1 {
+    font-family: var(--font-sans);
+    font-weight: var(--weight-semibold);
+    font-size: var(--size-h1);
+    line-height: var(--leading-heading);
+    letter-spacing: var(--tracking-display);
+    margin: 12px 0 6px;
+  }
+  .tagline { font-size: var(--size-body); color: var(--fg-1); margin: 0 0 12px; }
+  .intro { font-size: var(--size-body); color: var(--fg-2); margin: 0 0 12px; max-width: var(--width-content); }
+  .status { font-family: var(--font-mono); font-size: 12px; color: var(--fg-3); margin: 0 0 24px; }
+  .stack { display: grid; gap: var(--space-4); margin-top: var(--space-5); }
+  .back { margin-top: var(--space-6); font-size: var(--size-small); color: var(--fg-2); }
+</style>
