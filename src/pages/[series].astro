@@ -8,7 +8,9 @@ import { formatDate } from '../utils/date';
 // One topic hub per entry in series.ts. getStaticPaths whitelists exactly these
 // slugs, so /rag is built and unrelated top-level paths still 404.
 export async function getStaticPaths() {
-  return allSeries.map((s) => ({ params: { series: s.slug }, props: { s } }));
+  return allSeries
+    .filter((s) => !s.hidden)
+    .map((s) => ({ params: { series: s.slug }, props: { s } }));
 }
 
 const { s } = Astro.props;

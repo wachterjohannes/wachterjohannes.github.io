@@ -20,11 +20,59 @@ export interface Series {
   tagline: string;
   intro: string;
   pieces: SeriesPiece[];
+  hidden?: boolean; // when true, the hub page is not built yet (hold it until launch day)
 }
 
 export const series: Series[] = [
   {
+    slug: 'mate',
+    kicker: '// MATE',
+    title: 'Symfony Mate',
+    tagline: 'Give coding agents reliable access to your running app, and the know how to use it.',
+    intro:
+      'A running thread through my work: a coding agent can read your code but cannot look into the running application, so it guesses. Mate is the tool that gives it the right tools instead. These pieces are the thinking around it, from what it should expose, to how you distribute know how to agents, to why the transport was never the point.',
+    pieces: [
+      {
+        title: 'Giving AI assistants eyes',
+        blurb: 'What Mate is: tools that let a coding agent look into a running Symfony app, not just read its code.',
+        slug: 'giving-ai-assistants-eyes',
+        kind: 'article',
+      },
+      {
+        title: 'Skills over MCP: shipping Symfony know-how with Mate',
+        blurb: 'Serving know how to agents over the same connection as the tools.',
+        slug: 'skills-over-mcp',
+        kind: 'article',
+      },
+      {
+        title: 'The last mile: distributing Agent Skills to real agents',
+        blurb: 'No agent reads Skills over MCP yet. Getting them onto the filesystem agents actually watch.',
+        slug: 'the-last-mile',
+        kind: 'article',
+      },
+      {
+        title: 'The wrong debate: what PHP taught me about agentic software',
+        blurb: 'MCP or CLI is the wrong fight. What PHP already learned about building things together, one layer down.',
+        slug: 'the-wrong-debate',
+        kind: 'article',
+      },
+      {
+        title: 'Kill the MCP',
+        blurb: 'I deleted the MCP server from my own MCP project and kept the tools. Kill the reflex, not the protocol.',
+        slug: 'kill-the-mcp',
+        kind: 'article',
+      },
+      {
+        title: 'The Mate journey: how an idea became a tool',
+        blurb: 'From skeptic to contributor, an homage to the Symfony community and the symfony/ai initiative.',
+        slug: 'the-mate-journey',
+        kind: 'article',
+      },
+    ],
+  },
+  {
     slug: 'rag',
+    hidden: true, // goes live with the first RAG article on 2026-07-29 (flip to false + deploy that day)
     kicker: '// RAG',
     title: 'RAG beyond hello world',
     tagline: 'Retrieval is a pipeline, not a lookup.',
