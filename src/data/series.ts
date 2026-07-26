@@ -38,16 +38,16 @@ export const series: Series[] = [
         kind: 'article',
       },
       {
-        title: 'Building a minimal RAG pipeline with Symfony AI',
-        blurb: 'The deliberate hello world: index, embed, retrieve, answer. Then see where it breaks.',
-        slug: 'minimal-rag-pipeline-symfony-ai',
-        kind: 'tutorial',
-      },
-      {
         title: 'Retrieval quality is decided before the first query',
         blurb: 'The indexing side: loading, chunking and enriching the source before anyone searches it.',
         slug: 'indexing-for-rag',
         kind: 'article',
+      },
+      {
+        title: 'Building a minimal RAG pipeline with Symfony AI',
+        blurb: 'The deliberate hello world: index, embed, retrieve, answer. Then see where it breaks.',
+        slug: 'minimal-rag-pipeline-symfony-ai',
+        kind: 'tutorial',
       },
       {
         title: 'Your users do not write search queries',
