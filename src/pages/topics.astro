@@ -1,0 +1,65 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Card from '../components/Card.astro';
+import { series as allSeries } from '../data/series';
+import { getAllPosts } from '../utils/posts';
+
+// One entry per visible series hub. Hidden series (held until launch day) are
+// left out and appear here automatically once they go live.
+const posts = await getAllPosts();
+const ids = new Set(posts.map((p) => p.id));
+
+const hubs = allSeries
+  .filter((s) => !s.hidden)
+  .map((s) => ({
+    s,
+    published: s.pieces.filter((p) => ids.has(p.slug)).length,
+    total: s.pieces.length,
+  }));
+
+const description =
+  'The threads that run through my writing on Symfony, open source and AI tooling, each collected as a series.';
+---
+<BaseLayout title="Topics · Johannes Wachter" description={description}>
+  <div class="content wrap">
+    <span class="kicker">// TOPICS</span>
+    <h1>Topics</h1>
+    <p class="intro">
+      A few threads run through my writing, each one a series on a single question. The larger one
+      underneath them is how to turn AI capabilities into software we can understand, test, secure
+      and maintain.
+    </p>
+
+    {hubs.length === 0 ? (
+      <p class="intro">Nothing here yet.</p>
+    ) : (
+      <div class="stack">
+        {hubs.map(({ s, published, total }) => (
+          <Card
+            kicker={s.kicker}
+            title={s.title}
+            meta={`${published} of ${total} published`}
+            href={`/${s.slug}`}
+          >{s.tagline}</Card>
+        ))}
+      </div>
+    )}
+
+    <p class="back"><a href="/blog">All writing &rarr;</a></p>
+  </div>
+</BaseLayout>
+
+<style>
+  .wrap { padding-top: var(--space-8); padding-bottom: var(--space-8); }
+  h1 {
+    font-family: var(--font-sans);
+    font-weight: var(--weight-semibold);
+    font-size: var(--size-h1);
+    line-height: var(--leading-heading);
+    letter-spacing: var(--tracking-display);
+    margin: 12px 0 6px;
+  }
+  .intro { font-size: var(--size-body); color: var(--fg-2); margin: 0 0 24px; max-width: var(--width-content); }
+  .stack { display: grid; gap: var(--space-4); margin-top: var(--space-5); }
+  .back { margin-top: var(--space-6); font-size: var(--size-small); color: var(--fg-2); }
+</style>
