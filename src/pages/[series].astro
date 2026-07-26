@@ -15,17 +15,15 @@ export async function getStaticPaths() {
 
 const { s } = Astro.props;
 
-// A piece is "live" when a published post with its slug exists.
+// Only published pieces are shown. A piece appears once a post with its slug
+// exists; planned pieces are simply absent (no placeholders, no counters).
 const posts = await getAllPosts();
 const bySlug = new Map(posts.map((p) => [p.id, p]));
 
-const items = s.pieces.map((piece, index) => ({
-  piece,
-  n: String(index + 1).padStart(2, '0'),
-  post: bySlug.get(piece.slug) ?? null,
-}));
+const items = s.pieces
+  .map((piece) => ({ piece, post: bySlug.get(piece.slug) ?? null }))
+  .filter((it) => it.post !== null);
 
-const publishedCount = items.filter((it) => it.post).length;
 const description = `${s.title}. ${s.tagline}`;
 ---
 <BaseLayout title={`${s.title} · Johannes Wachter`} description={description}>
@@ -34,17 +32,14 @@ const description = `${s.title}. ${s.tagline}`;
     <h1>{s.title}</h1>
     <p class="tagline">{s.tagline}</p>
     <p class="intro">{s.intro}</p>
-    <p class="status">
-      {publishedCount} of {s.pieces.length} published. This page grows as the series ships.
-    </p>
 
     <div class="stack">
-      {items.map(({ piece, n, post }) => (
+      {items.map(({ piece, post }) => (
         <Card
-          kicker={`${n} · ${piece.kind ?? 'article'}`}
+          kicker={piece.kind ?? 'article'}
           title={piece.title}
-          meta={post ? `${formatDate(post.data.pubDate)} · ${post.data.readingTime}` : 'Coming soon'}
-          href={post ? `/blog/${post.id}` : undefined}
+          meta={`${formatDate(post.data.pubDate)} · ${post.data.readingTime}`}
+          href={`/blog/${post.id}`}
         >{piece.blurb}</Card>
       ))}
     </div>

@@ -9,13 +9,11 @@ import { getAllPosts } from '../utils/posts';
 const posts = await getAllPosts();
 const ids = new Set(posts.map((p) => p.id));
 
+// Only surface hubs that already have at least one published piece. No counters.
 const hubs = allSeries
   .filter((s) => !s.hidden)
-  .map((s) => ({
-    s,
-    published: s.pieces.filter((p) => ids.has(p.slug)).length,
-    total: s.pieces.length,
-  }));
+  .map((s) => ({ s, published: s.pieces.filter((p) => ids.has(p.slug)).length }))
+  .filter((h) => h.published > 0);
 
 const description =
   'The threads that run through my writing on Symfony, open source and AI tooling, each collected as a series.';
@@ -34,13 +32,8 @@ const description =
       <p class="intro">Nothing here yet.</p>
     ) : (
       <div class="stack">
-        {hubs.map(({ s, published, total }) => (
-          <Card
-            kicker={s.kicker}
-            title={s.title}
-            meta={`${published} of ${total} published`}
-            href={`/${s.slug}`}
-          >{s.tagline}</Card>
+        {hubs.map(({ s }) => (
+          <Card kicker={s.kicker} title={s.title} href={`/${s.slug}`}>{s.tagline}</Card>
         ))}
       </div>
     )}
