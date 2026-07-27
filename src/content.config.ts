@@ -23,6 +23,11 @@ const posts = defineCollection({
     // /archive, never in the home Featured/Latest or the main blog index.
     archived: z.boolean().default(false),
     source: z.string().url().optional(), // original asapo.at URL
+    // Cross-post: this piece was first published elsewhere. canonicalUrl keeps
+    // the SEO weight with the original instead of competing with it, and
+    // originalPublisher names it in the visible note above the article.
+    canonicalUrl: z.string().url().optional(),
+    originalPublisher: z.string().optional(),
   }),
 });
 

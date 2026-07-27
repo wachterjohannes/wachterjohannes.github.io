@@ -25,6 +25,34 @@ export interface Series {
 
 export const series: Series[] = [
   {
+    slug: 'ownership',
+    kicker: '// OWNERSHIP',
+    title: 'Ownership',
+    tagline: 'Who owns the consequences once implementation stops being the hard part.',
+    intro:
+      'Building software has become cheap, and the arguments about it are mostly about speed. The part that stayed expensive is the one nobody photographs: somebody has to hold the context, carry the maintenance and answer for the system a year later. These pieces circle that question from three directions, from a classroom, from a team of six, and from the current enthusiasm for building without developers.',
+    pieces: [
+      {
+        title: 'What happens to innovation when implementation becomes almost free?',
+        blurb: 'When code, design and content all get cheap, the bottleneck moves. A note from the classroom about where excellence still shows up.',
+        slug: 'when-implementation-becomes-free',
+        kind: 'article',
+      },
+      {
+        title: 'Why six people are enough and what coding agents have to do with it',
+        blurb: 'Six developers run Sulu and its projects. Ownership and context are what make that work, and agents need the same things.',
+        slug: 'why-six-people-are-enough',
+        kind: 'article',
+      },
+      {
+        title: 'Vibe coding is no-code without a custodian',
+        blurb: 'Another attempt at software without developers. The difference to no-code is not the abstraction level, it is that nobody is left to look after it.',
+        slug: 'vibe-coding-without-a-custodian',
+        kind: 'article',
+      },
+    ],
+  },
+  {
     slug: 'mate',
     kicker: '// MATE',
     title: 'Symfony Mate',

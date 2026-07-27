@@ -49,7 +49,7 @@ const jsonLd = {
     url: 'https://johanneswachter.dev/about',
   },
   publisher: { '@type': 'Person', name: 'Johannes Wachter' },
-  mainEntityOfPage: { '@type': 'WebPage', '@id': url },
+  mainEntityOfPage: { '@type': 'WebPage', '@id': data.canonicalUrl ?? url },
   keywords: data.tags.join(', '),
 };
 ---
@@ -59,6 +59,7 @@ const jsonLd = {
   image={data.heroImage}
   type="article"
   jsonLd={jsonLd}
+  canonicalUrl={data.canonicalUrl}
 >
   <article class="content wrap">
     <a class="back" href={data.archived ? '/archive' : '/blog'}>&larr; {data.archived ? 'Archive' : 'Blog'}</a>
@@ -70,6 +71,13 @@ const jsonLd = {
         Archived, originally posted on
         {' '}<a href={data.source} rel="noopener" target="_blank">asapo.at</a>
         {' '}({formatDate(data.pubDate)}).
+      </p>
+    )}
+    {data.canonicalUrl && (
+      <p class="archive-note">
+        Originally published on
+        {' '}<a href={data.canonicalUrl} rel="noopener nofollow" target="_blank">{data.originalPublisher ?? 'another site'}</a>
+        {' '}({formatDate(data.pubDate)}). Reposted here in full.
       </p>
     )}
     {(data.linkedin || series) && (
@@ -96,7 +104,9 @@ const jsonLd = {
     {data.linkedin && (
       <div class="li-cta">
         <Button href={data.linkedin} rel="noopener" target="_blank">Discuss on LinkedIn &rarr;</Button>
-        <span class="li-note">This post was also published on LinkedIn. Join the discussion there.</span>
+        <span class="li-note">{data.canonicalUrl
+          ? 'This piece was shared and discussed on LinkedIn. Join in there.'
+          : 'This post was also published on LinkedIn. Join the discussion there.'}</span>
       </div>
     )}
 

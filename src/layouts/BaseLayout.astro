@@ -10,14 +10,15 @@ interface Props {
   image?: string;
   type?: 'website' | 'article';
   jsonLd?: Record<string, unknown>;
+  canonicalUrl?: string;
   transparentHeader?: boolean;
 }
-const { title, description, image, type, jsonLd, transparentHeader = false } = Astro.props;
+const { title, description, image, type, jsonLd, canonicalUrl, transparentHeader = false } = Astro.props;
 ---
 <!doctype html>
 <html lang="en">
   <head>
-    <BaseHead title={title} description={description} image={image} type={type} jsonLd={jsonLd} />
+    <BaseHead title={title} description={description} image={image} type={type} jsonLd={jsonLd} canonicalUrl={canonicalUrl} />
   </head>
   <body>
     <div class="layout">

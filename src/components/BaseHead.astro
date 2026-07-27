@@ -8,6 +8,10 @@ interface Props {
   image?: string;         // site-relative path, e.g. /images/posts/x.png
   type?: 'website' | 'article';
   jsonLd?: Record<string, unknown>;
+  // Absolute URL of the original publication. Set for cross-posts, so search
+  // engines keep the original as the canonical and this copy does not compete
+  // with it. Absent means this page is the original.
+  canonicalUrl?: string;
 }
 const {
   title,
@@ -15,12 +19,13 @@ const {
   image = '/images/posts/giving-ai-assistants-eyes-header.png',
   type = 'website',
   jsonLd,
+  canonicalUrl,
 } = Astro.props;
 
 const site = Astro.site ?? new URL('https://johanneswachter.dev');
 // Normalise: no trailing slash except the root, so canonicals are stable.
 const path = Astro.url.pathname.replace(/(.)\/$/, '$1');
-const canonical = new URL(path, site).href;
+const canonical = canonicalUrl ?? new URL(path, site).href;
 const ogImage = new URL(image, site).href;
 const SITE_NAME = 'Johannes Wachter';
 ---
