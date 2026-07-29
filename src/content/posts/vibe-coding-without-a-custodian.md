@@ -8,6 +8,7 @@ heroImage: "/images/posts/vibe-coding-without-a-custodian-header.png"
 heroAlt: "Ownership. Who checks the roof. Vibe coding, the second act nobody posts. A card shows a timeline: day 0 shipped it, day 30 users love it, month 6 empty."
 tags: [ai, vibe-coding, ownership, maintenance, opinion]
 draft: false
+linkedin: "https://www.linkedin.com/posts/wachterjohannes_vibe-coding-is-no-code-without-a-custodian-activity-7488133759892967424-hTBp"
 ---
 
 *By Johannes Wachter. Part of Ownership, a series about who carries the consequences once implementation stops being the hard part.*
