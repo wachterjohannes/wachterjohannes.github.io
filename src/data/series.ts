@@ -100,7 +100,7 @@ export const series: Series[] = [
   },
   {
     slug: 'rag',
-    hidden: true, // goes live with the first RAG article on 2026-07-29 (flip to false + deploy that day)
+    hidden: true, // RAG is postponed indefinitely (Johannes, 2026-08-04). No date. Flip to false on the day the first RAG article actually ships, not before.
     kicker: '// RAG',
     title: 'RAG beyond hello world',
     tagline: 'Retrieval is a pipeline, not a lookup.',
