@@ -17,15 +17,16 @@ const work: [string, string, string, string][] = [
   ['August, 2013 – September, 2018', 'MASSIVE ART WebServices GmbH', 'Sulu Core Developer', 'Conception and development of Sulu and its third-party bundles, with consulting, part-time alongside my studies at first.'],
   ['June, 2010 – September, 2010', 'Liebherr Elektronik GmbH', 'Test Software Developer', 'Extended the project I began for my thesis at HTL Rankweil.'],
 ];
-// Real talks only. [event, title, note?, url?]
-const talks: [string, string, (string | undefined)?, string?][] = [
-  ['SymfonyLive Berlin 2026 · SymfonyOnline 2026', 'Symfony Mate: Real Runtime Context for AI Coding Assistants'],
-  ['SymfonyCon Vienna 2024', 'Flexibility in the Face of Uncertainty', 'Provider-agnostic, GDPR-aware AI in Symfony'],
-  ['Never Code Alone, 12 June 2025', 'Sulu CMS 3.0 & AI: Live-Integration', 'With Roland Golla', 'https://www.youtube.com/live/PBkfMI5B4WQ'],
-  ['Never Code Alone', 'Sulu 3.0 Content Update: Live-Demo & Überblick', undefined, 'https://www.youtube.com/live/IdOB0ldvr8A'],
-  ['SyliusCon 2023', 'Sulu & Sylius: Content and Commerce', undefined, 'https://www.youtube.com/watch?v=ZYfHaiZSh_s'],
-  ['SymfonyCon Cluj 2017', 'Tired of fixing your CMS instead of creating awesome websites?', 'Sulu'],
-  ['VLBG Webdev 2026', 'RAG beyond hello world'],
+// Real talks only. [year, title, event, note?, url?] — one shape for every row, newest first.
+const talks: [string, string, string, (string | undefined)?, (string | undefined)?][] = [
+  ['2026', 'Symfony Mate: So findet deine KI Bugs, die sie im Code übersieht', 'Never Code Alone', 'With Roland Golla', 'https://www.youtube.com/live/RgXZ54O5FYs'],
+  ['2026', 'Symfony Mate: Real Runtime Context for AI Coding Assistants', 'SymfonyLive Berlin · SymfonyOnline'],
+  ['2026', 'RAG beyond hello world', 'VLBG Webdev'],
+  ['2025', 'Sulu CMS 3.0 & AI: Live-Integration', 'Never Code Alone', 'With Roland Golla', 'https://www.youtube.com/live/PBkfMI5B4WQ'],
+  ['2025', 'Sulu 3.0 Content Update: Live-Demo & Überblick', 'Never Code Alone', undefined, 'https://www.youtube.com/live/IdOB0ldvr8A'],
+  ['2024', 'Flexibility in the Face of Uncertainty', 'SymfonyCon Vienna', 'Provider-agnostic, GDPR-aware AI in Symfony'],
+  ['2023', 'Sulu & Sylius: Content and Commerce', 'SyliusCon', undefined, 'https://www.youtube.com/watch?v=ZYfHaiZSh_s'],
+  ['2017', 'Tired of fixing your CMS instead of creating awesome websites?', 'SymfonyCon Cluj', 'Sulu'],
 ];
 const edu: [string, string, string][] = [
   ['2005 – 2009', 'Höhere Lehranstalt für Elektronik und Technische Informatik', 'HTL Rankweil'],
@@ -106,14 +107,14 @@ const description =
   <section class="content sec">
     <div class="section-head"><span class="kicker">// SPEAKING</span><span class="rule"></span></div>
     <div class="rows tight">
-      {talks.map(([event, title, note, url]) => (
+      {talks.map(([year, title, event, note, url]) => (
         <div class="row">
-          <div class="date">{event}</div>
+          <div class="date">{year}</div>
           <div>
             <span class="edu-title">
               {url ? <a href={url} rel="noopener" target="_blank">{title}</a> : title}
             </span>
-            {note && <span class="edu-inst"> · {note}</span>}
+            <span class="edu-inst talk-meta">{note ? `${event} · ${note}` : event}</span>
           </div>
         </div>
       ))}
@@ -160,6 +161,8 @@ const description =
   .fact { display: flex; gap: 12px; font-size: var(--size-small); }
   .fact dt { font-family: var(--font-mono); color: var(--fg-3); width: 130px; margin: 0; }
   .fact dd { margin: 0; font-weight: var(--weight-medium); }
+
+  .talk-meta { display: block; margin-top: 2px; }
 
   .portrait { margin: 0; }
   .portrait img {
