@@ -8,6 +8,7 @@ heroImage: "/images/posts/kill-the-mcp-header.png"
 heroAlt: "Title card: Kill the MCP. I deleted the MCP server from my own MCP project. A dark terminal shows the Mate CLI listing and calling tools, with no mcp/sdk and no server."
 tags: [ai, mcp, php, symfony, opinion]
 draft: false
+linkedin: "https://www.linkedin.com/feed/update/urn:li:share:7490634951298777089/"
 ---
 
 *By Johannes Wachter, Sulu core developer. The follow-up I promised at the end of the last piece. Less a debate this time, more a report from the workbench: what happened when I took my own advice literally and started deleting things.*
