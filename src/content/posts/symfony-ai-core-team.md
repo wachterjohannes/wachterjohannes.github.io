@@ -8,6 +8,7 @@ heroImage: "/images/posts/symfony-ai-core-team-header.png"
 heroAlt: "Title card: Joining the AI Core Team. A personal note. A dark terminal shows a core-team roster listing Christopher Hertel as lead, Oskar Stark, Fabien Potencier, and Johannes Wachter."
 tags: [ai, symfony, career]
 draft: false
+linkedin: "https://www.linkedin.com/posts/wachterjohannes_joining-the-symfony-ai-core-team-johannes-share-7493584698774921217-SyEH/"
 ---
 
 *By Johannes Wachter, Sulu core developer and contributor to symfony/ai. A personal note on being asked to join the new Symfony AI Core Team.*
