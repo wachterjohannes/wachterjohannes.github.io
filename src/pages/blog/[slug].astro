@@ -11,9 +11,12 @@ import { formatDate, isoDate } from '../../utils/date';
 export async function getStaticPaths() {
   // Generate a page for every post, regular and archived.
   const posts = await getAllPosts();
+  // Unlisted posts never show up as a "next up" suggestion, on their own page
+  // or anyone else's, so a quiet publish stays quiet.
+  const listable = posts.filter((p) => !p.data.unlisted);
   return posts.map((post) => ({
     params: { slug: post.id },
-    props: { post, all: posts },
+    props: { post, all: listable },
   }));
 }
 
@@ -60,6 +63,7 @@ const jsonLd = {
   type="article"
   jsonLd={jsonLd}
   canonicalUrl={data.canonicalUrl}
+  lang={data.lang}
 >
   <article class="content wrap">
     <a class="back" href={data.archived ? '/archive' : '/blog'}>&larr; {data.archived ? 'Archive' : 'Blog'}</a>

@@ -12,11 +12,12 @@ interface Props {
   jsonLd?: Record<string, unknown>;
   canonicalUrl?: string;
   transparentHeader?: boolean;
+  lang?: string;
 }
-const { title, description, image, type, jsonLd, canonicalUrl, transparentHeader = false } = Astro.props;
+const { title, description, image, type, jsonLd, canonicalUrl, transparentHeader = false, lang = 'en' } = Astro.props;
 ---
 <!doctype html>
-<html lang="en">
+<html lang={lang}>
   <head>
     <BaseHead title={title} description={description} image={image} type={type} jsonLd={jsonLd} canonicalUrl={canonicalUrl} />
   </head>

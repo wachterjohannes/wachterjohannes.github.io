@@ -28,6 +28,14 @@ const posts = defineCollection({
     // originalPublisher names it in the visible note above the article.
     canonicalUrl: z.string().url().optional(),
     originalPublisher: z.string().optional(),
+    // Language of the post body, for the <html lang> attribute. Defaults to
+    // English since that's every post so far.
+    lang: z.enum(['en', 'de']).default('en'),
+    // Live at its own URL and fully functional, but deliberately not linked or
+    // listed anywhere on the site (home, blog index, archive, RSS, tags,
+    // "next up" suggestions on other posts). For a quiet publish, e.g. a
+    // translation Johannes wants up without promoting it.
+    unlisted: z.boolean().default(false),
   }),
 });
 

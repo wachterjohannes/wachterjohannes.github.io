@@ -12,10 +12,11 @@ export async function getAllPosts(): Promise<Post[]> {
   return posts.sort(byNewest);
 }
 
-// Regular (non-archived) posts, newest first. Drives the home Featured/Latest
-// and the main blog index. Archived posts are excluded here on purpose.
+// Regular (non-archived, non-unlisted) posts, newest first. Drives the home
+// Featured/Latest and the main blog index. Archived and unlisted posts are
+// excluded here on purpose.
 export async function getSortedPosts(): Promise<Post[]> {
-  return (await getAllPosts()).filter((p) => p.data.archived !== true);
+  return (await getAllPosts()).filter((p) => p.data.archived !== true && p.data.unlisted !== true);
 }
 
 // Archived posts (migrated from asapo.at), newest first. Drives /archive.
