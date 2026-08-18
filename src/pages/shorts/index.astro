@@ -1,19 +1,16 @@
 ---
-import { render } from 'astro:content';
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import Card from '../../components/Card.astro';
 import Tag from '../../components/Tag.astro';
-import { getSortedShorts, getAllShortTags } from '../../utils/shorts';
+import { getSortedShorts, getAllShortTags, excerpt } from '../../utils/shorts';
 import { formatDate, isoDate } from '../../utils/date';
 
-// The index is the primary surface for shorts: at this length the piece fits on
-// the listing, so it is shown in full rather than teased. Each one still has its
-// own page for linking and sharing.
+// The index opens each short and stops. Printing the whole thing here left the
+// individual pages with nothing to offer, so the listing shows the first sentence
+// or two and the piece is read on its own page.
 const shorts = await getSortedShorts();
 const tags = await getAllShortTags();
-const rendered = await Promise.all(
-  shorts.map(async (short) => ({ short, Content: (await render(short)).Content })),
-);
+const items = shorts.map((short) => ({ short, ...excerpt(short.body ?? '') }));
 
 const description =
   'Short notes on Symfony, open source and agentic development. One observation at a time, in a few sentences.';
@@ -25,12 +22,13 @@ const description =
     <p class="intro">{description}</p>
 
     <div class="stack">
-      {rendered.map(({ short, Content }) => (
+      {items.map(({ short, text, truncated }) => (
         <Card class="short" kicker={`// ${formatDate(short.data.pubDate)}`}>
           <h2 class="short-title" id={short.id}>
             <a href={`/shorts/${short.id}`}>{short.data.title}</a>
           </h2>
-          <div class="short-body" lang={short.data.lang}><Content /></div>
+          <p class="short-excerpt" lang={short.data.lang}>{text}{truncated && '\u2026'}</p>
+          <a class="short-more" href={`/shorts/${short.id}`}>Read the short &rarr;</a>
           <div class="short-foot">
             <time datetime={isoDate(short.data.pubDate)}>{formatDate(short.data.pubDate)}</time>
             {short.data.source && (
@@ -86,8 +84,18 @@ const description =
   }
   .short-title a { color: var(--fg-1); border-bottom: none; }
   .short-title a:hover { color: var(--accent-text); }
-  .short-body { font-size: var(--size-body); line-height: var(--leading-body); color: var(--fg-1); }
-  .short-body :global(p) { margin: 10px 0 0; }
+  .short-excerpt {
+    font-size: var(--size-body);
+    line-height: var(--leading-body);
+    color: var(--fg-1);
+    margin: 10px 0 0;
+  }
+  .short-more {
+    display: inline-block;
+    margin-top: 8px;
+    font-family: var(--font-mono);
+    font-size: 13px;
+  }
   .short-foot {
     display: flex;
     align-items: center;
