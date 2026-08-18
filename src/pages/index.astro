@@ -4,12 +4,18 @@ import BaseLayout from '../layouts/BaseLayout.astro';
 import Card from '../components/Card.astro';
 import Button from '../components/Button.astro';
 import { getSortedPosts } from '../utils/posts';
-import { formatDate } from '../utils/date';
+import { getSortedShorts } from '../utils/shorts';
+import { formatDate, isoDate } from '../utils/date';
 import heroImg from '../assets/hero.jpg';
 
 const posts = await getSortedPosts();
 const featured = posts[0];
 const latest = posts.slice(1);
+
+// The three most recent shorts, as a thin strip under the writing. Deliberately
+// not cards: shorts are the small content type and must not pull attention off
+// the featured post, so they get a list with no surface of its own.
+const shorts = (await getSortedShorts()).slice(0, 3);
 
 const meta = (p: typeof posts[number]) =>
   `${formatDate(p.data.pubDate)} · ${p.data.readingTime}`;
@@ -73,6 +79,24 @@ const description =
         ))}
       </div>
       <p class="more"><a href="/blog">All writing &rarr;</a></p>
+    </section>
+  )}
+
+  {shorts.length > 0 && (
+    <section class="content shorts">
+      <div class="section-head" style="margin-top: var(--space-6)"><span class="kicker muted-kicker">// SHORTS</span><span class="rule"></span></div>
+      <ul class="shorts-list">
+        {shorts.map((s) => (
+          <li class="shorts-item">
+            <a class="shorts-link" href={`/shorts/${s.id}`}>
+              <time class="shorts-date" datetime={isoDate(s.data.pubDate)}>{formatDate(s.data.pubDate)}</time>
+              <span class="shorts-title">{s.data.title}</span>
+            </a>
+            <p class="shorts-desc">{s.data.description}</p>
+          </li>
+        ))}
+      </ul>
+      <p class="more"><a href="/shorts">All shorts &rarr;</a></p>
     </section>
   )}
 
@@ -170,6 +194,49 @@ const description =
     max-width: 640px;
     text-wrap: pretty;
   }
+  /* Shorts strip: one hairline-separated row each, no card, muted kicker, small
+     type. It should read as a footnote to the writing above it, not a second
+     feed competing with it. */
+  .shorts { padding-top: var(--space-6); }
+  .muted-kicker { color: var(--fg-3); }
+  .shorts-list { list-style: none; margin: 0; padding: 0; }
+  .shorts-item {
+    padding: var(--space-3) 0;
+    border-top: 1px solid var(--border-1);
+  }
+  .shorts-item:last-child { border-bottom: 1px solid var(--border-1); }
+  .shorts-link {
+    display: flex;
+    align-items: baseline;
+    gap: 12px;
+    color: var(--fg-1);
+    border-bottom: none;
+  }
+  .shorts-link:hover { color: var(--accent-text); }
+  .shorts-date {
+    font-family: var(--font-mono);
+    font-size: var(--size-label);
+    color: var(--fg-3);
+    flex: none;
+  }
+  .shorts-title {
+    font-size: var(--size-small);
+    font-weight: var(--weight-medium);
+    line-height: var(--leading-heading);
+  }
+  .shorts-desc {
+    margin: 2px 0 0;
+    font-size: var(--size-small);
+    color: var(--fg-3);
+    /* One line only. The whole short is on /shorts; this is just a taste. */
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+  @media (max-width: 640px) {
+    .shorts-link { flex-direction: column; gap: 2px; }
+  }
+
   .block { padding-top: var(--space-7); }
   .content { padding-top: var(--space-7); }
   .stack { display: grid; gap: var(--space-4); }
