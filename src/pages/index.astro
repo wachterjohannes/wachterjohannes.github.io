@@ -12,9 +12,9 @@ const posts = await getSortedPosts();
 const featured = posts[0];
 const latest = posts.slice(1);
 
-// The three most recent shorts, as a thin strip under the writing. Deliberately
-// not cards: shorts are the small content type and must not pull attention off
-// the featured post, so they get a list with no surface of its own.
+// The three most recent shorts, as a thin strip between the featured post and the
+// rest of the writing. Deliberately not cards: staying visually light is what keeps
+// it from competing with the featured post, whatever position it sits in.
 const shorts = (await getSortedShorts()).slice(0, 3);
 
 const meta = (p: typeof posts[number]) =>
@@ -68,20 +68,6 @@ const description =
     </section>
   )}
 
-  {latest.length > 0 && (
-    <section class="content">
-      <div class="section-head" style="margin-top: var(--space-6)"><span class="kicker">// LATEST</span><span class="rule"></span></div>
-      <div class="stack">
-        {latest.map((p) => (
-          <Card kicker={p.data.category} title={p.data.title} meta={meta(p)} href={`/blog/${p.id}`}>
-            {p.data.description}
-          </Card>
-        ))}
-      </div>
-      <p class="more"><a href="/blog">All writing &rarr;</a></p>
-    </section>
-  )}
-
   {shorts.length > 0 && (
     <section class="content shorts">
       <div class="section-head" style="margin-top: var(--space-6)"><span class="kicker muted-kicker">// SHORTS</span><span class="rule"></span></div>
@@ -97,6 +83,20 @@ const description =
         ))}
       </ul>
       <p class="more"><a href="/shorts">All shorts &rarr;</a></p>
+    </section>
+  )}
+
+  {latest.length > 0 && (
+    <section class="content">
+      <div class="section-head" style="margin-top: var(--space-6)"><span class="kicker">// LATEST</span><span class="rule"></span></div>
+      <div class="stack">
+        {latest.map((p) => (
+          <Card kicker={p.data.category} title={p.data.title} meta={meta(p)} href={`/blog/${p.id}`}>
+            {p.data.description}
+          </Card>
+        ))}
+      </div>
+      <p class="more"><a href="/blog">All writing &rarr;</a></p>
     </section>
   )}
 
