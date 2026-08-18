@@ -3,11 +3,14 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
 import Card from '../../components/Card.astro';
 import Tag from '../../components/Tag.astro';
 import { getSortedShorts, getAllShortTags, excerpt } from '../../utils/shorts';
-import { formatDate, isoDate } from '../../utils/date';
+import { formatDate } from '../../utils/date';
 
 // The index opens each short and stops. Printing the whole thing here left the
 // individual pages with nothing to offer, so the listing shows the first sentence
 // or two and the piece is read on its own page.
+//
+// The date is the card's kicker, where a post card carries its category, and it is
+// deliberately not repeated in the footer row underneath.
 const shorts = await getSortedShorts();
 const tags = await getAllShortTags();
 const items = shorts.map((short) => ({ short, ...excerpt(short.body ?? '') }));
@@ -30,7 +33,6 @@ const description =
           <p class="short-excerpt" lang={short.data.lang}>{text}{truncated && '\u2026'}</p>
           <a class="short-more" href={`/shorts/${short.id}`}>Read the short &rarr;</a>
           <div class="short-foot">
-            <time datetime={isoDate(short.data.pubDate)}>{formatDate(short.data.pubDate)}</time>
             {short.data.source && (
               <a href={short.data.source} rel="noopener" target="_blank">source &rarr;</a>
             )}
