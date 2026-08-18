@@ -1,0 +1,123 @@
+---
+import { render } from 'astro:content';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import Card from '../../components/Card.astro';
+import Tag from '../../components/Tag.astro';
+import { getSortedShorts } from '../../utils/shorts';
+import { formatDate, isoDate } from '../../utils/date';
+
+// A short is read on the index, but it still gets its own URL so it can be linked
+// and shared on its own. The page is deliberately small: the piece, when it was
+// written, what it comments on, and the way back.
+export async function getStaticPaths() {
+  const shorts = await getSortedShorts();
+  return shorts.map((short) => ({
+    params: { slug: short.id },
+    props: { short, all: shorts },
+  }));
+}
+
+const { short, all } = Astro.props;
+const { Content } = await render(short);
+const { data } = short;
+
+const more = all.filter((s) => s.id !== short.id).slice(0, 2);
+
+const site = Astro.site ?? new URL('https://johanneswachter.dev');
+const url = new URL(`/shorts/${short.id}`, site).href;
+
+const jsonLd = {
+  '@context': 'https://schema.org',
+  '@type': 'BlogPosting',
+  headline: data.title,
+  description: data.description,
+  datePublished: isoDate(data.pubDate),
+  dateModified: isoDate(data.pubDate),
+  author: {
+    '@type': 'Person',
+    name: 'Johannes Wachter',
+    url: 'https://johanneswachter.dev/about',
+  },
+  publisher: { '@type': 'Person', name: 'Johannes Wachter' },
+  mainEntityOfPage: { '@type': 'WebPage', '@id': url },
+  keywords: data.tags.join(', '),
+};
+---
+<BaseLayout
+  title={`${data.title} · Johannes Wachter`}
+  description={data.description}
+  type="article"
+  jsonLd={jsonLd}
+  lang={data.lang}
+>
+  <article class="content wrap">
+    <a class="back" href="/shorts">&larr; Shorts</a>
+    <span class="kicker">// SHORT</span>
+    <h1>{data.title}</h1>
+    <div class="byline">
+      <time datetime={isoDate(data.pubDate)}>{formatDate(data.pubDate)}</time> · Johannes Wachter
+    </div>
+
+    <div class="prose short-body"><Content /></div>
+
+    {data.source && (
+      <p class="source">
+        On <a href={data.source} rel="noopener" target="_blank">{data.source}</a>
+      </p>
+    )}
+
+    {data.tags.length > 0 && (
+      <div class="tags">
+        <span class="tags-label">tags:</span>
+        {data.tags.map((t) => <Tag>{t}</Tag>)}
+      </div>
+    )}
+
+    {more.length > 0 && (
+      <div class="next">
+        {more.map((s) => (
+          <Card kicker="// MORE SHORTS" title={s.data.title} href={`/shorts/${s.id}`}>
+            {s.data.description}
+          </Card>
+        ))}
+      </div>
+    )}
+  </article>
+</BaseLayout>
+
+<style>
+  .wrap { padding-top: var(--space-8); padding-bottom: var(--space-8); }
+  .back {
+    display: inline-block;
+    font-family: var(--font-mono);
+    font-size: 13px;
+    color: var(--fg-3);
+    border-bottom: none;
+    margin-bottom: 24px;
+  }
+  .back:hover { color: var(--accent-text); }
+  h1 {
+    font-family: var(--font-sans);
+    font-weight: var(--weight-semibold);
+    font-size: var(--size-h2);
+    line-height: var(--leading-heading);
+    letter-spacing: var(--tracking-display);
+    margin: 12px 0 10px;
+  }
+  .byline { font-family: var(--font-mono); font-size: 13px; color: var(--fg-3); margin-bottom: 28px; }
+  .short-body { font-size: var(--size-body); line-height: var(--leading-body); }
+  .source { font-family: var(--font-mono); font-size: 13px; color: var(--fg-3); margin-top: 28px; word-break: break-word; }
+  .tags { display: flex; gap: 8px; margin: 28px 0 0; align-items: center; flex-wrap: wrap; }
+  .tags-label { font-family: var(--font-mono); font-size: 12px; color: var(--fg-3); margin-right: 4px; }
+  .next {
+    border-top: 1px solid var(--border-1);
+    margin-top: 40px;
+    padding-top: 28px;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 16px;
+  }
+  @media (max-width: 640px) {
+    .next { grid-template-columns: 1fr; }
+  }
+</style>

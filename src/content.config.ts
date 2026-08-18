@@ -39,4 +39,22 @@ const posts = defineCollection({
   }),
 });
 
-export const collections = { posts };
+// Shorts are the small content type: one observation in three to five sentences,
+// written straight into src/content/shorts by the write app's Publish button. They
+// carry no hero image, no category kicker and no reading time, because at this
+// length none of those say anything. The body is the piece; `description` is the
+// same text as plain prose, for the card, the meta tag and the OG preview.
+const shorts = defineCollection({
+  loader: glob({ pattern: '**/*.{md,mdx}', base: './src/content/shorts' }),
+  schema: z.object({
+    title: z.string(),
+    description: z.string(),
+    pubDate: z.coerce.date(),
+    tags: z.array(z.string()).default([]),
+    // The thing the short comments on: a pull request, a release, a package.
+    source: z.string().url().optional(),
+    lang: z.enum(['en', 'de']).default('en'),
+  }),
+});
+
+export const collections = { posts, shorts };

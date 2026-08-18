@@ -1,0 +1,109 @@
+---
+import { render } from 'astro:content';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import Card from '../../components/Card.astro';
+import Tag from '../../components/Tag.astro';
+import { getSortedShorts, getAllShortTags } from '../../utils/shorts';
+import { formatDate, isoDate } from '../../utils/date';
+
+// The index is the primary surface for shorts: at this length the piece fits on
+// the listing, so it is shown in full rather than teased. Each one still has its
+// own page for linking and sharing.
+const shorts = await getSortedShorts();
+const tags = await getAllShortTags();
+const rendered = await Promise.all(
+  shorts.map(async (short) => ({ short, Content: (await render(short)).Content })),
+);
+
+const description =
+  'Short notes on Symfony, open source and agentic development. One observation at a time, in a few sentences.';
+---
+<BaseLayout title="Shorts · Johannes Wachter" description={description}>
+  <div class="content wrap">
+    <span class="kicker">// SHORTS</span>
+    <h1>Shorts</h1>
+    <p class="intro">{description}</p>
+
+    <div class="stack">
+      {rendered.map(({ short, Content }) => (
+        <Card class="short" kicker={`// ${formatDate(short.data.pubDate)}`}>
+          <h2 class="short-title" id={short.id}>
+            <a href={`/shorts/${short.id}`}>{short.data.title}</a>
+          </h2>
+          <div class="short-body" lang={short.data.lang}><Content /></div>
+          <div class="short-foot">
+            <time datetime={isoDate(short.data.pubDate)}>{formatDate(short.data.pubDate)}</time>
+            {short.data.source && (
+              <a href={short.data.source} rel="noopener" target="_blank">source &rarr;</a>
+            )}
+            {short.data.tags.map((t) => <Tag>{t}</Tag>)}
+          </div>
+        </Card>
+      ))}
+    </div>
+
+    {shorts.length === 0 && (
+      <p class="intro">Nothing here yet.</p>
+    )}
+
+    {tags.length > 0 && (
+      <div class="topics">
+        <span class="topics-label">topics:</span>
+        {tags.map((t) => <Tag>{t}</Tag>)}
+      </div>
+    )}
+
+    <p class="blog-link">
+      The longer pieces are in the <a href="/blog">blog</a> &rarr;
+    </p>
+  </div>
+</BaseLayout>
+
+<style>
+  .wrap { padding-top: var(--space-8); padding-bottom: var(--space-8); }
+  h1 {
+    font-family: var(--font-sans);
+    font-weight: var(--weight-semibold);
+    font-size: var(--size-h1);
+    line-height: var(--leading-heading);
+    letter-spacing: var(--tracking-display);
+    margin: 12px 0 6px;
+  }
+  .intro { font-size: var(--size-body); color: var(--fg-2); margin: 0 0 24px; max-width: var(--width-content); }
+
+  /* Denser than the blog stack: a short is read on the listing, so the cards sit
+     closer together and the body carries the weight instead of a summary line. */
+  .stack { display: grid; gap: var(--space-3); margin-top: var(--space-5); max-width: var(--width-content); }
+  .short-title {
+    font-family: var(--font-sans);
+    font-size: var(--size-h3);
+    font-weight: var(--weight-semibold);
+    line-height: var(--leading-heading);
+    margin: 0;
+    scroll-margin-top: 80px;
+  }
+  .short-title a { color: var(--fg-1); border-bottom: none; }
+  .short-title a:hover { color: var(--accent-text); }
+  .short-body { font-size: var(--size-body); line-height: var(--leading-body); color: var(--fg-1); }
+  .short-body :global(p) { margin: 10px 0 0; }
+  .short-foot {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    flex-wrap: wrap;
+    margin-top: 14px;
+    font-family: var(--font-mono);
+    font-size: 12px;
+    color: var(--fg-3);
+  }
+
+  .topics {
+    display: flex;
+    gap: 8px;
+    margin-top: var(--space-6);
+    align-items: center;
+    flex-wrap: wrap;
+  }
+  .topics-label { font-family: var(--font-mono); font-size: 12px; color: var(--fg-3); margin-right: 4px; }
+  .blog-link { margin-top: var(--space-6); font-size: var(--size-small); color: var(--fg-2); }
+</style>
