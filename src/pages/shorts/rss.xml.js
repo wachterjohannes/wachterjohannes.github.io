@@ -1,10 +1,9 @@
 import rss from '@astrojs/rss';
 import { getSortedShorts } from '../../utils/shorts';
 
-// Shorts get their own feed rather than a place in /rss.xml. They publish more
-// often and much lighter than the articles, so mixing them in would change what
-// the main feed is for; a separate feed lets people take the long-form only, the
-// shorts only, or both. Reachable at /shorts/rss.xml.
+// The shorts feed: shorts and nothing else, for people who want the small pieces
+// without the articles. /rss.xml carries both and /blog/rss.xml carries the writing
+// on its own. Reachable at /shorts/rss.xml.
 export async function GET(context) {
   const shorts = await getSortedShorts();
   return rss({
