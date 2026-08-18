@@ -2,6 +2,7 @@
 import { render } from 'astro:content';
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import Card from '../../components/Card.astro';
+import DiscussOnLinkedIn from '../../components/DiscussOnLinkedIn.astro';
 import Tag from '../../components/Tag.astro';
 import { getSortedShorts } from '../../utils/shorts';
 import { formatDate, isoDate } from '../../utils/date';
@@ -64,6 +65,13 @@ const jsonLd = {
       <p class="source">
         On <a href={data.source} rel="noopener" target="_blank">{data.source}</a>
       </p>
+    )}
+
+    {data.linkedin && (
+      <DiscussOnLinkedIn
+        href={data.linkedin}
+        note="This short was also posted on LinkedIn. Join the discussion there."
+      />
     )}
 
     {data.tags.length > 0 && (

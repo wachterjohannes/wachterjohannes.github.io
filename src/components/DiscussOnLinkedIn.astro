@@ -1,0 +1,33 @@
+---
+// The end-of-piece call to action linking the LinkedIn version of a piece. Lifted
+// out of the post page unchanged so shorts get the same element rather than a
+// second copy of it; both pass their own note, because a cross-post and a short
+// are not the same sentence.
+import Button from './Button.astro';
+
+interface Props {
+  href: string;
+  note?: string;
+}
+const {
+  href,
+  note = 'This post was also published on LinkedIn. Join the discussion there.',
+} = Astro.props;
+---
+<div class="li-cta">
+  <Button href={href} rel="noopener" target="_blank">Discuss on LinkedIn &rarr;</Button>
+  <span class="li-note">{note}</span>
+</div>
+
+<style>
+  .li-cta {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    flex-wrap: wrap;
+    margin-top: 36px;
+    padding-top: 28px;
+    border-top: 1px solid var(--border-1);
+  }
+  .li-note { font-size: var(--size-small); color: var(--fg-3); }
+</style>

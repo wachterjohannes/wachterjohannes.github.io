@@ -53,6 +53,10 @@ const shorts = defineCollection({
     tags: z.array(z.string()).default([]),
     // The thing the short comments on: a pull request, a release, a package.
     source: z.string().url().optional(),
+    // Optional: the LinkedIn version of this short. Set means the page shows the
+    // same "Discuss on LinkedIn" call to action a post does. Plenty of shorts are
+    // website only and never get one.
+    linkedin: z.string().url().optional(),
     lang: z.enum(['en', 'de']).default('en'),
   }),
 });

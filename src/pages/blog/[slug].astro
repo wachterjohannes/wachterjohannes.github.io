@@ -1,7 +1,7 @@
 ---
 import { render } from 'astro:content';
 import BaseLayout from '../../layouts/BaseLayout.astro';
-import Button from '../../components/Button.astro';
+import DiscussOnLinkedIn from '../../components/DiscussOnLinkedIn.astro';
 import Card from '../../components/Card.astro';
 import Tag from '../../components/Tag.astro';
 import { getAllPosts } from '../../utils/posts';
@@ -106,12 +106,12 @@ const jsonLd = {
     </div>
 
     {data.linkedin && (
-      <div class="li-cta">
-        <Button href={data.linkedin} rel="noopener" target="_blank">Discuss on LinkedIn &rarr;</Button>
-        <span class="li-note">{data.canonicalUrl
+      <DiscussOnLinkedIn
+        href={data.linkedin}
+        note={data.canonicalUrl
           ? 'This piece was shared and discussed on LinkedIn. Join in there.'
-          : 'This post was also published on LinkedIn. Join the discussion there.'}</span>
-      </div>
+          : 'This post was also published on LinkedIn. Join the discussion there.'}
+      />
     )}
 
     {data.tags.length > 0 && (
@@ -155,17 +155,6 @@ const jsonLd = {
     font-family: var(--font-mono);
     font-size: 13px;
   }
-  /* Prominent call to action at the end of the article. */
-  .li-cta {
-    display: flex;
-    align-items: center;
-    gap: 14px;
-    flex-wrap: wrap;
-    margin-top: 36px;
-    padding-top: 28px;
-    border-top: 1px solid var(--border-1);
-  }
-  .li-note { font-size: var(--size-small); color: var(--fg-3); }
   h1 {
     font-family: var(--font-sans);
     font-weight: var(--weight-semibold);
