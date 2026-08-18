@@ -111,6 +111,10 @@ const description =
         <Button variant="secondary" href="/about">More about me &rarr;</Button>
         <Button href="https://www.linkedin.com/in/wachterjohannes/" rel="noopener" target="_blank">Follow on LinkedIn</Button>
       </div>
+      <p class="bio-aside">
+        On the bad days, this is what I put on:
+        <a href="https://open.spotify.com/intl-de/track/7LD3k81uHRfLMGvYOhDxmy" rel="noopener" target="_blank">Claude is in the Stand-up</a>.
+      </p>
     </div>
   </section>
 </BaseLayout>
@@ -260,6 +264,14 @@ const description =
     margin: 0;
   }
   .bio-actions { display: flex; gap: 10px; flex-wrap: wrap; }
+  .bio-aside {
+    flex-basis: 100%;
+    margin: 4px 0 0;
+    font-size: 13px;
+    font-style: italic;
+    color: var(--fg-3);
+  }
+  .bio-aside a { color: inherit; }
 
   /* Mobile hero: the photo is much wider than tall, so on a narrow hero `cover`
      keeps the full height and crops horizontally. Bias the crop rightward so the
