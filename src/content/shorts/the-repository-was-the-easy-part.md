@@ -1,7 +1,7 @@
 ---
 title: "The repository was the easy part"
 description: "GitHub spent almost eight hours on Monday returning errors across git operations, pull requests, Actions, Pages and Copilot. By the afternoon an Ask HN thread about alternatives to GitHub was on the front page with a few hundred comments."
-pubDate: 2026-08-18
+pubDate: 2026-08-20
 tags: [open-source, developer-tooling, ai]
 source: "https://www.githubstatus.com/incidents/zkxwbgr0cnmx"
 lang: en
