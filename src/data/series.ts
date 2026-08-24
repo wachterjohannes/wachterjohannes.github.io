@@ -73,6 +73,22 @@ export const series: Series[] = [
         kind: 'article',
       },
       {
+        title: 'The Mate journey: how an idea became a tool',
+        blurb: 'From skeptic to contributor, an homage to the Symfony community and the symfony/ai initiative.',
+        slug: 'the-mate-journey',
+        kind: 'article',
+      },
+    ],
+  },
+  {
+    slug: 'agentic-software',
+    kicker: '// AGENTIC SOFTWARE',
+    title: 'Agentic Software',
+    tagline: 'The debates worth having about how software actually gets built for agents.',
+    intro:
+      'Agentic software collects protocol debates faster than working software does: MCP versus CLI, servers versus tools, specs versus what agents actually read. These pieces argue from what I actually shipped and broke while building Mate, not from the spec: why getting Skills onto the filesystem mattered more than the standard did, what PHP already learned about building things together one layer down, and why I killed the MCP server in my own MCP project.',
+    pieces: [
+      {
         title: 'The last mile: distributing Agent Skills to real agents',
         blurb: 'No agent reads Skills over MCP yet. Getting them onto the filesystem agents actually watch.',
         slug: 'the-last-mile',
@@ -88,12 +104,6 @@ export const series: Series[] = [
         title: 'Kill the MCP',
         blurb: 'I deleted the MCP server from my own MCP project and kept the tools. Kill the reflex, not the protocol.',
         slug: 'kill-the-mcp',
-        kind: 'article',
-      },
-      {
-        title: 'The Mate journey: how an idea became a tool',
-        blurb: 'From skeptic to contributor, an homage to the Symfony community and the symfony/ai initiative.',
-        slug: 'the-mate-journey',
         kind: 'article',
       },
     ],
