@@ -73,6 +73,12 @@ export const series: Series[] = [
         kind: 'article',
       },
       {
+        title: 'The Mate Lab: does an agent actually use a dev tool?',
+        blurb: 'Measuring whether an agent reaches for Mate unprompted, MCP server against bare CLI against a file-based discovery layer.',
+        slug: 'mate-lab',
+        kind: 'article',
+      },
+      {
         title: 'The Mate journey: how an idea became a tool',
         blurb: 'From skeptic to contributor, an homage to the Symfony community and the symfony/ai initiative.',
         slug: 'the-mate-journey',
