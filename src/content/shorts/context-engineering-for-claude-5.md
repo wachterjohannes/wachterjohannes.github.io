@@ -1,7 +1,7 @@
 ---
 title: "More instructions were not making Claude better"
 description: "Anthropic cut more than 80% of Claude Code's system prompt for the Claude 5 generation models, with no drop in coding evals. What interests me isn't the number."
-pubDate: 2026-08-14
+pubDate: 2026-08-25
 tags: [ai, agentic-ai, context-engineering]
 source: "https://claude.com/blog/the-new-rules-of-context-engineering-for-claude-5-generation-models"
 lang: en
