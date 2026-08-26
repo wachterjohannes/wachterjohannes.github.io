@@ -88,7 +88,7 @@ touched, not whether the agent used it well once it did, or whether the same gap
 a completely different kind of task. I'm continuing to run this kind of measurement on
 Mate, and there's more of it than fits in one piece.
 
-It's also not the only check happening. A community contributor, Marcel Beerta, opened
+It's also not the only check happening. A community contributor, Matthias Breddin, opened
 [PR #81](https://github.com/wachterjohannes/symfony-ai/pull/81) on the Mate repo, testing
 another part of the same problem: whether the wording of Mate's generated instructions
 changes whether models trust and follow them at all. I ran a separate set of tests against
