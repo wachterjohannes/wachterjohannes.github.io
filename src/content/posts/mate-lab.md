@@ -2,7 +2,7 @@
 title: "The Mate Lab: does an agent actually use a dev tool?"
 description: "I measured whether Symfony Mate actually gets used by a coding agent, not just whether it's available. The result behind the Kill the MCP bet."
 pubDate: 2026-08-25
-category: "// MCP"
+category: "// MEASUREMENT"
 readingTime: "6 min"
 heroImage: "/images/posts/mate-lab-header.png"
 heroAlt: "Title card: Visibility, not transport. A SKILL.md card shows name: mate-discovery, description: Find and use Mate's CLI tools, body note Read this before grepping. Footer: Measurement, visibility beats transport."
