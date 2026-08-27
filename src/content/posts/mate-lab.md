@@ -92,9 +92,10 @@ It's also not the only check happening. A community contributor, Matthias Breddi
 [PR #81](https://github.com/wachterjohannes/symfony-ai/pull/81) on the Mate repo, testing
 another part of the same problem: whether the wording of Mate's generated instructions
 changes whether models trust and follow them at all. I ran a separate set of tests against
-his change, and the behavioral effect was clear: across 44 runs, the old wording triggered
-the compliance-style behavior 43 times; the provenance-based wording did not trigger it
-once. Whether that also improves task success is less clear, and my measurements weren't
+his change, and the behavioral effect was clear: across 44 runs, the old wording made models
+treat the instructions as a suspicious command and push back or refuse, 43 times out of 44.
+The provenance-based wording caused that same reaction zero times. Whether that also
+improves task success is less clear, and my measurements weren't
 strong enough to claim it.
 
 That points at the next layer: making a tool visible is not enough. The model also has to
