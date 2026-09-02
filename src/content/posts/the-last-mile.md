@@ -2,7 +2,7 @@
 title: "The last mile: distributing Agent Skills to real agents"
 description: "The polyfill that bridges where the Agent Skills standard is heading and what agents can read today, and why distribution, not the protocol, was the real problem."
 pubDate: 2026-07-09
-category: "// SKILLS"
+category: "// BUILD"
 readingTime: "9 min"
 heroImage: "/images/posts/the-last-mile-header.png"
 heroAlt: "The last mile: distributing Agent Skills to real agents. A terminal shows composer require and mate discover installing skills."

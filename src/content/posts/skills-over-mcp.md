@@ -2,7 +2,7 @@
 title: "Skills over MCP: shipping Symfony know-how with Mate"
 description: "What an Agent Skill actually is, how you serve one over MCP, and lessons from building a reference implementation against a spec that kept moving."
 pubDate: 2026-07-02
-category: "// MCP"
+category: "// BUILD"
 readingTime: "11 min"
 heroImage: "/images/posts/skills-over-mcp-header.png"
 heroAlt: "Skills over MCP: shipping Symfony know-how with Mate."

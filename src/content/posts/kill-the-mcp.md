@@ -2,11 +2,11 @@
 title: "Kill the MCP"
 description: "I deleted the MCP server from a Mate prototype and kept the tools. What that cost, what it bought, and why the reflex is the thing worth killing."
 pubDate: 2026-08-04
-category: "// OPINION"
+category: "// EXPERIMENT"
 readingTime: "10 min"
 heroImage: "/images/posts/kill-the-mcp-header.png"
 heroAlt: "Title card: Kill the MCP. I deleted the MCP server from my own MCP project. A dark terminal shows the Mate CLI listing and calling tools, with no mcp/sdk and no server."
-tags: [ai, mcp, php, symfony, opinion]
+tags: [ai, mcp, php, symfony]
 draft: false
 linkedin: "https://www.linkedin.com/feed/update/urn:li:share:7490634951298777089/"
 ---

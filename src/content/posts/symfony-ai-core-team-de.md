@@ -2,7 +2,7 @@
 title: "Beitritt zum Symfony AI Core Team"
 description: "Chris Hertel hat mich gebeten, dem neuen Symfony AI Core Team beizutreten, gemeinsam mit Fabien Potencier und Oskar Stark. Was das für mich bedeutet."
 pubDate: 2026-08-13
-category: "// AI"
+category: "// PERSONAL"
 readingTime: "4 min"
 heroImage: "/images/posts/symfony-ai-core-team-header.png"
 heroAlt: "Titelbild: Joining the AI Core Team. A personal note. Ein dunkles Terminal zeigt eine Core-Team-Liste mit Christopher Hertel als Lead, Oskar Stark, Fabien Potencier und Johannes Wachter."

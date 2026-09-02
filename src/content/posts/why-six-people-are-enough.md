@@ -2,10 +2,10 @@
 title: "Why six people are enough and what coding agents have to do with it"
 description: "Six developers run Sulu, its enterprise projects and its cloud services. That only works because of ownership and context, and those are exactly what coding agents need too."
 pubDate: 2026-05-19
-category: "// OPINION"
+category: "// ESSAY"
 readingTime: "8 min"
 heroAlt: ""
-tags: [ai, teams, ownership, opinion, sulu]
+tags: [ai, teams, ownership, sulu]
 draft: false
 linkedin: "https://www.linkedin.com/posts/quotes-2-share-7465771606288711680-yLdR/"
 canonicalUrl: "https://sulu.io/blog/why-six-people-are-enough-and-what-it-has-to-do-with-coding-agents"

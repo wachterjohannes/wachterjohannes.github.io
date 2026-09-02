@@ -6,7 +6,7 @@ category: "// ESSAY"
 readingTime: "8 min"
 heroImage: "/images/posts/when-implementation-becomes-free-header.png"
 heroAlt: "When implementation becomes almost free. A terminal card reads: ship the idea, done in minutes, the bottleneck moved, where to?"
-tags: [ai, innovation, teaching, opinion]
+tags: [ai, innovation, teaching]
 draft: false
 linkedin: "https://www.linkedin.com/posts/wachterjohannes_ai-innovation-opensource-activity-7475885760634576896-SE4y"
 ---

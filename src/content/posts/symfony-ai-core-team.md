@@ -2,7 +2,7 @@
 title: "Joining the Symfony AI Core Team"
 description: "Chris Hertel asked me to join the new Symfony AI Core Team alongside Fabien Potencier and Oskar Stark. What that actually means to me."
 pubDate: 2026-08-13
-category: "// AI"
+category: "// PERSONAL"
 readingTime: "3 min"
 heroImage: "/images/posts/symfony-ai-core-team-header.png"
 heroAlt: "Title card: Joining the AI Core Team. A personal note. A dark terminal shows a core-team roster listing Christopher Hertel as lead, Oskar Stark, Fabien Potencier, and Johannes Wachter."

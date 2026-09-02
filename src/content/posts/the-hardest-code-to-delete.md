@@ -2,11 +2,11 @@
 title: "The hardest code to delete is your own"
 description: "My first Symfony AI release as a core team member deletes the MCP server from Mate. PR #2380 ships in 0.13, and what it actually cost to ship the answer."
 pubDate: 2026-08-31
-category: "// OPINION"
+category: "// ESSAY"
 readingTime: "4 min"
 heroImage: "/images/posts/the-hardest-code-to-delete-header.png"
 heroAlt: "Title card: The hardest code to delete is your own. A dark terminal shows mate init writing AGENTS.md and CLAUDE.md, mate discover installing 5 skills, and mate serve marked removed. Footer: Symfony AI 0.13, MCP server removed."
-tags: [ai, mcp, php, symfony, mate, opinion]
+tags: [ai, mcp, php, symfony, mate]
 draft: false
 ---
 

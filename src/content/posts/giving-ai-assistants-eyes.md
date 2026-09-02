@@ -2,7 +2,7 @@
 title: "Giving AI assistants eyes"
 description: "Highlights from the Symfony Mate Q&A: the dev-only MCP server that lets AI assistants look inside your running app, and why better context beats more context."
 pubDate: 2026-06-18
-category: "// AI"
+category: "// BUILD"
 readingTime: "6 min"
 heroImage: "/images/posts/giving-ai-assistants-eyes-header.png"
 heroAlt: "Symfony Mate: giving AI assistants eyes. A terminal shows composer require, mate init and mate discover."

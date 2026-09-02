@@ -2,11 +2,11 @@
 title: "Vibe coding is no-code without a custodian"
 description: "Vibe coding can produce maintainable software. The harder question is who owns its dependencies, decisions and failures after launch."
 pubDate: 2026-07-28
-category: "// OPINION"
+category: "// ESSAY"
 readingTime: "9 min"
 heroImage: "/images/posts/vibe-coding-without-a-custodian-header.png"
 heroAlt: "Ownership. Who checks the roof. Vibe coding, the second act nobody posts. A card shows a timeline: day 0 shipped it, day 30 users love it, month 6 empty."
-tags: [ai, vibe-coding, ownership, maintenance, opinion]
+tags: [ai, vibe-coding, ownership, maintenance]
 draft: false
 linkedin: "https://www.linkedin.com/posts/wachterjohannes_vibe-coding-is-no-code-without-a-custodian-activity-7488133759892967424-hTBp"
 ---

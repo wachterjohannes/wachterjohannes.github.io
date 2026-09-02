@@ -2,11 +2,11 @@
 title: "The wrong debate: what PHP taught me about agentic software"
 description: "MCP or CLI is the wrong fight. What PHP with Composer, PSR and Symfony already learned about building things together, one layer down."
 pubDate: 2026-07-22
-category: "// OPINION"
+category: "// ESSAY"
 readingTime: "8 min"
 heroImage: "/images/posts/the-wrong-debate-header.png"
 heroAlt: "Title card: the wrong debate. MCP vs CLI is the wrong fight. PHP already showed us why."
-tags: [ai, mcp, php, symfony, opinion]
+tags: [ai, mcp, php, symfony]
 linkedin: "https://www.linkedin.com/feed/update/urn:li:activity:7485627287883845632/"
 draft: false
 ---
