@@ -8,6 +8,7 @@ heroImage: "/images/posts/the-hardest-code-to-delete-header.png"
 heroAlt: "Title card: The hardest code to delete is your own. A dark terminal shows mate init writing AGENTS.md and CLAUDE.md, mate discover installing 5 skills, and mate serve marked removed. Footer: Symfony AI 0.13, MCP server removed."
 tags: [ai, mcp, php, symfony, mate]
 draft: false
+linkedin: "https://www.linkedin.com/feed/update/urn:li:activity:7500817289445998592/"
 ---
 
 *By Johannes Wachter, Sulu core developer. The wrong debate made the argument, Kill the MCP
