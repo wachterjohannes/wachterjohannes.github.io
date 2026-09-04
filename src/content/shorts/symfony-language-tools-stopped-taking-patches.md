@@ -1,7 +1,7 @@
 ---
 title: "Symfony Language Tools stopped taking patches"
 description: "Symfony's new Language Tools repository closed its pull request tab. Contributors now start with an issue instead. Maintainers turn selected issues into code, usually with a coding agent doing much of the implementation work. Fabien's reasoning is what stuck with me."
-pubDate: 2026-08-25
+pubDate: 2026-09-04
 tags: [symfony, open-source, ai]
 source: "https://symfony.com/blog/experimenting-with-issue-first-open-source-contributions"
 lang: en
