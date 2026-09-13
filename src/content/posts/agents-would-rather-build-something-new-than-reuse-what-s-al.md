@@ -149,3 +149,4 @@ adding a redundant `ValidationExceptionListener` on top of an attribute that alr
 - [What happens to innovation when implementation becomes almost free?](https://johanneswachter.dev/blog/when-implementation-becomes-free/), the cost side of generation getting cheap
 - [Vibe coding is no-code without a custodian](https://johanneswachter.dev/blog/vibe-coding-without-a-custodian/), who owns what an agent generates after launch
 - [The hardest code to delete is your own](https://johanneswachter.dev/blog/the-hardest-code-to-delete/), what it costs to actually remove what got reinvented
+- [How I Made Symfony's Maker Agentic](https://johanneswachter.dev/shorts/the-bug-agents-kept-finding-in-symfonys-makers/), fixing the underlying makers instead of just telling agents to route around them
