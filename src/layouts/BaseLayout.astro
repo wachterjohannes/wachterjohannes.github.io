@@ -27,6 +27,46 @@ const { title, description, image, type, jsonLd, canonicalUrl, transparentHeader
       <main class="layout-main"><slot /></main>
       <Footer />
     </div>
+    {import.meta.env.PROD && type === 'article' && (
+      <script is:inline define:vars={{ slug: Astro.url.pathname.replace(/^\/|\/$/g, '') }}>
+        (function () {
+          // Custom GoatCounter events for how far an article actually gets read, not just
+          // whether it was opened. Fires each milestone at most once per page load, only
+          // once window.goatcounter (loaded async in BaseHead) is ready.
+          var fired = { scroll50: false, scroll100: false, dwell30: false };
+
+          function send(kind) {
+            if (fired[kind] || !window.goatcounter || !window.goatcounter.count) return;
+            fired[kind] = true;
+            window.goatcounter.count({
+              path: '/events/' + kind + '/' + slug,
+              title: kind + ' — ' + slug,
+              event: true,
+            });
+          }
+
+          function scrollPercent() {
+            var doc = document.documentElement;
+            var scrollable = doc.scrollHeight - doc.clientHeight;
+            if (scrollable <= 0) return 100;
+            return Math.min(100, Math.round((window.scrollY / scrollable) * 100));
+          }
+
+          function onScroll() {
+            var pct = scrollPercent();
+            if (pct >= 50) send('scroll50');
+            if (pct >= 100) send('scroll100');
+            if (fired.scroll50 && fired.scroll100) {
+              window.removeEventListener('scroll', onScroll);
+            }
+          }
+
+          window.addEventListener('scroll', onScroll, { passive: true });
+          onScroll(); // in case the article is short enough to start past 50%/100%
+          setTimeout(function () { send('dwell30'); }, 30000);
+        })();
+      </script>
+    )}
   </body>
 </html>
 
