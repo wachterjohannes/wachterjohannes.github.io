@@ -36,6 +36,9 @@ const posts = defineCollection({
     // "next up" suggestions on other posts). For a quiet publish, e.g. a
     // translation Johannes wants up without promoting it.
     unlisted: z.boolean().default(false),
+    // Listed normally (blog index, Latest, RSS), but never picked as the home page's
+    // Featured post, e.g. a cross-post of a piece that already had its moment elsewhere.
+    skipFeatured: z.boolean().default(false),
   }),
 });
 

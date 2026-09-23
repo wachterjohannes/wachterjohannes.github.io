@@ -9,8 +9,8 @@ import { formatDate, isoDate } from '../utils/date';
 import heroImg from '../assets/hero.jpg';
 
 const posts = await getSortedPosts();
-const featured = posts[0];
-const latest = posts.slice(1);
+const featured = posts.find((p) => !p.data.skipFeatured);
+const latest = posts.filter((p) => p !== featured);
 
 // The three most recent shorts, as a thin strip between the featured post and the
 // rest of the writing. Deliberately not cards: staying visually light is what keeps
