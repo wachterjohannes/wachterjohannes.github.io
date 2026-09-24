@@ -30,9 +30,26 @@ const series = allSeries.find((s) => !s.hidden && s.pieces.some((p) => p.slug ==
 
 // "Next up" stays within the same kind: archived posts point to other archived
 // posts, regular posts to other regular posts.
-const nextUp = all
-  .filter((p) => p.id !== post.id && p.data.archived === data.archived)
-  .slice(0, 2);
+// Inside a series, the reader wants the neighbouring pieces of that series first, in the
+// order series.ts defines, skipping pieces that aren't published yet. Remaining slots are
+// filled with other recent writing.
+const published = new Map(all.map((p) => [p.id, p]));
+const seriesNav: { kicker: string; post: (typeof all)[number] }[] = [];
+if (series) {
+  const pieces = series.pieces.filter((p) => published.has(p.slug) || p.slug === post.id);
+  const i = pieces.findIndex((p) => p.slug === post.id);
+  const label = series.kicker.replace(/^\/\/\s*/, '');
+  const next = pieces[i + 1];
+  const prev = pieces[i - 1];
+  if (next) seriesNav.push({ kicker: `// NEXT IN ${label}`, post: published.get(next.slug)! });
+  if (prev) seriesNav.push({ kicker: `// PREVIOUS IN ${label}`, post: published.get(prev.slug)! });
+}
+const nextUp = [
+  ...seriesNav,
+  ...all
+    .filter((p) => p.id !== post.id && p.data.archived === data.archived && !seriesNav.some((s) => s.post.id === p.id))
+    .map((p) => ({ kicker: '// NEXT UP', post: p })),
+].slice(0, 2);
 
 const site = Astro.site ?? new URL('https://johanneswachter.dev');
 const url = new URL(`/blog/${post.id}`, site).href;
@@ -123,8 +140,8 @@ const jsonLd = {
 
     {nextUp.length > 0 && (
       <div class="next">
-        {nextUp.map((p) => (
-          <Card kicker="// NEXT UP" title={p.data.title} href={`/blog/${p.id}`}>
+        {nextUp.map(({ kicker, post: p }) => (
+          <Card kicker={kicker} title={p.data.title} href={`/blog/${p.id}`}>
             {p.data.description}
           </Card>
         ))}

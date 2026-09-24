@@ -5,12 +5,17 @@ import Card from '../components/Card.astro';
 import Button from '../components/Button.astro';
 import { getSortedPosts } from '../utils/posts';
 import { getSortedShorts } from '../utils/shorts';
+import { series as allSeries } from '../data/series';
 import { formatDate, isoDate } from '../utils/date';
 import heroImg from '../assets/hero.jpg';
 
 const posts = await getSortedPosts();
 const featured = posts.find((p) => !p.data.skipFeatured);
-const latest = posts.filter((p) => p !== featured);
+// Capped so the home page stays a front page, not the archive; /blog has everything.
+const latest = posts.filter((p) => p !== featured).slice(0, 5);
+
+// The topic hubs, so a first-time visitor sees what the writing is about, not only what came last.
+const topics = allSeries.filter((s) => !s.hidden);
 
 // The three most recent shorts, as a thin strip between the featured post and the
 // rest of the writing. Deliberately not cards: staying visually light is what keeps
@@ -98,6 +103,20 @@ const description =
         ))}
       </div>
       <p class="more"><a href="/blog">All writing &rarr;</a></p>
+    </section>
+  )}
+
+  {topics.length > 0 && (
+    <section class="content">
+      <div class="section-head" style="margin-top: var(--space-6)"><span class="kicker">// EXPLORE BY TOPIC</span><span class="rule"></span></div>
+      <div class="topics">
+        {topics.map((t) => (
+          <a class="topic" href={`/${t.slug}`}>
+            <span class="topic-title">{t.title}</span>
+            <span class="topic-tagline">{t.tagline}</span>
+          </a>
+        ))}
+      </div>
     </section>
   )}
 
@@ -246,6 +265,19 @@ const description =
   .content { padding-top: var(--space-7); }
   .stack { display: grid; gap: var(--space-4); }
   .more { margin: var(--space-5) 0 0; font-size: var(--size-small); }
+  .topics { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 12px; }
+  .topic {
+    display: flex; flex-direction: column; gap: 6px;
+    padding: 16px 18px;
+    border: 1px solid var(--border-1);
+    border-radius: var(--radius-2, 8px);
+    border-bottom: 1px solid var(--border-1);
+    color: var(--fg-1);
+    transition: border-color var(--speed), background var(--speed);
+  }
+  .topic:hover { border-color: var(--accent); background: var(--bg-2); }
+  .topic-title { font-weight: 600; }
+  .topic-tagline { color: var(--fg-2); font-size: 15px; line-height: 1.45; }
   .bio { padding-top: var(--space-7); padding-bottom: var(--space-8); }
   .bio-card {
     border: 1px solid var(--border-1);

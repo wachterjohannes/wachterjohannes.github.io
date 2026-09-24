@@ -6,7 +6,7 @@
 interface Props { transparent?: boolean }
 const { transparent = false } = Astro.props;
 const path = Astro.url.pathname;
-const isBlog = path === '/' || path.startsWith('/blog');
+const isBlog = path.startsWith('/blog');
 const isShorts = path.startsWith('/shorts');
 const isTopics = path === '/topics';
 const isProjects = path.startsWith('/projects');
@@ -16,7 +16,7 @@ const isAbout = path.startsWith('/about');
   <div class="bar page">
     <a class="wordmark" href="/">Johannes <span class="dot">Wachter</span></a>
     <nav class="nav" aria-label="Primary">
-      <a href="/" class:list={['nav-link', { active: isBlog }]}>Blog</a>
+      <a href="/blog" class:list={['nav-link', { active: isBlog }]}>Blog</a>
       <a href="/shorts" class:list={['nav-link', { active: isShorts }]}>Shorts</a>
       <a href="/topics" class:list={['nav-link', { active: isTopics }]}>Topics</a>
       <a href="/projects" class:list={['nav-link', { active: isProjects }]}>Projects</a>
