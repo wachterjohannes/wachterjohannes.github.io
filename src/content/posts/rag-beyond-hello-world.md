@@ -8,6 +8,7 @@ heroImage: "/images/posts/rag-beyond-hello-world-header.png"
 heroAlt: "Header: RAG, part one. Retrieval is a pipeline. Query time: why naive RAG breaks on real docs."
 tags: [ai, rag, symfony, php]
 draft: false
+linkedin: "https://www.linkedin.com/feed/update/urn:li:activity:7508790070481682432/"
 ---
 
 *By Johannes Wachter, Sulu core developer and Symfony AI core team member. The first piece in a series about building retrieval that survives contact with real documentation.*
