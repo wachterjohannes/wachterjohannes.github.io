@@ -130,7 +130,7 @@ export const series: Series[] = [
         kind: 'article',
       },
       {
-        title: 'Retrieval quality is decided before the first query',
+        title: 'Indexing sets the ceiling for retrieval',
         blurb: 'The indexing side: loading, chunking and enriching the source before anyone searches it.',
         slug: 'indexing-for-rag',
         kind: 'article',
