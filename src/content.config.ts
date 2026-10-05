@@ -39,6 +39,11 @@ const posts = defineCollection({
     // Listed normally (blog index, Latest, RSS), but never picked as the home page's
     // Featured post, e.g. a cross-post of a piece that already had its moment elsewhere.
     skipFeatured: z.boolean().default(false),
+    // Optional audio version of the post (a public path, e.g. /audio/<slug>.mp3).
+    // Renders a small player above the article. audioLabel says what it is, e.g.
+    // "Podcast version, in German", so a reader knows before pressing play.
+    audio: z.string().optional(),
+    audioLabel: z.string().optional(),
   }),
 });
 

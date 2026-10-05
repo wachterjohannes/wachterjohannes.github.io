@@ -81,7 +81,7 @@ export const series: Series[] = [
       {
         title: 'The Mate journey: how an idea became a tool',
         blurb: 'From skeptic to contributor, an homage to the Symfony community and the symfony/ai initiative.',
-        slug: 'the-mate-journey',
+        slug: 'mate-journey',
         kind: 'article',
       },
     ],
