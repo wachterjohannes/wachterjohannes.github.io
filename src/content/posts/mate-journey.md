@@ -8,7 +8,7 @@ heroImage: "/images/posts/mate-journey-header.png"
 heroAlt: "Title card: 'Built on a train.' A terminal labeled 'Amsterdam → home' shows git init debug-mcp, composer install, the note 'no signal on the train…', and two checks: opencode (local model, works), 138917f (bootstrap commit). Footer: 'Origin story · Amsterdam, a train, and Berlin.'"
 tags: [symfony, mate, ai, open-source]
 audio: "/audio/mate-journey-podcast-de.mp3"
-audioLabel: "Audio version of this post, 8 min"
+audioLabel: "Spoken companion to this post, 8 min"
 draft: false
 ---
 
