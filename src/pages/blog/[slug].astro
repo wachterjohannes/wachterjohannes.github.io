@@ -121,8 +121,30 @@ const jsonLd = {
     {data.audio && (
       <div class="audio">
         <div class="audio-label">&#9658; {data.audioLabel ?? 'Listen to this post'}</div>
-        <audio controls preload="none" src={data.audio}></audio>
+        <audio controls preload="none" src={data.audio} data-slug={Astro.params.slug}></audio>
       </div>
+    )}
+    {import.meta.env.PROD && data.audio && (
+      <script is:inline>
+        (function () {
+          // GoatCounter events for the audio player: first play and finished, once per page load.
+          var el = document.querySelector('.audio audio');
+          if (!el) return;
+          var slug = el.getAttribute('data-slug');
+          var fired = {};
+          function send(kind) {
+            if (fired[kind] || !window.goatcounter || !window.goatcounter.count) return;
+            fired[kind] = true;
+            window.goatcounter.count({
+              path: '/events/' + kind + '/' + slug,
+              title: kind + ' — ' + slug,
+              event: true,
+            });
+          }
+          el.addEventListener('play', function () { send('audio-play'); });
+          el.addEventListener('ended', function () { send('audio-ended'); });
+        })();
+      </script>
     )}
 
     <div class="prose">
