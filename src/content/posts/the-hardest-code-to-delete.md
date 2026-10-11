@@ -34,16 +34,11 @@ replaceable?
 
 It could. But not in the naive form I first built.
 
-## The embarrassing zero
+## The first CLI was invisible
 
-Removing MCP was not as simple as replacing the server with three CLI commands. I learned
-that the embarrassing way: in twenty controlled runs, the bare CLI was invoked exactly zero
-times.
+My first replacement for the server was a few CLI commands and nothing else. In the experiment I describe in [The Mate Lab](https://johanneswachter.dev/blog/mate-lab), an agent with only that CLI never used it: zero out of twenty runs, on two tasks, with a small model.
 
-I wrote up the experiment separately in
-[The Mate Lab](https://johanneswachter.dev/blog/mate-lab). The important part for this
-release is what it forced me to change. MCP had been providing discovery as well as
-transport. If I wanted to remove one, I had to deliberately rebuild the other.
+That is a small sample, but the cause was clear. MCP had been providing discovery as well as transport. If I wanted to remove one, I had to deliberately rebuild the other.
 
 ## What actually shipped
 
