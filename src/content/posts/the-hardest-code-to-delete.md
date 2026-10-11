@@ -37,7 +37,7 @@ It could. But not in the naive form I first built.
 ## The embarrassing zero
 
 Removing MCP was not as simple as replacing the server with three CLI commands. I learned
-that the embarrassing way: in thirty controlled runs, the bare CLI was invoked exactly zero
+that the embarrassing way: in twenty controlled runs, the bare CLI was invoked exactly zero
 times.
 
 I wrote up the experiment separately in
