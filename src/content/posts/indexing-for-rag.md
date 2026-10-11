@@ -7,6 +7,7 @@ readingTime: "7 min"
 heroImage: "/images/posts/indexing-for-rag-header.png"
 heroAlt: "Header: RAG, part two. Indexing sets the ceiling. Index time: before the first query."
 tags: [ai, rag, symfony, php]
+linkedin: "https://www.linkedin.com/posts/wachterjohannes_one-of-the-chunks-in-my-rag-example-kept-share-7511131941849600000-UAPf/"
 draft: false
 ---
 
