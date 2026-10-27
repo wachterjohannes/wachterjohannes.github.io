@@ -7,7 +7,7 @@
   --warm-3: oklch(0.86 0.014 85);
   --ink-1: oklch(0.245 0.014 75);
   --ink-2: oklch(0.42 0.016 75);
-  --ink-3: oklch(0.58 0.018 78);
+  --ink-3: oklch(0.53 0.018 78);  /* was 0.58: 4.0:1 on the page bg, now >= 4.5:1 (WCAG AA) */
   --amber: oklch(0.62 0.145 62);
   --amber-strong: oklch(0.54 0.14 58);
   --amber-bright: oklch(0.76 0.14 68);
@@ -29,6 +29,9 @@
   /* accent */
   --accent: var(--amber);
   --accent-hover: var(--amber-strong);
+  /* Filled-button background: --accent is only 3.6:1 against the light button text. */
+  --accent-fill: var(--amber-strong);
+  --accent-fill-hover: oklch(0.48 0.13 56);
   --accent-soft: oklch(0.94 0.035 70);
   --accent-text: oklch(0.55 0.145 58);
   /* status: shared lightness/chroma, varied hue */
@@ -41,6 +44,8 @@
   --focus-ring: oklch(0.62 0.145 62 / 0.45);
 }
 [data-theme="dark"] {
+  --accent-fill: var(--accent);
+  --accent-fill-hover: var(--accent-hover);
   --bg-1: oklch(0.205 0.01 75);
   --bg-2: oklch(0.235 0.011 75);
   --surface-card: oklch(0.255 0.012 75);

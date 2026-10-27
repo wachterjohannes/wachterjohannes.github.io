@@ -1,6 +1,8 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
 import Tag from '../components/Tag.astro';
+import { Image } from 'astro:assets';
+import portraitImg from '../assets/johannes.jpg';
 
 // About/CV page. Work Experience and Education are kept as-is (accurate). The bio
 // reflects his current Sulu + AI positioning; project names link to their detail
@@ -74,7 +76,7 @@ const description =
       </dl>
     </div>
     <figure class="portrait">
-      <img src="/johannes.jpg" alt="Johannes Wachter" width="320" height="480" />
+      <Image src={portraitImg} alt="Johannes Wachter" width={320} height={480} densities={[1, 2]} format="webp" quality={75} />
     </figure>
   </section>
 

@@ -8,6 +8,7 @@ import { getSortedShorts } from '../utils/shorts';
 import { series as allSeries } from '../data/series';
 import { formatDate, isoDate } from '../utils/date';
 import heroImg from '../assets/hero.jpg';
+import portraitImg from '../assets/johannes.jpg';
 
 const posts = await getSortedPosts();
 const featured = posts.find((p) => !p.data.skipFeatured);
@@ -39,16 +40,17 @@ const description =
       aria-hidden="true"
       width={2400}
       height={1136}
-      widths={[1280, 1920, 2400]}
+      widths={[640, 960, 1280, 1920, 2400]}
       sizes="100vw"
       format="webp"
-      quality={68}
+      quality={60}
       loading="eager"
+      fetchpriority="high"
     />
     <div class="hero-scrim" aria-hidden="true"></div>
     <div class="hero-inner">
       <div class="avatar">
-        <img src="/johannes.jpg" alt="Johannes Wachter" width="104" height="104" />
+        <Image src={portraitImg} alt="Johannes Wachter" width={104} height={104} densities={[1, 2]} format="webp" quality={75} />
       </div>
       <div class="hello">// HELLO</div>
       <h1>I&rsquo;m Johannes Wachter</h1>

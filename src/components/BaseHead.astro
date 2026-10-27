@@ -1,4 +1,7 @@
 ---
+import sans400 from '@fontsource/ibm-plex-sans/files/ibm-plex-sans-latin-400-normal.woff2?url';
+import sans600 from '@fontsource/ibm-plex-sans/files/ibm-plex-sans-latin-600-normal.woff2?url';
+import mono500 from '@fontsource/ibm-plex-mono/files/ibm-plex-mono-latin-500-normal.woff2?url';
 // Per-page <head>: title, meta description, canonical, Open Graph, Twitter card,
 // and optional JSON-LD. Canonical + OG URLs are absolute against the production
 // site (johanneswachter.dev) so they are correct even while staged elsewhere.
@@ -32,6 +35,9 @@ const SITE_NAME = 'Johannes Wachter';
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <meta name="generator" content={Astro.generator} />
+{[sans400, sans600, mono500].map((href) => (
+  <link rel="preload" href={href} as="font" type="font/woff2" crossorigin />
+))}
 <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
 <link rel="sitemap" href="/sitemap-index.xml" />
 <link rel="me" href="https://phpc.social/@wachterjohannes" />
