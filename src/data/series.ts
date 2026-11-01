@@ -20,10 +20,38 @@ export interface Series {
   tagline: string;
   intro: string;
   pieces: SeriesPiece[];
+  // When true, the home page shows this series as one card in the Featured slot and keeps
+  // its pieces out of Latest, so a running series does not flood the front page.
+  featured?: boolean;
+  planned?: number; // total parts, when more are planned than listed in `pieces`
   hidden?: boolean; // when true, the hub page is not built yet (hold it until launch day)
 }
 
 export const series: Series[] = [
+  {
+    slug: 'synapse',
+    featured: true,
+    planned: 5,
+    kicker: '// SERIES',
+    title: 'Synapse: a second brain with Symfony AI',
+    tagline: 'A folder of markdown notes that agents write to, read from and share over MCP.',
+    intro:
+      'A tutorial series for the Symfony AI hackathon. Each part builds one piece of a small second brain on Symfony AI 1.0.0-BETA1 with Cohere: an agent that files notes, one that answers from them, an MCP server behind an external authorization server, roles on the tokens, and a client that asks another brain. Every part is one branch of a single repository.',
+    pieces: [
+      {
+        title: 'An agent that files your notes, built with Symfony AI',
+        blurb: 'A capture agent with tools as plain classes, configured in YAML, and a Vault class as the only code that touches the file system.',
+        slug: 'synapse-capture-agent-symfony-ai',
+        kind: 'tutorial',
+      },
+      {
+        title: 'Ask your notes a question, built with Symfony AI',
+        blurb: 'Embeddings, a SQLite store and a retriever configured in YAML, and an agent that names its source file.',
+        slug: 'synapse-read-agent-symfony-ai',
+        kind: 'tutorial',
+      },
+    ],
+  },
   {
     slug: 'ownership',
     kicker: '// OWNERSHIP',

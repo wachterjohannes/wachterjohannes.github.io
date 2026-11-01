@@ -10,8 +10,16 @@ import { formatDate, isoDate } from '../utils/date';
 import heroImg from '../assets/hero.jpg';
 import portraitImg from '../assets/johannes.jpg';
 
-const posts = await getSortedPosts();
-const featured = posts.find((p) => !p.data.skipFeatured);
+const allPosts = await getSortedPosts();
+// A running series is shown as one card in the Featured slot and its pieces stay out of
+// Latest. It needs at least one published piece, otherwise the card would point at nothing.
+const publishedIds = new Set(allPosts.map((p) => p.id));
+const featuredSeries =
+  allSeries.find((s) => s.featured && !s.hidden && s.pieces.some((pc) => publishedIds.has(pc.slug))) ?? null;
+const seriesIds = new Set(featuredSeries?.pieces.map((pc) => pc.slug) ?? []);
+const seriesPublished = featuredSeries ? featuredSeries.pieces.filter((pc) => publishedIds.has(pc.slug)).length : 0;
+const posts = allPosts.filter((p) => !seriesIds.has(p.id));
+const featured = featuredSeries ? null : posts.find((p) => !p.data.skipFeatured);
 // Capped so the home page stays a front page, not the archive; /blog has everything.
 const latest = posts.filter((p) => p !== featured).slice(0, 5);
 
@@ -61,6 +69,20 @@ const description =
       </p>
     </div>
   </section>
+
+  {featuredSeries && (
+    <section class="content block">
+      <div class="section-head"><span class="kicker">// FEATURED SERIES</span><span class="rule"></span></div>
+      <Card
+        kicker={featuredSeries.kicker}
+        title={featuredSeries.title}
+        meta={`${seriesPublished} of ${featuredSeries.planned ?? featuredSeries.pieces.length} parts out`}
+        href={`/${featuredSeries.slug}`}
+      >
+        {featuredSeries.tagline}
+      </Card>
+    </section>
+  )}
 
   {featured && (
     <section class="content block">
