@@ -31,12 +31,12 @@ export const series: Series[] = [
   {
     slug: 'synapse',
     featured: true,
-    planned: 5,
+    planned: 6,
     kicker: '// SERIES',
     title: 'Synapse: a second brain with Symfony AI',
     tagline: 'A folder of markdown notes that agents write to, read from and share over MCP.',
     intro:
-      'A tutorial series for the Symfony AI hackathon. Each part builds one piece of a small second brain on Symfony AI 1.0.0-BETA1 with Cohere: an agent that files notes, one that answers from them, an MCP server behind an external authorization server, roles on the tokens, and a client that asks another brain. Every part is one branch of a single repository.',
+      'A tutorial series for the Symfony AI hackathon. Each part builds one piece of a small second brain on Symfony AI 1.0.0-BETA1 with Cohere: an agent that files notes, one that answers from them, an MCP server behind an external authorization server, roles on the tokens, tool permissions that a test walks through, and a client that asks another brain. Every part is one branch of a single repository.',
     pieces: [
       {
         title: 'An agent that files your notes, built with Symfony AI',
@@ -48,6 +48,12 @@ export const series: Series[] = [
         title: 'Ask your notes a question, built with Symfony AI',
         blurb: 'Embeddings, a SQLite store and a retriever configured in YAML, and an agent that names its source file.',
         slug: 'synapse-read-agent-symfony-ai',
+        kind: 'tutorial',
+      },
+      {
+        title: 'Put your notes behind an MCP server without writing a login',
+        blurb: 'An MCP server for the brain, protected by an external authorization server: 401 discovery, token introspection and audience checks.',
+        slug: 'synapse-mcp-server-oauth-symfony-ai',
         kind: 'tutorial',
       },
     ],
