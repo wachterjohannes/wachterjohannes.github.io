@@ -120,7 +120,7 @@ const jsonLd = {
 
     {data.audio && (
       <div class="audio">
-        <div class="audio-label">&#9658; {data.audioLabel ?? 'Listen to this post'}</div>
+        <div class="audio-label">&#9658; {data.audioLabel ?? 'AI-generated audio version of this post'}</div>
         <audio controls preload="none" src={data.audio} data-slug={Astro.params.slug}></audio>
       </div>
     )}
