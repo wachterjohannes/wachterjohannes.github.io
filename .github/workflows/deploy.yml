@@ -48,3 +48,16 @@ jobs:
       - name: Deploy to GitHub Pages
         id: deployment
         uses: actions/deploy-pages@v4
+
+  indexnow:
+    needs: deploy
+    runs-on: ubuntu-latest
+    # A failed ping must never turn a successful deploy red.
+    continue-on-error: true
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - name: Notify IndexNow
+        run: .github/scripts/indexnow.sh "${{ github.event.before }}" "${{ github.sha }}"
