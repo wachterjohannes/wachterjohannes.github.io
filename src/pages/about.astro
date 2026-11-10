@@ -42,7 +42,7 @@ const edu: [string, string, string][] = [
 ];
 
 const description =
-  'Johannes Wachter: core developer of Sulu, the open-source Symfony CMS, working where software engineering meets AI. Background, work, talks and education.';
+  'Johannes Wachter: core developer of Sulu, the Symfony-based CMS and DXP, working where software engineering meets AI. Background, work, talks and education.';
 ---
 <BaseLayout title="About · Johannes Wachter" description={description} image="/johannes.jpg">
   <section class="content intro">
@@ -51,18 +51,19 @@ const description =
       <h1>Johannes Wachter</h1>
       <p>
         Hello, I am Johannes Wachter. I am a core developer of <a href="/projects/sulu">Sulu</a>,
-        the open-source Symfony CMS, and I have worked on it since the project&rsquo;s early days,
+        the Symfony-based CMS and DXP, and I have worked on it since the project&rsquo;s early days,
         mostly on the backend. I am based in Vorarlberg, Austria, and have been building with
         Symfony since around 2012.
       </p>
       <p>
         These days most of my energy goes into where software engineering meets AI. I started
         <a href="/projects/symfony-mate">Symfony Mate</a>, which gives AI coding assistants real
-        runtime context from a running app, and <a href="/projects/modelflow-ai">Modelflow-AI</a>,
-        a provider-agnostic PHP interface for AI models. In August 2026 I joined the
+        runtime context from a running app. Before that I built
+        <a href="/projects/modelflow-ai">Modelflow-AI</a>, a provider-agnostic PHP interface for
+        AI models whose ideas moved into symfony/ai. In August 2026 I joined the
         <a href="/projects/symfony-ai">symfony/ai</a> Core Team (see
         <a href="/blog/symfony-ai-core-team">my note on that</a>), teach as an external
-        lecturer at FH Vorarlberg, and write about what building open source actually
+        lecturer at FH Vorarlberg, and write about what building open source
         teaches me, and what we can all learn from it.
       </p>
       <p>
@@ -81,10 +82,12 @@ const description =
   </section>
 
   <section class="content sec">
-    <div class="section-head"><span class="kicker">// HOW THIS IS WRITTEN</span><span class="rule"></span></div>
+    <div class="section-head" id="how-this-is-written"><span class="kicker">// HOW THIS IS WRITTEN</span><span class="rule"></span></div>
     <p class="colophon">
-      I draft these articles with an AI assistant, the same kind of tooling I write about, then
-      edit and cut until it says what I actually mean. The experiences and the opinions are mine.
+      I draft these articles with an AI assistant, the same kind of tooling I write about. The raw
+      material is an interview the assistant runs with me, plus my notes and threads. I then edit
+      and cut until it says what I mean, and since November 2026 I run every draft against a style
+      guide that strips out the model&rsquo;s own habits. The experiences and the opinions are mine.
       I do not ship a sentence I would not defend in a code review.
     </p>
   </section>

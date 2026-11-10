@@ -9,7 +9,7 @@ heroAlt: "Title card: 'Built on a train.' A terminal labeled 'Amsterdam → home
 tags: [symfony, mate, ai, open-source]
 audio: "/audio/mate-journey-podcast-de.mp3"
 linkedin: "https://www.linkedin.com/posts/wachterjohannes_before-symfony-ai-was-announced-i-stood-share-7512756576466677760-L7Nf/"
-audioLabel: "Spoken companion to this post, 8 min"
+audioLabel: "AI-generated spoken companion to this post, 8 min"
 draft: false
 ---
 

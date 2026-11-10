@@ -23,12 +23,12 @@ export const projects: Project[] = [
   {
     slug: 'sulu',
     name: 'Sulu',
-    tagline: 'The open-source CMS built on Symfony, for content-rich sites and custom web apps.',
+    tagline: 'The open-source CMS and DXP built on Symfony, for content-rich sites and custom web apps.',
     badges: [['accent', 'flagship'], ['success', 'stable'], ['neutral', 'Symfony'], ['neutral', 'PHP'], ['neutral', 'React']],
     code: `$ composer create-project sulu/skeleton my-app
 
 $ bin/adminconsole sulu:build dev`,
-    body: 'Sulu is an open-source content management system built on Symfony, for building and running content-rich sites and custom web applications. The backend is PHP and Symfony, the admin is a modern React interface. I am one of its core developers and have worked on it since 2013, mostly on the backend, though on a small team everyone does what is needed.',
+    body: 'Sulu is an open-source content management system and digital experience platform built on Symfony, for building and running content-rich sites and custom web applications. The backend is PHP and Symfony, the admin is a modern React interface. I am one of its core developers and have worked on it since 2013, mostly on the backend, though on a small team everyone does what is needed.',
     github: 'https://github.com/sulu/sulu',
     docs: 'https://docs.sulu.io',
   },

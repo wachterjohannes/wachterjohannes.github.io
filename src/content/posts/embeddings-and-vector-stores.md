@@ -8,7 +8,7 @@ heroImage: "/images/posts/embeddings-and-vector-stores-header.png"
 heroAlt: "Header: RAG foundations. How embeddings and vector stores actually work."
 tags: [ai, rag, symfony, php]
 audio: "/audio/embeddings-and-vector-stores-en.mp3"
-audioLabel: "Spoken version of this post, 9 min"
+audioLabel: "AI-generated spoken version of this post, 9 min"
 draft: false
 ---
 

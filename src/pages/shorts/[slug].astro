@@ -75,6 +75,8 @@ const jsonLd = {
       />
     )}
 
+    <p class="how-written"><a href="/about#how-this-is-written">How this is written &rarr;</a></p>
+
     {data.tags.length > 0 && (
       <div class="tags">
         <span class="tags-label">tags:</span>
@@ -95,6 +97,7 @@ const jsonLd = {
 </BaseLayout>
 
 <style>
+  .how-written { margin: 32px 0 0; font-family: var(--font-mono); font-size: 13px; }
   .wrap { padding-top: var(--space-8); padding-bottom: var(--space-8); }
   .back {
     display: inline-block;

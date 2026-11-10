@@ -160,6 +160,10 @@ const jsonLd = {
       />
     )}
 
+    {!(data.archived || data.canonicalUrl) && (
+      <p class="how-written"><a href="/about#how-this-is-written">How this is written &rarr;</a></p>
+    )}
+
     {data.tags.length > 0 && (
       <div class="tags">
         <span class="tags-label">tags:</span>
@@ -191,6 +195,7 @@ const jsonLd = {
   }
   .back:hover { color: var(--accent-text); }
   /* Subtle links under the title: LinkedIn discussion and the topic hub. */
+  .how-written { margin: 32px 0 0; font-family: var(--font-mono); font-size: 13px; }
   .meta-links {
     display: flex;
     flex-direction: column;

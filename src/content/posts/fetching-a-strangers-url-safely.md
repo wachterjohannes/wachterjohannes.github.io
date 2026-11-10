@@ -8,7 +8,7 @@ heroImage: "/images/posts/fetching-a-strangers-url-safely-header.png"
 heroAlt: "Header: A stranger's URL. Making the fetch behind a client id safe, and what real clients sent."
 tags: [mcp, oauth, security, php, symfony, sulu]
 audio: "/audio/fetching-a-strangers-url-safely-en.mp3"
-audioLabel: "Spoken version of this post, 5 min"
+audioLabel: "AI-generated spoken version of this post, 5 min"
 draft: false
 ---
 
