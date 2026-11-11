@@ -26,8 +26,8 @@ const {
 } = Astro.props;
 
 const site = Astro.site ?? new URL('https://johanneswachter.dev');
-// Normalise: no trailing slash except the root, so canonicals are stable.
-const path = Astro.url.pathname.replace(/(.)\/$/, '$1');
+// Normalise: always a trailing slash, matching the URL the host serves and the sitemap lists.
+const path = Astro.url.pathname.replace(/([^/])$/, '$1/');
 const canonical = canonicalUrl ?? new URL(path, site).href;
 const ogImage = new URL(image, site).href;
 const SITE_NAME = 'Johannes Wachter';

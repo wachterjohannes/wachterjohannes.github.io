@@ -25,7 +25,7 @@ const story = project.story ? archived.find((p) => p.id === project.story) : und
 const current = await getSortedPosts();
 const read = project.read ? current.find((p) => p.id === project.read) : undefined;
 ---
-<BaseLayout title={`${project.name} · Johannes Wachter`} description={description}>
+<BaseLayout title={project.name} description={description}>
   <div class="content wrap">
     <span class="kicker">// LAB</span>
     <div class="head">
