@@ -19,7 +19,7 @@ It was not a bad search result in the usual sense. By the time the query arrived
 
 I added a small filter before vectorisation. The fragment disappeared, and so did the embedding call it would have cost. That is the part of RAG I underestimated at first: retrieval quality starts before there is anything to retrieve.
 
-In the [previous article](/blog/rag-beyond-hello-world) I stayed at query time. Query rewriting, hybrid search and reranking all try to make better decisions once the index already exists. But they can only work with what indexing gave them, and indexing sets the ceiling for everything that happens later. None of those techniques can fix content that was chunked too bluntly, stripped of the detail that made it findable, or never indexed in a useful shape to begin with.
+In the [previous article](/blog/rag-beyond-hello-world/) I stayed at query time. Query rewriting, hybrid search and reranking all try to make better decisions once the index already exists. But they can only work with what indexing gave them, and indexing sets the ceiling for everything that happens later. None of those techniques can fix content that was chunked too bluntly, stripped of the detail that made it findable, or never indexed in a useful shape to begin with.
 
 ## Indexing is more than plumbing
 

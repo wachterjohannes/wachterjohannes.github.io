@@ -33,12 +33,12 @@ const description =
     ) : (
       <div class="stack">
         {hubs.map(({ s }) => (
-          <Card kicker={s.kicker} title={s.title} href={`/${s.slug}`}>{s.tagline}</Card>
+          <Card kicker={s.kicker} title={s.title} href={`/${s.slug}/`}>{s.tagline}</Card>
         ))}
       </div>
     )}
 
-    <p class="back"><a href="/blog">All writing &rarr;</a></p>
+    <p class="back"><a href="/blog/">All writing &rarr;</a></p>
   </div>
 </BaseLayout>
 

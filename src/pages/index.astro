@@ -44,8 +44,7 @@ const description =
     <Image
       class="hero-bg"
       src={heroImg}
-      alt=""
-      aria-hidden="true"
+      alt="Looking up through tall spruce trees toward a snow-covered mountain ridge"
       width={2400}
       height={1136}
       widths={[640, 960, 1280, 1920, 2400]}
@@ -76,7 +75,7 @@ const description =
         kicker={featuredSeries.kicker}
         title={featuredSeries.title}
         meta={`${seriesPublished} of ${featuredSeries.planned ?? featuredSeries.pieces.length} parts out`}
-        href={`/${featuredSeries.slug}`}
+        href={`/${featuredSeries.slug}/`}
       >
         {featuredSeries.tagline}
       </Card>
@@ -90,7 +89,7 @@ const description =
         kicker={featured.data.category}
         title={featured.data.title}
         meta={meta(featured)}
-        href={`/blog/${featured.id}`}
+        href={`/blog/${featured.id}/`}
       >
         {featured.data.description}
       </Card>
@@ -103,7 +102,7 @@ const description =
       <ul class="shorts-list">
         {shorts.map((s) => (
           <li class="shorts-item">
-            <a class="shorts-link" href={`/shorts/${s.id}`}>
+            <a class="shorts-link" href={`/shorts/${s.id}/`}>
               <time class="shorts-date" datetime={isoDate(s.data.pubDate)}>{formatDate(s.data.pubDate)}</time>
               <span class="shorts-title">{s.data.title}</span>
             </a>
@@ -111,7 +110,7 @@ const description =
           </li>
         ))}
       </ul>
-      <p class="more"><a href="/shorts">All shorts &rarr;</a></p>
+      <p class="more"><a href="/shorts/">All shorts &rarr;</a></p>
     </section>
   )}
 
@@ -120,12 +119,12 @@ const description =
       <div class="section-head" style="margin-top: var(--space-6)"><span class="kicker">// LATEST</span><span class="rule"></span></div>
       <div class="stack">
         {latest.map((p) => (
-          <Card kicker={p.data.category} title={p.data.title} meta={meta(p)} href={`/blog/${p.id}`}>
+          <Card kicker={p.data.category} title={p.data.title} meta={meta(p)} href={`/blog/${p.id}/`}>
             {p.data.description}
           </Card>
         ))}
       </div>
-      <p class="more"><a href="/blog">All writing &rarr;</a></p>
+      <p class="more"><a href="/blog/">All writing &rarr;</a></p>
     </section>
   )}
 
@@ -134,7 +133,7 @@ const description =
       <div class="section-head" style="margin-top: var(--space-6)"><span class="kicker">// EXPLORE BY TOPIC</span><span class="rule"></span></div>
       <div class="topics">
         {topics.map((t) => (
-          <a class="topic" href={`/${t.slug}`}>
+          <a class="topic" href={`/${t.slug}/`}>
             <span class="topic-title">{t.title}</span>
             <span class="topic-tagline">{t.tagline}</span>
           </a>
@@ -146,12 +145,12 @@ const description =
   <section class="content bio">
     <div class="bio-card">
       <p>
-        Core Dev <a href="/projects/sulu">Sulu</a> CMS &middot; Core Team
-        <a href="/projects/symfony-ai">symfony/ai</a> &middot; Building Symfony Mate &middot;
+        Core Dev <a href="/projects/sulu/">Sulu</a> CMS &middot; Core Team
+        <a href="/projects/symfony-ai/">symfony/ai</a> &middot; Building Symfony Mate &middot;
         External Lecturer @ FH Vorarlberg
       </p>
       <div class="bio-actions">
-        <Button variant="secondary" href="/about">More about me &rarr;</Button>
+        <Button variant="secondary" href="/about/">More about me &rarr;</Button>
         <Button href="https://www.linkedin.com/in/wachterjohannes/" rel="noopener" target="_blank">Follow on LinkedIn</Button>
       </div>
       <p class="bio-aside">

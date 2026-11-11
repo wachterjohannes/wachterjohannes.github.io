@@ -23,13 +23,13 @@ const description =
 
     <div class="stack">
       {posts.map((p) => (
-        <Card kicker={p.data.category} title={p.data.title} meta={meta(p)} href={`/blog/${p.id}`}>
+        <Card kicker={p.data.category} title={p.data.title} meta={meta(p)} href={`/blog/${p.id}/`}>
           {p.data.description}
         </Card>
       ))}
     </div>
 
-    <p class="more"><a href="/blog">&larr; Back to current writing</a></p>
+    <p class="more"><a href="/blog/">&larr; Back to current writing</a></p>
   </div>
 </BaseLayout>
 

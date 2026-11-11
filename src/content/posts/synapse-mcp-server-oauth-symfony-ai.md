@@ -12,7 +12,7 @@ draft: false
 
 *By Johannes Wachter, Sulu core developer and Symfony AI core team member. Part three of a small tutorial series for the Symfony AI hackathon: the brain gets an MCP server, and an authorization server decides who may use it.*
 
-After [part two](/blog/synapse-read-agent-symfony-ai?utm_source=blog&utm_campaign=synapse-mcp-server-oauth-symfony-ai) the brain could be asked questions, but only from the console of the machine it lives on. Every tool that should reach it, a desktop client or an agent in another project, needs a way in, and MCP is that way in. Who is allowed through that door is the question the rest of this part is actually about.
+After [part two](/blog/synapse-read-agent-symfony-ai/?utm_source=blog&utm_campaign=synapse-mcp-server-oauth-symfony-ai) the brain could be asked questions, but only from the console of the machine it lives on. Every tool that should reach it, a desktop client or an agent in another project, needs a way in, and MCP is that way in. Who is allowed through that door is the question the rest of this part is actually about.
 
 My first instinct was a token in `.env` and a `hash_equals()` in front of the endpoint. That works for this demo, one client on one laptop. What I did not like about it is what it makes the brain responsible for: it has to manage tokens itself instead of asking something else whether a caller is allowed in, and that has nothing to do with notes. The MCP authorization specification takes the same view. An MCP server is an OAuth resource server, which means it checks tokens and never hands them out. This part builds that, and the interesting code turns out to be small.
 

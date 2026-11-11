@@ -16,7 +16,7 @@ draft: false
 
 By the end you can ask a plain question against the Symfony documentation and get an answer assembled from it, visibly wrong in an instructive way, which is why the rest of the series exists.
 
-In the [high-level piece](/blog/rag-beyond-hello-world) I argued that retrieval is a pipeline, not a lookup, and that the naive version breaks on real documentation. Here I build that naive version on purpose: embed the question, fetch the nearest documents by vector similarity, and hand them straight to a model, with no query rewriting, keyword matching or reranking.
+In the [high-level piece](/blog/rag-beyond-hello-world/) I argued that retrieval is a pipeline, not a lookup, and that the naive version breaks on real documentation. Here I build that naive version on purpose: embed the question, fetch the nearest documents by vector similarity, and hand them straight to a model, with no query rewriting, keyword matching or reranking.
 
 Everything runs on one provider: Cohere supplies the chat model, the embeddings, and later in the series the reranker, so the whole thing needs a single API key and no local model server.
 
@@ -124,7 +124,7 @@ foreach (['4.4', '5.4', '7.4', '8.0'] as $version) {
 
 The indexer does not fetch anything: the snippet expects one shallow clone of the documentation per version, for example `git clone --depth 1 --branch 8.0 https://github.com/symfony/symfony-docs.git path/to/symfony-docs-8.0`. The runnable `index.php` in the repository runs that clone itself for each version that is missing before it indexes, which I leave out here to keep the pipeline visible.
 
-The filter in the repository is slightly stricter; it also drops headings that are really template lines, such as `Welcome {{ email.toName }}!`. Both are guesses about what is worth embedding, and that is the honest description of them. Which parts of documentation help retrieval is the question the [indexing piece](/blog/indexing-for-rag) leaves open.
+The filter in the repository is slightly stricter; it also drops headings that are really template lines, such as `Welcome {{ email.toName }}!`. Both are guesses about what is worth embedding, and that is the honest description of them. Which parts of documentation help retrieval is the question the [indexing piece](/blog/indexing-for-rag/) leaves open.
 
 The `Vectorizer` is the first place the provider abstraction earns its keep: it takes a platform and an embedding model name, indifferent to Cohere being behind it. Running this once embeds a few thousand documents, which takes a few minutes; the runnable script in the repository clones the docs first if needed.
 

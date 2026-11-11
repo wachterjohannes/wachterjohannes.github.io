@@ -16,7 +16,7 @@ draft: false
 
 In my RAG example, a search for "send email" finds the page about Symfony's Mailer component, although the two share no words. A search for "Mailer" can rank that same page below three others that are merely about email. Both results come from the same mechanism, and understanding why gives you most of the mental model you need for using embeddings in retrieval.
 
-In the [first piece of this series](/blog/rag-beyond-hello-world) I only needed one sentence of mental model: an embedding turns text into numbers, and a vector store uses those numbers to find passages that are close in meaning. This piece opens that sentence up. The mechanics are not hard. Their limits explain many of the decisions that come later at query time, and once you see what the numbers can and cannot represent, hybrid search, reranking and query analysis look less like a bag of tricks and more like answers to a specific problem.
+In the [first piece of this series](/blog/rag-beyond-hello-world/) I only needed one sentence of mental model: an embedding turns text into numbers, and a vector store uses those numbers to find passages that are close in meaning. This piece opens that sentence up. The mechanics are not hard. Their limits explain many of the decisions that come later at query time, and once you see what the numbers can and cannot represent, hybrid search, reranking and query analysis look less like a bag of tricks and more like answers to a specific problem.
 
 ## What an embedding actually is
 

@@ -39,12 +39,12 @@ const description = `${s.title}. ${s.tagline}`;
           kicker={piece.kind ?? 'article'}
           title={piece.title}
           meta={`${formatDate(post.data.pubDate)} · ${post.data.readingTime}`}
-          href={`/blog/${post.id}`}
+          href={`/blog/${post.id}/`}
         >{piece.blurb}</Card>
       ))}
     </div>
 
-    <p class="back"><a href="/blog">All writing &rarr;</a></p>
+    <p class="back"><a href="/blog/">All writing &rarr;</a></p>
   </div>
 </BaseLayout>
 

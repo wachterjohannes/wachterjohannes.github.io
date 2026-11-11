@@ -83,7 +83,7 @@ const jsonLd = {
   lang={data.lang}
 >
   <article class="content wrap">
-    <a class="back" href={data.archived ? '/archive' : '/blog'}>&larr; {data.archived ? 'Archive' : 'Blog'}</a>
+    <a class="back" href={data.archived ? '/archive/' : '/blog/'}>&larr; {data.archived ? 'Archive' : 'Blog'}</a>
     <span class="kicker">{data.category}</span>
     <h1>{data.title}</h1>
     <div class="byline">{formatDate(data.pubDate)} · {data.readingTime} read · Johannes Wachter</div>
@@ -107,7 +107,7 @@ const jsonLd = {
           <a href={data.linkedin} rel="noopener" target="_blank">Discuss on LinkedIn &rarr;</a>
         )}
         {series && (
-          <a href={`/${series.slug}`}>Part of the {series.title} series &rarr;</a>
+          <a href={`/${series.slug}/`}>Part of the {series.title} series &rarr;</a>
         )}
       </div>
     )}
@@ -161,7 +161,7 @@ const jsonLd = {
     )}
 
     {!(data.archived || data.canonicalUrl) && (
-      <p class="how-written"><a href="/about#how-this-is-written">How this is written &rarr;</a></p>
+      <p class="how-written"><a href="/about/#how-this-is-written">How this is written &rarr;</a></p>
     )}
 
     {data.tags.length > 0 && (
@@ -174,7 +174,7 @@ const jsonLd = {
     {nextUp.length > 0 && (
       <div class="next">
         {nextUp.map(({ kicker, post: p }) => (
-          <Card kicker={kicker} title={p.data.title} href={`/blog/${p.id}`}>
+          <Card kicker={kicker} title={p.data.title} href={`/blog/${p.id}/`}>
             {p.data.description}
           </Card>
         ))}

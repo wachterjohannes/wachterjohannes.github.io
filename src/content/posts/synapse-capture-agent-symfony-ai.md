@@ -203,4 +203,4 @@ An agent with write access can put things in the wrong place, and a model will o
 
 ## Where this stops
 
-The capture agent writes blind. It can list names and read single notes, but it cannot find a note by meaning, so a duplicate under a different wording will get through. Search is the next thing the brain needs, and it is the point where retrieval comes in. For the details of how that works I would point you to the [RAG series](/rag) rather than repeat it here.
+The capture agent writes blind. It can list names and read single notes, but it cannot find a note by meaning, so a duplicate under a different wording will get through. Search is the next thing the brain needs, and it is the point where retrieval comes in. For the details of how that works I would point you to the [RAG series](/rag/) rather than repeat it here.

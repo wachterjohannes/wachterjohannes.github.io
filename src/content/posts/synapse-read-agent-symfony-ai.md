@@ -12,9 +12,9 @@ draft: false
 
 *By Johannes Wachter, Sulu core developer and Symfony AI core team member. Part two of a small tutorial series for the Symfony AI hackathon: an agent that answers from your notes and tells you which file it used.*
 
-In the [first part](/blog/synapse-capture-agent-symfony-ai?utm_source=blog&utm_campaign=synapse-read-agent-symfony-ai) an agent learned to file notes. The brain was write-only after that: I could put things in, and the only way to get them out was to open the folder. This part adds the other direction. You ask a question in plain words, and you get an answer plus the file it came from.
+In the [first part](/blog/synapse-capture-agent-symfony-ai/?utm_source=blog&utm_campaign=synapse-read-agent-symfony-ai) an agent learned to file notes. The brain was write-only after that: I could put things in, and the only way to get them out was to open the folder. This part adds the other direction. You ask a question in plain words, and you get an answer plus the file it came from.
 
-I am deliberately keeping this one brief. Retrieval has a lot of depth, chunking, embeddings and reranking among them, and I have a whole [RAG series](/rag) on that. Here the interesting part is the opposite: how little code you need when Symfony AI's store and AI bundle do the work.
+I am deliberately keeping this one brief. Retrieval has a lot of depth, chunking, embeddings and reranking among them, and I have a whole [RAG series](/rag/) on that. Here the interesting part is the opposite: how little code you need when Symfony AI's store and AI bundle do the work.
 
 ## What you will have at the end
 
@@ -221,7 +221,7 @@ I'm sorry, I couldn't find any information about which Cohere models the demo us
 Source: N/A
 ```
 
-Then I captured a decision with the agent from [part one](/blog/synapse-capture-agent-symfony-ai?utm_source=blog&utm_campaign=synapse-read-agent-symfony-ai), rebuilt the index and asked again:
+Then I captured a decision with the agent from [part one](/blog/synapse-capture-agent-symfony-ai/?utm_source=blog&utm_campaign=synapse-read-agent-symfony-ai), rebuilt the index and asked again:
 
 ```
 $ php bin/console app:capture "Decision: the demo uses Cohere command-a-03-2025 for the agents, embed-english-v3.0 for embeddings and rerank-v3.5 for reranking, because one API key covers all three."
@@ -246,6 +246,6 @@ One agent filed the note, the other one found it. The branch's `bin/smoke` runs 
 
 ## Where this stops
 
-Look at the three commands between capture and the second question. The index is not updated when a note is written. I rebuild it by hand, and for a demo that is fine. Running `ai:store:index brain` again without clearing first stores every passage a second time, so a rebuild needs either `ai:store:clear brain --force` before indexing again, or the drop-and-setup sequence I used above. A brain that you actually use needs the index to follow the files, through a command on a schedule or an event after each write. I left that out because it is its own problem, with its own trade-offs between cost, freshness and what a failed embedding call should do, the kind of decision the [indexing piece](/blog/indexing-for-rag?utm_source=blog&utm_campaign=synapse-read-agent-symfony-ai) of the RAG series covers. The same goes for search quality: the retriever returns the nearest passages, and whether those are the right ones is the question the [query-time piece](/blog/rag-beyond-hello-world?utm_source=blog&utm_campaign=synapse-read-agent-symfony-ai) of that series spends its time on.
+Look at the three commands between capture and the second question. The index is not updated when a note is written. I rebuild it by hand, and for a demo that is fine. Running `ai:store:index brain` again without clearing first stores every passage a second time, so a rebuild needs either `ai:store:clear brain --force` before indexing again, or the drop-and-setup sequence I used above. A brain that you actually use needs the index to follow the files, through a command on a schedule or an event after each write. I left that out because it is its own problem, with its own trade-offs between cost, freshness and what a failed embedding call should do, the kind of decision the [indexing piece](/blog/indexing-for-rag/?utm_source=blog&utm_campaign=synapse-read-agent-symfony-ai) of the RAG series covers. The same goes for search quality: the retriever returns the nearest passages, and whether those are the right ones is the question the [query-time piece](/blog/rag-beyond-hello-world/?utm_source=blog&utm_campaign=synapse-read-agent-symfony-ai) of that series spends its time on.
 
 What the brain cannot do yet is leave this machine. Both agents live in one console application, and the next thing it needs is a way for something else to talk to it.

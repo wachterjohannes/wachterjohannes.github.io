@@ -18,7 +18,7 @@ const description =
 
     <div class="grid">
       {projects.map((p) => (
-        <Card kicker="// PROJECT" title={p.name} href={`/projects/${p.slug}`} arrow={false}>
+        <Card kicker="// PROJECT" title={p.name} href={`/projects/${p.slug}/`} arrow={false}>
           <div class="badges">{p.badges.map(([v, l]) => <Badge variant={v}>{l}</Badge>)}</div>
           <p class="tagline">{p.tagline}</p>
         </Card>

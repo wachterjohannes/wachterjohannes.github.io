@@ -45,14 +45,14 @@ const read = project.read ? current.find((p) => p.id === project.read) : undefin
 
     {read && (
       <p class="story">
-        Read more: <a href={`/blog/${read.id}`}>{read.data.title}</a> &rarr;
+        Read more: <a href={`/blog/${read.id}/`}>{read.data.title}</a> &rarr;
         <span class="story-note">from the blog</span>
       </p>
     )}
 
     {story && (
       <p class="story">
-        Origin story: <a href={`/blog/${story.id}`}>{story.data.title}</a> &rarr;
+        Origin story: <a href={`/blog/${story.id}/`}>{story.data.title}</a> &rarr;
         <span class="story-note">from the archive</span>
       </p>
     )}
@@ -64,7 +64,7 @@ const read = project.read ? current.find((p) => p.id === project.read) : undefin
 
     <div class="related">
       {related.map((p) => (
-        <Card kicker="// RELATED" title={p.name} href={`/projects/${p.slug}`} arrow={false}>
+        <Card kicker="// RELATED" title={p.name} href={`/projects/${p.slug}/`} arrow={false}>
           {p.tagline}
         </Card>
       ))}

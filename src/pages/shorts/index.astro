@@ -28,10 +28,10 @@ const description =
       {items.map(({ short, text, truncated }) => (
         <Card class="short" kicker={`// ${formatDate(short.data.pubDate)}`}>
           <h2 class="short-title" id={short.id}>
-            <a href={`/shorts/${short.id}`}>{short.data.title}</a>
+            <a href={`/shorts/${short.id}/`}>{short.data.title}</a>
           </h2>
           <p class="short-excerpt" lang={short.data.lang}>{text}{truncated && '\u2026'}</p>
-          <a class="short-more" href={`/shorts/${short.id}`}>Read the short &rarr;</a>
+          <a class="short-more" href={`/shorts/${short.id}/`}>Read the short &rarr;</a>
           <div class="short-foot">
             {short.data.source && (
               <a href={short.data.source} rel="noopener" target="_blank">source &rarr;</a>
@@ -54,7 +54,7 @@ const description =
     )}
 
     <p class="blog-link">
-      The longer pieces are in the <a href="/blog">blog</a> &rarr;
+      The longer pieces are in the <a href="/blog/">blog</a> &rarr;
       <span class="sep">&middot;</span>
       <a href="/shorts/rss.xml">Shorts RSS</a>
     </p>

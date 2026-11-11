@@ -22,7 +22,7 @@ const description =
 
     <div class="stack">
       {posts.map((p) => (
-        <Card kicker={p.data.category} title={p.data.title} meta={meta(p)} href={`/blog/${p.id}`}>
+        <Card kicker={p.data.category} title={p.data.title} meta={meta(p)} href={`/blog/${p.id}/`}>
           {p.data.description}
         </Card>
       ))}
@@ -34,7 +34,7 @@ const description =
     </div>
 
     <p class="archive-link">
-      Looking for older posts? Browse the <a href="/archive">archive</a> from asapo.at &rarr;
+      Looking for older posts? Browse the <a href="/archive/">archive</a> from asapo.at &rarr;
       <span class="sep">&middot;</span>
       <a href="/blog/rss.xml">Writing RSS</a>
     </p>

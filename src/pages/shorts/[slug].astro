@@ -53,7 +53,7 @@ const jsonLd = {
   lang={data.lang}
 >
   <article class="content wrap">
-    <a class="back" href="/shorts">&larr; Shorts</a>
+    <a class="back" href="/shorts/">&larr; Shorts</a>
     <span class="kicker">// SHORT</span>
     <h1>{data.title}</h1>
     <div class="byline">
@@ -75,7 +75,7 @@ const jsonLd = {
       />
     )}
 
-    <p class="how-written"><a href="/about#how-this-is-written">How this is written &rarr;</a></p>
+    <p class="how-written"><a href="/about/#how-this-is-written">How this is written &rarr;</a></p>
 
     {data.tags.length > 0 && (
       <div class="tags">
@@ -87,7 +87,7 @@ const jsonLd = {
     {more.length > 0 && (
       <div class="next">
         {more.map((s) => (
-          <Card kicker="// MORE SHORTS" title={s.data.title} href={`/shorts/${s.id}`}>
+          <Card kicker="// MORE SHORTS" title={s.data.title} href={`/shorts/${s.id}/`}>
             {s.data.description}
           </Card>
         ))}
