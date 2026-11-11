@@ -56,6 +56,12 @@ export const series: Series[] = [
         slug: 'synapse-mcp-server-oauth-symfony-ai',
         kind: 'tutorial',
       },
+      {
+        title: 'Let readers read and admins write on an MCP server, with Symfony',
+        blurb: 'Two roles for the MCP server: scopes from the authorization server become roles, and the write tools refuse a read-only token with a message the client can show.',
+        slug: 'synapse-roles-mcp-symfony-ai',
+        kind: 'tutorial',
+      },
     ],
   },
   {
