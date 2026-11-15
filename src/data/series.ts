@@ -62,6 +62,12 @@ export const series: Series[] = [
         slug: 'synapse-roles-mcp-symfony-ai',
         kind: 'tutorial',
       },
+      {
+        title: 'Guard every MCP tool by default in Symfony, and test all of them',
+        blurb: 'Every tool starts closed to readers unless it says it is read-only, enforced by a guard in front of the server and a test that walks tools/list.',
+        slug: 'synapse-tool-guards-mcp-symfony-ai',
+        kind: 'tutorial',
+      },
     ],
   },
   {
