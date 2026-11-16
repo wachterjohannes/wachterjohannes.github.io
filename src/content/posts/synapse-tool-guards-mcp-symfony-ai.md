@@ -77,6 +77,8 @@ $builder->addMethodCall('setReferenceHandler', [new Definition(ToolGuard::class,
 
 That reaches into a detail of the bundle, and it is the first thing I would check again with the next release. The pass refuses to run if a handler is already set, so it fails loudly and does not wrap twice.
 
+**Update, 16 November 2026:** Christophe Coevoet pointed out that the bundle does define a service for the default handler, but only when the server has MCP App tool templates. In that case plain service decoration is simpler than my pass. Without templates, as in Synapse, there is no service to decorate, which is why the pass is still needed here. I opened [symfony/ai#2968](https://github.com/symfony/ai/issues/2968) to ask for the handler to be registered as a service in both cases.
+
 ## A test that finds the tools
 
 `tools/guard-check.php` asks the running server for `tools/list` with a reader token. For every tool it fills the required arguments with dummy values from the input schema and calls it. A tool that is not read-only must answer with `isError: true` and the refusal text. A read-only tool must not be refused. Afterwards it compares the notes folder with how it was before, because a reader must not change anything either way.
