@@ -31,7 +31,7 @@ export const series: Series[] = [
   {
     slug: 'synapse',
     featured: true,
-    planned: 6,
+    planned: 7,
     kicker: '// SERIES',
     title: 'Synapse: a second brain with Symfony AI',
     tagline: 'A folder of markdown notes that agents write to, read from and share over MCP.',
