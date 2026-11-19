@@ -68,6 +68,12 @@ export const series: Series[] = [
         slug: 'synapse-tool-guards-mcp-symfony-ai',
         kind: 'tutorial',
       },
+      {
+        title: 'Ask a second brain over MCP and rank both answers together, with Symfony AI',
+        blurb: 'A Symfony AI app asks a second brain over MCP, merges both result lists with a reranker, and keeps working when the other brain is down or refuses the token.',
+        slug: 'synapse-mcp-client-rerank-symfony-ai',
+        kind: 'tutorial',
+      },
     ],
   },
   {
