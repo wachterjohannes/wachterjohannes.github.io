@@ -1,3 +1,4 @@
+import { feedLink } from '../../utils/feed';
 import rss from '@astrojs/rss';
 import { getSortedShorts } from '../../utils/shorts';
 
@@ -14,7 +15,7 @@ export async function GET(context) {
       title: short.data.title,
       description: short.data.description,
       pubDate: short.data.pubDate,
-      link: `/shorts/${short.id}/`,
+      ...feedLink(`/shorts/${short.id}/`, short.id),
       categories: short.data.tags,
     })),
     customData: `<language>en</language>`,

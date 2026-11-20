@@ -1,3 +1,4 @@
+import { feedLink } from '../../utils/feed';
 import rss from '@astrojs/rss';
 import { getSortedPosts } from '../../utils/posts';
 
@@ -17,7 +18,7 @@ export async function GET(context) {
       title: post.data.title,
       description: post.data.description,
       pubDate: post.data.pubDate,
-      link: `/blog/${post.id}/`,
+      ...feedLink(`/blog/${post.id}/`, post.id),
       categories: post.data.tags,
     })),
     customData: `<language>en</language>`,
