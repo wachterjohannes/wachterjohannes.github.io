@@ -24,6 +24,9 @@ const items = s.pieces
   .map((piece) => ({ piece, post: bySlug.get(piece.slug) ?? null }))
   .filter((it) => it.post !== null);
 
+const featuredItem = items.find((it) => it.piece.slug === s.featuredPiece) ?? null;
+const restItems = featuredItem ? items.filter((it) => it !== featuredItem) : items;
+
 const description = `${s.title}. ${s.tagline}`;
 ---
 <BaseLayout title={s.title} description={description}>
@@ -33,8 +36,24 @@ const description = `${s.title}. ${s.tagline}`;
     <p class="tagline">{s.tagline}</p>
     <p class="intro">{s.intro}</p>
 
+    {featuredItem && (
+      <section class="featured">
+        <div class="section-head"><span class="kicker">// FEATURED</span><span class="rule"></span></div>
+        <Card
+          kicker={featuredItem.piece.kind ?? 'article'}
+          title={featuredItem.piece.title}
+          meta={`${formatDate(featuredItem.post.data.pubDate)} · ${featuredItem.post.data.readingTime}`}
+          href={`/blog/${featuredItem.post.id}/`}
+        >{featuredItem.piece.blurb}</Card>
+      </section>
+    )}
+
+    {featuredItem && restItems.length > 0 && (
+      <div class="section-head list-head"><span class="kicker">// ALL PARTS</span><span class="rule"></span></div>
+    )}
+
     <div class="stack">
-      {items.map(({ piece, post }) => (
+      {restItems.map(({ piece, post }) => (
         <Card
           kicker={piece.kind ?? 'article'}
           title={piece.title}
@@ -62,5 +81,7 @@ const description = `${s.title}. ${s.tagline}`;
   .intro { font-size: var(--size-body); color: var(--fg-2); margin: 0 0 12px; max-width: var(--width-content); }
   .status { font-family: var(--font-mono); font-size: 12px; color: var(--fg-3); margin: 0 0 24px; }
   .stack { display: grid; gap: var(--space-4); margin-top: var(--space-5); }
+  .featured { margin-top: var(--space-5); }
+  .list-head { margin-top: var(--space-6); margin-bottom: 0; }
   .back { margin-top: var(--space-6); font-size: var(--size-small); color: var(--fg-2); }
 </style>

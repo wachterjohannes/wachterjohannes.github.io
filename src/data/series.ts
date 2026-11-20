@@ -23,6 +23,8 @@ export interface Series {
   // When true, the home page shows this series as one card in the Featured slot and keeps
   // its pieces out of Latest, so a running series does not flood the front page.
   featured?: boolean;
+  // Slug of one piece to show as a Featured card at the top of the hub page (e.g. the finished project of a tutorial series).
+  featuredPiece?: string;
   planned?: number; // total parts, when more are planned than listed in `pieces`
   hidden?: boolean; // when true, the hub page is not built yet (hold it until launch day)
 }
@@ -32,6 +34,7 @@ export const series: Series[] = [
     slug: 'synapse',
     featured: true,
     planned: 7,
+    featuredPiece: 'synapse-finished-second-brain-symfony-ai',
     kicker: '// SERIES',
     title: 'Synapse: a second brain with Symfony AI',
     tagline: 'A folder of markdown notes that agents write to, read from and share over MCP.',
